@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/clothes_home"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:title="홈"
+        tool:ignore="AlwaysShowAction"/>
+
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/clothes_search"
+        app:showAsAction="always"
+        android:title="조회"/>
+
+</menu>

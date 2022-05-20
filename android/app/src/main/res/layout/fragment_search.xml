@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/clothes_plus_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/clothes_add"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/clothes_bookmark_iv"/>
+
+        <ImageView
+            android:id="@+id/clothes_bookmark_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="25dp"
+            android:src="@drawable/clothes_bookmark"
+            app:layout_constraintTop_toTopOf="@id/clothes_plus_iv"
+            app:layout_constraintBottom_toBottomOf="@id/clothes_plus_iv"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <HorizontalScrollView
+            android:id="@+id/season_nsv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/clothes_plus_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:text="봄"/>
+
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:text="여름"/>
+
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:text="가을"/>
+
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:text="겨울"/>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/kind_nsv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/season_nsv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:text="상의"/>
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:text="아우터"/>
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:text="바지"/>
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:text="원피스"/>
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:text="스커트"/>
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:text="신발"/>
+
+                    <Button
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:text="악세서리"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clothes_01_cl"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="25dp"
+            app:layout_constraintTop_toBottomOf="@id/kind_nsv"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clothes_cardView_01"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/clothes_01_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="25dp"
+                    android:paddingTop="25dp"
+                    android:paddingEnd="25dp"
+                    android:paddingBottom="25dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/tshirt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/bookmark_01_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/bookmark_off"
+                app:layout_constraintBottom_toBottomOf="@id/clothes_cardView_01"
+                app:layout_constraintEnd_toEndOf="@id/clothes_cardView_01"/>
+
+            <TextView
+                android:id="@+id/clothes_kind_01_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="상의"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="@id/clothes_cardView_01"
+                app:layout_constraintTop_toBottomOf="@id/clothes_cardView_01"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="치수"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/clothes_cardView_01"
+                app:layout_constraintTop_toBottomOf="@id/clothes_kind_01_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clothes_02_cl"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            app:layout_constraintTop_toTopOf="@id/clothes_01_cl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/clothes_01_cl">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clothes_cardView_02"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/clothes_02_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="25dp"
+                    android:paddingTop="25dp"
+                    android:paddingEnd="25dp"
+                    android:paddingBottom="25dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/tshirt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/bookmark_02_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/bookmark_off"
+                app:layout_constraintBottom_toBottomOf="@id/clothes_cardView_02"
+                app:layout_constraintEnd_toEndOf="@id/clothes_cardView_02"/>
+
+            <TextView
+                android:id="@+id/clothes_kind_02_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="상의"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="@id/clothes_cardView_02"
+                app:layout_constraintTop_toBottomOf="@id/clothes_cardView_02"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="치수"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/clothes_cardView_02"
+                app:layout_constraintTop_toBottomOf="@id/clothes_kind_02_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clothes_03_cl"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="25dp"
+            app:layout_constraintTop_toBottomOf="@id/clothes_01_cl"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clothes_cardView_03"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/clothes_03_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="25dp"
+                    android:paddingTop="25dp"
+                    android:paddingEnd="25dp"
+                    android:paddingBottom="25dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/tshirt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/bookmark_03_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/bookmark_off"
+                app:layout_constraintBottom_toBottomOf="@id/clothes_cardView_03"
+                app:layout_constraintEnd_toEndOf="@id/clothes_cardView_03"/>
+
+            <TextView
+                android:id="@+id/clothes_kind_03_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="상의"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="@id/clothes_cardView_03"
+                app:layout_constraintTop_toBottomOf="@id/clothes_cardView_03"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="치수"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/clothes_cardView_03"
+                app:layout_constraintTop_toBottomOf="@id/clothes_kind_03_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clothes_04_cl"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            app:layout_constraintTop_toTopOf="@id/clothes_03_cl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/clothes_03_cl">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clothes_cardView_04"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/clothes_04_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="25dp"
+                    android:paddingTop="25dp"
+                    android:paddingEnd="25dp"
+                    android:paddingBottom="25dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/tshirt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/bookmark_04_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/bookmark_off"
+                app:layout_constraintBottom_toBottomOf="@id/clothes_cardView_04"
+                app:layout_constraintEnd_toEndOf="@id/clothes_cardView_04"/>
+
+            <TextView
+                android:id="@+id/clothes_kind_04_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="상의"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="@id/clothes_cardView_04"
+                app:layout_constraintTop_toBottomOf="@id/clothes_cardView_04"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="치수"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/clothes_cardView_04"
+                app:layout_constraintTop_toBottomOf="@id/clothes_kind_04_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--    <Button-->
+        <!--        android:id="@+id/clothes_search_btn"-->
+        <!--        android:layout_width="170dp"-->
+        <!--        android:layout_height="50dp"-->
+        <!--        android:background="@drawable/clothes_btn"-->
+        <!--        android:layout_marginStart="15dp"-->
+        <!--        android:layout_marginBottom="40dp"-->
+        <!--        android:paddingStart="15dp"-->
+        <!--        android:paddingEnd="20dp"-->
+        <!--        android:drawableStart="@drawable/hanger_small_size"-->
+        <!--        android:text="의류 조회하기"-->
+        <!--        android:textSize="16sp"-->
+        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"/>-->
+
+        <!--    <Button-->
+        <!--        android:id="@+id/clothes_bookmark_btn"-->
+        <!--        android:layout_width="170dp"-->
+        <!--        android:layout_height="50dp"-->
+        <!--        android:background="@drawable/clothes_btn"-->
+        <!--        android:layout_marginEnd="15dp"-->
+        <!--        android:paddingStart="15dp"-->
+        <!--        android:paddingEnd="20dp"-->
+        <!--        android:drawableStart="@drawable/hanger_small_size"-->
+        <!--        android:text="의류 즐겨찾기"-->
+        <!--        android:textSize="16sp"-->
+        <!--        app:layout_constraintTop_toTopOf="@id/clothes_search_btn"-->
+        <!--        app:layout_constraintBottom_toBottomOf="@id/clothes_search_btn"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
