@@ -10,4 +10,4 @@
 - [장혜원](https://github.com/hyewoniiiii)
  
 ## 프로젝트 메인 저장소
-[소프트웨에 공학 메인 저장소](https://github.com/JongdaeHan/SE2022_HAEA0008_2-)
+[소프트웨어 공학 메인 저장소](https://github.com/JongdaeHan/SE2022_HAEA0008_2-)
