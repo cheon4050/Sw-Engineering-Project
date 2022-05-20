@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+
+    <TextView
+        android:id="@+id/app_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Hanger"
+        android:textSize="40sp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/id_til"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:hint="아이디"
+        app:layout_constraintTop_toBottomOf="@id/app_name_tv"
+        app:layout_constraintEnd_toEndOf="@id/app_name_tv"
+        app:layout_constraintStart_toStartOf="@id/app_name_tv">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/id_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_til"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="비밀번호"
+        app:layout_constraintTop_toBottomOf="@id/id_til"
+        app:layout_constraintEnd_toEndOf="@id/id_til"
+        app:layout_constraintStart_toStartOf="@id/id_til">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/sign_up_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="회원 가입"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/password_til"
+        app:layout_constraintEnd_toEndOf="@id/password_til"/>
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="로그인"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/password_til"
+        app:layout_constraintEnd_toEndOf="@id/password_til"
+        app:layout_constraintStart_toStartOf="@id/password_til"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
