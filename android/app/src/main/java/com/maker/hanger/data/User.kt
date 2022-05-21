@@ -1,8 +1,10 @@
 package com.maker.hanger.data
 
+import com.google.gson.annotations.SerializedName
+
 data class User(
-    var userIdx: Int,
-    var userId: String,
-    var password: String,
-    var birth: Int
+    @SerializedName(value = "userIdx") var userIdx: Int,
+    @SerializedName(value = "userId") var userId: String,
+    @SerializedName(value = "password") var password: String,
+    @SerializedName(value = "birth") var birth: Int
 )

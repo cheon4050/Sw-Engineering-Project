@@ -5,11 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/signup_sign_up_tv"
+        android:id="@+id/modify_modify_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="회원가입"
+        android:text="회원 정보 수정"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
-        android:id="@+id/signup_id_et"
+        android:id="@+id/modify_id_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -30,20 +30,20 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_sign_up_tv"/>
+        app:layout_constraintTop_toBottomOf="@id/modify_modify_tv"/>
 
     <View
-        android:id="@+id/signup_underscore_view"
+        android:id="@+id/modify_underscore_view"
         android:layout_width="0dp"
         android:layout_height="2px"
         android:layout_marginTop="15dp"
         android:background="#a8a8a8"
-        app:layout_constraintEnd_toEndOf="@id/signup_id_et"
-        app:layout_constraintStart_toStartOf="@id/signup_id_et"
-        app:layout_constraintTop_toBottomOf="@id/signup_id_et"/>
+        app:layout_constraintEnd_toEndOf="@id/modify_id_et"
+        app:layout_constraintStart_toStartOf="@id/modify_id_et"
+        app:layout_constraintTop_toBottomOf="@id/modify_id_et"/>
 
     <TextView
-        android:id="@+id/signup_email_error_tv"
+        android:id="@+id/modify_email_error_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
@@ -51,12 +51,12 @@
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/signup_underscore_view"
-        app:layout_constraintTop_toBottomOf="@id/signup_underscore_view"
-        app:layout_constraintEnd_toEndOf="@id/signup_underscore_view"/>
+        app:layout_constraintStart_toStartOf="@id/modify_underscore_view"
+        app:layout_constraintTop_toBottomOf="@id/modify_underscore_view"
+        app:layout_constraintEnd_toEndOf="@id/modify_underscore_view"/>
 
     <EditText
-        android:id="@+id/signup_birth_et"
+        android:id="@+id/modify_birth_et"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -67,19 +67,19 @@
         android:inputType="textPersonName"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_email_error_tv"/>
+        app:layout_constraintTop_toBottomOf="@id/modify_email_error_tv"/>
 
     <View
-        android:id="@+id/signup_name_underscore_view"
+        android:id="@+id/modify_name_underscore_view"
         android:layout_width="150dp"
         android:layout_height="2px"
         android:layout_marginTop="15dp"
         android:background="#a8a8a8"
-        app:layout_constraintStart_toStartOf="@id/signup_password_et"
-        app:layout_constraintTop_toBottomOf="@id/signup_birth_et"/>
+        app:layout_constraintStart_toStartOf="@id/modify_password_et"
+        app:layout_constraintTop_toBottomOf="@id/modify_birth_et"/>
 
     <EditText
-        android:id="@+id/signup_password_et"
+        android:id="@+id/modify_password_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -91,20 +91,20 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_name_underscore_view"/>
+        app:layout_constraintTop_toBottomOf="@id/modify_name_underscore_view"/>
 
     <View
-        android:id="@+id/signup_password_underscore_view"
+        android:id="@+id/modify_password_underscore_view"
         android:layout_width="0dp"
         android:layout_height="2px"
         android:layout_marginTop="15dp"
         android:background="#a8a8a8"
-        app:layout_constraintEnd_toEndOf="@id/signup_password_et"
-        app:layout_constraintStart_toStartOf="@id/signup_password_et"
-        app:layout_constraintTop_toBottomOf="@id/signup_password_et"/>
+        app:layout_constraintEnd_toEndOf="@id/modify_password_et"
+        app:layout_constraintStart_toStartOf="@id/modify_password_et"
+        app:layout_constraintTop_toBottomOf="@id/modify_password_et"/>
 
     <EditText
-        android:id="@+id/signup_password_check_et"
+        android:id="@+id/modify_password_check_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -116,24 +116,37 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_password_underscore_view"/>
+        app:layout_constraintTop_toBottomOf="@id/modify_password_underscore_view"/>
 
     <View
-        android:id="@+id/signup_password_check_underscore_view"
+        android:id="@+id/modify_password_check_underscore_view"
         android:layout_width="0dp"
         android:layout_height="2px"
         android:layout_marginTop="15dp"
         android:background="#a8a8a8"
-        app:layout_constraintEnd_toEndOf="@id/signup_password_check_et"
-        app:layout_constraintStart_toStartOf="@id/signup_password_check_et"
-        app:layout_constraintTop_toBottomOf="@id/signup_password_check_et"/>
+        app:layout_constraintEnd_toEndOf="@id/modify_password_check_et"
+        app:layout_constraintStart_toStartOf="@id/modify_password_check_et"
+        app:layout_constraintTop_toBottomOf="@id/modify_password_check_et"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signup_sign_up_btn"
+        android:id="@+id/modify_withdrawal_btn"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="200dp"
+        android:background="@color/orange"
+        android:text="탈퇴하기"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/modify_password_check_underscore_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/modify_modify_btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/orange"
-        android:text="가입완료"
+        android:text="수정완료"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

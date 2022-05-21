@@ -5,12 +5,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
+        android:id="@+id/home_user_info_modify_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/user_modify"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
         android:id="@+id/weather_iv"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/weather_sample"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_user_info_modify_iv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
