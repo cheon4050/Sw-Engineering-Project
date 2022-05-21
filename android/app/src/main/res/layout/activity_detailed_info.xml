@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:elevation="5dp"
+        android:background="@drawable/clothes_search_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/detail_info_clothes_delete_iv"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/clothes_delete"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/detail_info_clothes_iv"
+            android:layout_width="match_parent"
+            android:layout_height="480dp"
+            android:src="@drawable/tshirt"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintTop_toBottomOf="@id/detail_info_clothes_delete_iv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/detail_info_clothes_kind_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="카테고리"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/detail_info_clothes_iv"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/detail_info_clothes_kind_input_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="종류...."
+            app:layout_constraintTop_toBottomOf="@id/detail_info_clothes_kind_tv"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/detail_info_clothes_size_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="치수"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/detail_info_clothes_kind_input_tv"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/detail_info_clothes_size_input_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="사이즈...."
+            app:layout_constraintTop_toBottomOf="@id/detail_info_clothes_size_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/detail_info_clothes_washing_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/detail_info_clothes_iv"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/detail_info_clothes_washing_40_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/washing_40"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/detail_info_clothes_washing_60_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/washing_60"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/detail_info_clothes_washing_95_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/washing_95"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/detail_info_clothes_washing_no_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/washing_no"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
