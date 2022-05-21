@@ -5,21 +5,21 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.maker.hanger.data.Clothes
-import com.maker.hanger.databinding.ActivityDetailedInfoBinding
+import com.maker.hanger.databinding.ActivityDetailedinfoBinding
 
 class DetailedInfoActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailedInfoBinding
+    private lateinit var binding: ActivityDetailedinfoBinding
     private lateinit var clothes: Clothes
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailedInfoBinding.inflate(layoutInflater)
+        binding = ActivityDetailedinfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         clothes = intent.getSerializableExtra("clothes") as Clothes
 
         initClothesInfo()
-        setOnClickListener()
+        deleteClothes()
     }
 
     private fun initClothesInfo() {
@@ -43,7 +43,7 @@ class DetailedInfoActivity : AppCompatActivity() {
         }
     }
 
-    private fun setOnClickListener() {
+    private fun deleteClothes() {
         binding.detailInfoClothesDeleteIv.setOnClickListener {
             finish()
         }

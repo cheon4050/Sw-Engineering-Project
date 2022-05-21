@@ -12,7 +12,7 @@ import com.maker.hanger.adapter.PanelVPAdapter
 import com.maker.hanger.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-    lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var handler: Handler
     private var position: Int = 0
 

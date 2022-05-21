@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.maker.hanger.databinding.FragmentPanelBinding
 
 class PanelFragment(private val imageResource: Int = -1) : Fragment() {
-    lateinit var binding: FragmentPanelBinding
+    private lateinit var binding: FragmentPanelBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
