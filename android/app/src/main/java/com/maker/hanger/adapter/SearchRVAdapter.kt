@@ -8,7 +8,13 @@ import com.maker.hanger.databinding.ItemClothesBinding
 
 class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Adapter<SearchRVAdapter.ViewHolder>() {
     interface OnItemClickListener {
-        fun onDetailedInfoItem()
+        fun onDetailedInfoItem(clothes: Clothes)
+    }
+
+    private lateinit var onItemClickListener: OnItemClickListener
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.onItemClickListener = onItemClickListener
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -19,11 +25,12 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(clothes[position])
+        holder.binding.clothesCardView.setOnClickListener { onItemClickListener.onDetailedInfoItem(clothes[position]) }
     }
 
     override fun getItemCount(): Int = clothes.size
 
-    inner class ViewHolder(private val binding: ItemClothesBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemClothesBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(clothes: Clothes) {
             binding.clothesKindTv.text = clothes.kind.toString()
