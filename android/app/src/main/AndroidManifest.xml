@@ -32,6 +32,9 @@
         <activity
             android:name=".SignUpActivity"
             android:exported="true"/>
+        <activity
+            android:name=".ModifyActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
