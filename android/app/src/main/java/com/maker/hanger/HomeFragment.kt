@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.maker.hanger.adapter.PanelVPAdapter
+import com.maker.hanger.adapter.RecommendVPAdapter
 import com.maker.hanger.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -23,36 +23,36 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        val panelAdapter = PanelVPAdapter(this)
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        binding.homePanelVp.adapter = panelAdapter
-        binding.homeIndicator.setViewPager2(binding.homePanelVp)
+        val recommendVPAdapter = RecommendVPAdapter(this)
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        binding.homeRecommendVp.adapter = recommendVPAdapter
+        binding.homeIndicator.setViewPager2(binding.homeRecommendVp)
 
         handler = Handler(Looper.getMainLooper())
-        val autoViewPager = AutoViewPager(panelAdapter)
+        val autoViewPager = AutoViewPager(recommendVPAdapter)
         autoViewPager.start()
 
         return binding.root
     }
 
-    private fun switchPanel(panelAdapter: PanelVPAdapter) {
-        position = (position + 1) % panelAdapter.itemCount
-        binding.homePanelVp.setCurrentItem(position, true)
+    private fun recommendClothes(recommendAdapter: RecommendVPAdapter) {
+        position = (position + 1) % recommendAdapter.itemCount
+        binding.homeRecommendVp.setCurrentItem(position, true)
     }
 
-    inner class AutoViewPager(private val panelAdapter: PanelVPAdapter) : Thread() {
+    inner class AutoViewPager(private val recommendAdapter: RecommendVPAdapter) : Thread() {
         override fun run() {
             super.run()
             try {
                 while (true) {
                     sleep(2500)
                     handler.post {
-                        switchPanel(panelAdapter)
+                        recommendClothes(recommendAdapter)
                     }
                 }
             } catch (e: InterruptedException) {

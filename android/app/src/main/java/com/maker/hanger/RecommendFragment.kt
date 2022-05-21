@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.maker.hanger.databinding.FragmentPanelBinding
+import com.maker.hanger.databinding.FragmentRecommendBinding
 
-class PanelFragment(private val imageResource: Int = -1) : Fragment() {
-    private lateinit var binding: FragmentPanelBinding
+class RecommendFragment(private val imageResource: Int = -1) : Fragment() {
+    private lateinit var binding: FragmentRecommendBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPanelBinding.inflate(inflater, container, false)
+        binding = FragmentRecommendBinding.inflate(inflater, container, false)
         if (imageResource != -1) {
-            binding.homePanelBackgroundIv.setImageResource(imageResource)
+            binding.homeRecommendBackgroundIv.setImageResource(imageResource)
         }
 
         return binding.root
