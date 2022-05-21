@@ -31,6 +31,7 @@ class SearchFragment : Fragment() {
 
         dummyInput()
         initRecyclerView(dummyClothes)
+        addClothes()
 
         return binding.root
     }
@@ -47,6 +48,12 @@ class SearchFragment : Fragment() {
                 startActivity(intent)
             }
         })
+    }
+
+    private fun addClothes() {
+        binding.searchClothesAddIv.setOnClickListener {
+            startActivity(Intent(requireContext(), RegisterActivity::class.java))
+        }
     }
 
     private fun dummyInput() {

@@ -5,27 +5,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/clothes_plus_iv"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:id="@+id/search_clothes_add_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/clothes_add"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/clothes_bookmark_iv"/>
+        app:layout_constraintEnd_toStartOf="@id/search_clothes_bookmark_iv"/>
 
     <ImageView
-        android:id="@+id/clothes_bookmark_iv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:id="@+id/search_clothes_bookmark_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginEnd="25dp"
         android:src="@drawable/clothes_bookmark"
-        app:layout_constraintTop_toTopOf="@id/clothes_plus_iv"
-        app:layout_constraintBottom_toBottomOf="@id/clothes_plus_iv"
+        app:layout_constraintTop_toTopOf="@id/search_clothes_add_iv"
+        app:layout_constraintBottom_toBottomOf="@id/search_clothes_add_iv"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <HorizontalScrollView
-        android:id="@+id/season_nsv"
+        android:id="@+id/search_season_nsv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -33,7 +33,7 @@
         android:layout_marginEnd="20dp"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/clothes_plus_iv"
+        app:layout_constraintTop_toBottomOf="@id/search_clothes_add_iv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -44,22 +44,19 @@
 
             <Button
                 android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="봄"/>
-
             <Button
                 android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="여름"/>
-
             <Button
                 android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="가을"/>
-
             <Button
                 android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="겨울"/>
 
         </LinearLayout>
@@ -67,7 +64,7 @@
     </HorizontalScrollView>
 
     <HorizontalScrollView
-        android:id="@+id/kind_nsv"
+        android:id="@+id/search_kind_nsv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -75,7 +72,7 @@
         android:layout_marginEnd="20dp"
         android:fillViewport="true"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/season_nsv"
+        app:layout_constraintTop_toBottomOf="@id/search_season_nsv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -94,37 +91,33 @@
 
                 <Button
                     android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:text="상의"/>
-
                 <Button
                     android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:text="아우터"/>
-
                 <Button
                     android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:text="바지"/>
-
                 <Button
                     android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:text="원피스"/>
-
                 <Button
                     android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:text="스커트"/>
 
                 <Button
                     android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:text="신발"/>
 
                 <Button
                     android:layout_width="80dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:text="악세서리"/>
 
             </LinearLayout>
@@ -144,6 +137,6 @@
         android:background="@drawable/clothes_search_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/kind_nsv"/>
+        app:layout_constraintTop_toBottomOf="@id/search_kind_nsv"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
