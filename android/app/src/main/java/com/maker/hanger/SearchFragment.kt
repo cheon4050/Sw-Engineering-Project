@@ -67,6 +67,22 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private fun selectSession() {
+        // 계절 선택
+    }
+
+    private fun selectKind() {
+        // 종류 선택
+    }
+
+    private fun searchCategory() {
+        // 카테고리별 조회
+    }
+
+    private fun searchBookmark() {
+        // 즐겨찾기별 조회
+    }
+
     private fun dummyInput() {
         dummyKind1.add("상의")
         dummyKind2.add("하의")

@@ -35,6 +35,9 @@
         <activity
             android:name=".ModifyActivity"
             android:exported="true"/>
+        <activity
+            android:name=".FindActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

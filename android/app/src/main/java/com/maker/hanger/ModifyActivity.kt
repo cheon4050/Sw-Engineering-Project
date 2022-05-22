@@ -7,6 +7,7 @@ import com.maker.hanger.databinding.ActivityModifyBinding
 
 class ModifyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityModifyBinding
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
