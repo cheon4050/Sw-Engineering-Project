@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface AuthRetrofitInterface {
     @POST("/auth")
-    fun signUp(@Body user: User): Call<User>
+    fun signUp(@Body user: User)
 
     @GET("/auth/login")
     fun login(@Body user: User): Call<User>
@@ -15,8 +15,8 @@ interface AuthRetrofitInterface {
     fun find(@Body user: User): Call<User>
 
     @PUT("/auth/user")
-    fun modify(@Body user: User): Call<User>
+    fun modify(@Body user: User)
 
     @DELETE("/auth/user")
-    fun delete(@Body userIdx: Int): Call<User>
+    fun delete(@Body userIdx: Int)
 }
