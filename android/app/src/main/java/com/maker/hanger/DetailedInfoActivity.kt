@@ -3,6 +3,7 @@ package com.maker.hanger
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.maker.hanger.data.Clothes
 import com.maker.hanger.databinding.ActivityDetailedinfoBinding
@@ -46,6 +47,7 @@ class DetailedInfoActivity : AppCompatActivity() {
 
     private fun deleteClothes() {
         binding.detailInfoClothesDeleteIv.setOnClickListener {
+            Toast.makeText(this, "의류가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
     }

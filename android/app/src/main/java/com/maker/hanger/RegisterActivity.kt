@@ -1,6 +1,7 @@
 package com.maker.hanger
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.maker.hanger.data.Clothes
 import com.maker.hanger.databinding.ActivityRegisterBinding
@@ -13,10 +14,15 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        addClothes()
     }
 
-    private fun registerClothes() {
-        // 의류 등록 하기
+    private fun addClothes() {
+        binding.registerClothesAddIv.setOnClickListener {
+            Toast.makeText(this, "의류가 등록되었습니다.", Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
 
     private fun attachPhoto() {
