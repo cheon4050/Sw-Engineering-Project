@@ -41,7 +41,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:visibility="gone"
-        android:src="@drawable/bookmark_off_search"
+        android:src="@drawable/bookmark_on_search"
         app:layout_constraintBottom_toBottomOf="@id/clothes_cardView"
         app:layout_constraintEnd_toEndOf="@id/clothes_cardView"/>
 

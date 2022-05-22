@@ -23,6 +23,7 @@ class DetailedInfoActivity : AppCompatActivity() {
     }
 
     private fun initClothesInfo() {
+        isBookmark(clothes.bookmark)
         binding.detailInfoClothesKindInputTv.text = clothes.kind.toString()
         binding.detailInfoClothesSizeInputTv.text = clothes.size.toString()
         for (i in 0 until clothes.washingMethod.size) {
@@ -46,6 +47,16 @@ class DetailedInfoActivity : AppCompatActivity() {
     private fun deleteClothes() {
         binding.detailInfoClothesDeleteIv.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun isBookmark(isLike: Boolean) {
+        if (isLike) {
+            binding.detailInfoClothesBookmarkOnIv.visibility = View.VISIBLE
+            binding.detailInfoClothesBookmarkOffIv.visibility = View.GONE
+        } else {
+            binding.detailInfoClothesBookmarkOnIv.visibility = View.GONE
+            binding.detailInfoClothesBookmarkOffIv.visibility = View.VISIBLE
         }
     }
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.maker.hanger.adapter.SearchRVAdapter
 import com.maker.hanger.data.Clothes
 import com.maker.hanger.databinding.FragmentSearchBinding
+import com.maker.hanger.databinding.ItemClothesBinding
 
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
@@ -46,6 +47,16 @@ class SearchFragment : Fragment() {
                 val intent = Intent(requireContext(), DetailedInfoActivity::class.java)
                 intent.putExtra("clothes", clothes)
                 startActivity(intent)
+            }
+
+            override fun onBookmarkOnItem(position: Int, binding: ItemClothesBinding) {
+                searchRVAdapter.onBookmarkOn(position)
+                searchRVAdapter.isBookmark(position, binding)
+            }
+
+            override fun onBookmarkOffItem(position: Int, binding: ItemClothesBinding) {
+                searchRVAdapter.onBookmarkOff(position)
+                searchRVAdapter.isBookmark(position, binding)
             }
         })
     }
