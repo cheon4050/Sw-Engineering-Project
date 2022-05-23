@@ -1,2 +1,2 @@
 # Sw-Engineering-Project
-Maker팀 server repository입니다.
+🍎 Maker팀 server repository입니다.
