@@ -1,17 +1,17 @@
 package com.maker.hanger.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.maker.hanger.R
 import com.maker.hanger.data.Clothes
 import com.maker.hanger.databinding.ItemClothesBinding
 
 class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Adapter<SearchRVAdapter.ViewHolder>() {
     interface OnItemClickListener {
         fun onDetailedInfoItem(clothes: Clothes)
-        fun onBookmarkOnItem(position: Int, binding: ItemClothesBinding)
-        fun onBookmarkOffItem(position: Int, binding: ItemClothesBinding)
+        fun onBookmarkItem(position: Int, binding: ItemClothesBinding)
     }
 
     private lateinit var onItemClickListener: OnItemClickListener
@@ -20,21 +20,15 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
         this.onItemClickListener = onItemClickListener
     }
 
-    fun onBookmarkOn(position: Int) {
-        clothes[position].bookmark = true
-    }
-
-    fun onBookmarkOff(position: Int) {
-        clothes[position].bookmark = false
+    fun onBookmark(position: Int) {
+        clothes[position].bookmark = !clothes[position].bookmark
     }
 
     fun isBookmark(position: Int, binding: ItemClothesBinding) {
         if (clothes[position].bookmark) {
-            binding.clothesBookmarkOnIv.visibility = View.VISIBLE
-            binding.clothesBookmarkOffIv.visibility = View.GONE
+            binding.clothesBookmarkIv.setImageResource(R.drawable.bookmark_on_search)
         } else {
-            binding.clothesBookmarkOnIv.visibility = View.GONE
-            binding.clothesBookmarkOffIv.visibility = View.VISIBLE
+            binding.clothesBookmarkIv.setImageResource(R.drawable.bookmark_off_search)
         }
     }
 
@@ -49,11 +43,8 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
         holder.binding.clothesCardView.setOnClickListener {
             onItemClickListener.onDetailedInfoItem(clothes[position])
         }
-        holder.binding.clothesBookmarkOffIv.setOnClickListener {
-            onItemClickListener.onBookmarkOnItem(position, holder.binding)
-        }
-        holder.binding.clothesBookmarkOnIv.setOnClickListener {
-            onItemClickListener.onBookmarkOffItem(position, holder.binding)
+        holder.binding.clothesBookmarkIv.setOnClickListener {
+            onItemClickListener.onBookmarkItem(position, holder.binding)
         }
     }
 
@@ -64,6 +55,11 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
         fun bind(clothes: Clothes) {
             binding.clothesKindTv.text = clothes.kind.toString()
             binding.clothesSizeTv.text = clothes.size.toString()
+            if (clothes.bookmark) {
+                binding.clothesBookmarkIv.setImageResource(R.drawable.bookmark_on_search)
+            } else {
+                binding.clothesBookmarkIv.setImageResource(R.drawable.bookmark_off_search)
+            }
         }
     }
 }

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/search_clothes_bookmark_off_iv"
+        android:id="@+id/search_clothes_bookmark_iv"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="35dp"
@@ -15,24 +15,13 @@
         app:layout_constraintEnd_toStartOf="@id/search_clothes_add_iv"/>
 
     <ImageView
-        android:id="@+id/search_clothes_bookmark_on_iv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginRight="10dp"
-        android:visibility="gone"
-        android:src="@drawable/bookmark_on_search"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/search_clothes_add_iv"/>
-
-    <ImageView
         android:id="@+id/search_clothes_add_iv"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="20dp"
         android:src="@drawable/clothes_add"
-        app:layout_constraintTop_toTopOf="@id/search_clothes_bookmark_off_iv"
-        app:layout_constraintBottom_toBottomOf="@id/search_clothes_bookmark_off_iv"
+        app:layout_constraintTop_toTopOf="@id/search_clothes_bookmark_iv"
+        app:layout_constraintBottom_toBottomOf="@id/search_clothes_bookmark_iv"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <HorizontalScrollView
