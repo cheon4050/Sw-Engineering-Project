@@ -45,7 +45,7 @@ class SearchFragment : Fragment() {
         isBookmark = false
         binding.searchClothesBookmarkIv.setImageResource(R.drawable.bookmark_off_search)
 
-        search()
+        searchClothes()
         searchBookmark()
     }
 
@@ -68,7 +68,7 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun search() {
+    private fun searchClothes() {
         // 의류 조회
         initRecyclerView(dummyClothes)
     }
