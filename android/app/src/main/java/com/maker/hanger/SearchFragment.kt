@@ -79,7 +79,7 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun selectSession() {
+    private fun selectSeason() {
         // 계절 선택
     }
 
