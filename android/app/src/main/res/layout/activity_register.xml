@@ -27,6 +27,15 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/clothes_attach_photo"
+            app:layout_constraintTop_toTopOf="@id/register_clothes_iv"
+            app:layout_constraintEnd_toEndOf="@id/register_clothes_iv"
+            app:layout_constraintStart_toStartOf="@id/register_clothes_iv"
+            app:layout_constraintBottom_toBottomOf="@id/register_clothes_iv"/>
+
+        <ImageView
             android:id="@+id/register_clothes_iv"
             android:layout_width="match_parent"
             android:layout_height="480dp"
@@ -56,22 +65,49 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="봄"/>
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="여름"/>
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="가을"/>
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="겨울"/>
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="봄"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/clothes_search_btn_background"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="여름"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/clothes_search_btn_background"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="가을"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/clothes_search_btn_background"/>
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="겨울"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/clothes_search_btn_background"/>
 
             </LinearLayout>
 
@@ -103,36 +139,60 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent">
 
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:text="상의"/>
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:text="아우터"/>
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:text="바지"/>
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:text="원피스"/>
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:text="스커트"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="상의"
+                        android:paddingVertical="8dp"
+                        android:paddingHorizontal="15dp"
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/clothes_search_btn_background"/>
 
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:text="신발"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="아우터"
+                        android:paddingVertical="8dp"
+                        android:paddingHorizontal="15dp"
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/clothes_search_btn_background"/>
 
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="40dp"
-                        android:text="악세서리"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="바지"
+                        android:paddingVertical="8dp"
+                        android:paddingHorizontal="15dp"
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/clothes_search_btn_background"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="신발"
+                        android:paddingVertical="8dp"
+                        android:paddingHorizontal="15dp"
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/clothes_search_btn_background"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="악세서리"
+                        android:paddingVertical="8dp"
+                        android:paddingHorizontal="15dp"
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/clothes_search_btn_background"/>
 
                 </LinearLayout>
 
@@ -154,12 +214,14 @@
 
         <EditText
             android:id="@+id/register_clothes_size_input_et"
-            android:layout_width="50dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:layout_marginRight="25dp"
             app:layout_constraintTop_toTopOf="@id/register_clothes_size_tv"
             app:layout_constraintStart_toEndOf="@id/register_clothes_size_tv"
-            app:layout_constraintBottom_toBottomOf="@id/register_clothes_size_tv"/>
+            app:layout_constraintBottom_toBottomOf="@id/register_clothes_size_tv"
+            app:layout_constraintEnd_toStartOf="@id/register_clothes_washing_ll"/>
 
 
         <LinearLayout
@@ -175,30 +237,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <Button
+            <ImageView
                 android:id="@+id/register_clothes_washing_40_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginHorizontal="5dp"
-                android:background="@drawable/washing_40"/>
-            <Button
+                android:layout_marginHorizontal="3dp"
+                android:src="@drawable/washing_40"/>
+
+            <ImageView
                 android:id="@+id/register_clothes_washing_60_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginHorizontal="5dp"
-                android:background="@drawable/washing_60"/>
-            <Button
+                android:layout_marginHorizontal="3dp"
+                android:src="@drawable/washing_60"/>
+
+            <ImageView
                 android:id="@+id/register_clothes_washing_95_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginHorizontal="5dp"
-                android:background="@drawable/washing_95"/>
-            <Button
+                android:layout_marginHorizontal="3dp"
+                android:src="@drawable/washing_95"/>
+
+            <ImageView
                 android:id="@+id/register_clothes_washing_no_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginHorizontal="5dp"
-                android:background="@drawable/washing_no"/>
+                android:layout_marginHorizontal="3dp"
+                android:src="@drawable/washing_no"/>
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
