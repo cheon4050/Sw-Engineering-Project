@@ -41,6 +41,6 @@ class SignUpActivity : AppCompatActivity() {
         val userId : String = binding.signupIdEt.text.toString()
         val password: String = binding.signupPasswordEt.text.toString()
         val birth : Int = Integer.parseInt(binding.signupBirthEt.text.toString())
-        return User(0, userId, password, birth)
+        return User(null, userId, password, birth)
     }
 }

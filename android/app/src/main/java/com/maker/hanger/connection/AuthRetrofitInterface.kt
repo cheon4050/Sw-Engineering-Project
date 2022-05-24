@@ -18,5 +18,5 @@ interface AuthRetrofitInterface {
     fun modify(@Body user: User)
 
     @DELETE("/auth/user")
-    fun delete(@Body userIdx: Int)
+    fun delete(@Body userToken: String?)
 }
