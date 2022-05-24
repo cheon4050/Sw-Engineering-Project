@@ -7,7 +7,7 @@ data class Clothes(
     @SerializedName(value = "clothesIdx") var clothesIdx: Int,
     @SerializedName(value = "clothesImage") var clothesImage: String,
     @SerializedName(value = "date") var date: String,
-    @SerializedName(value = "session") var session: String,
+    @SerializedName(value = "season") var season: String, // 추후에 ArrayList<String>으로 변경 예정
     @SerializedName(value = "kind") var kind: ArrayList<String>,
     @SerializedName(value = "washingMethod") var washingMethod: ArrayList<Int>,
     @SerializedName(value = "size") var size: Char,

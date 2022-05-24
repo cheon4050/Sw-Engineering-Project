@@ -29,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
         // 사진 첨부하기
     }
 
-    private fun selectSession() {
+    private fun selectSeason() {
         // 계절 선택하기
     }
 
