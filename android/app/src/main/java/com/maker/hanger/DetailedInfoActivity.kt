@@ -1,5 +1,6 @@
 package com.maker.hanger
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -21,6 +22,7 @@ class DetailedInfoActivity : AppCompatActivity() {
 
         initClothesInfo()
         deleteClothes()
+        searchWashingMethod()
     }
 
     private fun initClothesInfo() {
@@ -59,6 +61,25 @@ class DetailedInfoActivity : AppCompatActivity() {
         } else {
             binding.detailInfoClothesBookmarkOnIv.visibility = View.GONE
             binding.detailInfoClothesBookmarkOffIv.visibility = View.VISIBLE
+        }
+    }
+
+    private fun searchWashingMethod() {
+        binding.detailInfoClothesWashing40Iv.setOnClickListener {
+            val intent = Intent(this, WashingMethodActivity::class.java)
+            startActivity(intent)
+        }
+        binding.detailInfoClothesWashing60Iv.setOnClickListener {
+            val intent = Intent(this, WashingMethodActivity::class.java)
+            startActivity(intent)
+        }
+        binding.detailInfoClothesWashing95Iv.setOnClickListener {
+            val intent = Intent(this, WashingMethodActivity::class.java)
+            startActivity(intent)
+        }
+        binding.detailInfoClothesWashingNoIv.setOnClickListener {
+            val intent = Intent(this, WashingMethodActivity::class.java)
+            startActivity(intent)
         }
     }
 }

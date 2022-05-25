@@ -38,6 +38,9 @@
         <activity
             android:name=".FindActivity"
             android:exported="true"/>
+        <activity
+            android:name=".WashingMethodActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
