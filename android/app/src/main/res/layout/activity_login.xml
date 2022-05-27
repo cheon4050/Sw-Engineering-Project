@@ -6,7 +6,7 @@
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
 
     <TextView
-        android:id="@+id/app_name_tv"
+        android:id="@+id/login_app_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -17,36 +17,36 @@
         android:textSize="40sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/id_til"
+        android:id="@+id/login_id_til"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:hint="아이디"
-        app:layout_constraintTop_toBottomOf="@id/app_name_tv"
-        app:layout_constraintEnd_toEndOf="@id/app_name_tv"
-        app:layout_constraintStart_toStartOf="@id/app_name_tv">
+        app:layout_constraintTop_toBottomOf="@id/login_app_name_tv"
+        app:layout_constraintEnd_toEndOf="@id/login_app_name_tv"
+        app:layout_constraintStart_toStartOf="@id/login_app_name_tv">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/id_et"
+            android:id="@+id/login_id_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_til"
+        android:id="@+id/login_password_til"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="비밀번호"
-        app:layout_constraintTop_toBottomOf="@id/id_til"
-        app:layout_constraintEnd_toEndOf="@id/id_til"
-        app:layout_constraintStart_toStartOf="@id/id_til">
+        app:layout_constraintTop_toBottomOf="@id/login_id_til"
+        app:layout_constraintEnd_toEndOf="@id/login_id_til"
+        app:layout_constraintStart_toStartOf="@id/login_id_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_et"
+            android:id="@+id/login_password_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"/>
@@ -54,24 +54,35 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/sign_up_"
+        android:id="@+id/login_sign_up_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="회원 가입"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/password_til"
-        app:layout_constraintEnd_toEndOf="@id/password_til"/>
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/login_password_til"
+        app:layout_constraintEnd_toEndOf="@id/login_password_til"/>
 
-    <Button
-        android:id="@+id/login_btn"
+    <TextView
+        android:id="@+id/login_find_password_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
+        android:text="비밀번호 찾기"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/login_password_til"
+        app:layout_constraintStart_toStartOf="@id/login_password_til"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_sign_up_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/orange"
         android:text="로그인"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/password_til"
-        app:layout_constraintEnd_toEndOf="@id/password_til"
-        app:layout_constraintStart_toStartOf="@id/password_til"/>
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

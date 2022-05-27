@@ -29,10 +29,10 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/bookmark_iv"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/bookmark_off"
+        android:id="@+id/clothes_bookmark_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/bookmark_off_search"
         app:layout_constraintBottom_toBottomOf="@id/clothes_cardView"
         app:layout_constraintEnd_toEndOf="@id/clothes_cardView"/>
 

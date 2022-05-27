@@ -1,63 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:id="@+id/home_user_info_modify_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/user_modify"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_weather_cl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:elevation="5dp"
+        android:background="@drawable/clothes_search_background"
+        app:layout_constraintTop_toBottomOf="@id/home_user_info_modify_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/weather_iv"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="80dp"
-            android:src="@drawable/weather_sample"
+            android:id="@+id/home_weather_iv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/home_panel_vp"
-            android:layout_width="match_parent"
-            android:layout_height="330dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/weather_iv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
-            android:id="@+id/home_indicator"
+        <TextView
+            android:id="@+id/home_weather_present_temperature_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:dampingRatio="0.5"
-            app:dotsColor="@color/bottom"
-            app:dotsStrokeColor="@color/indicator"
-            app:dotsSize="10dp"
-            app:dotsSpacing="6dp"
-            app:dotsStrokeWidth="2dp"
-            app:stiffness="300"
-            app:layout_constraintTop_toBottomOf="@id/home_panel_vp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="27"
+            android:textSize="60dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintTop_toTopOf="@id/home_weather_highest_temperature_tv"
+            app:layout_constraintBottom_toBottomOf="@id/home_weather_lowest_temperature_tv"
+            app:layout_constraintEnd_toStartOf="@id/home_weather_highest_temperature_tv"/>
+
+        <TextView
+            android:id="@+id/home_weather_highest_temperature_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="31"
+            android:textSize="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-<!--        <Button-->
-<!--            android:id="@+id/clothes_sign_up_btn"-->
-<!--            android:layout_width="170dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:background="@drawable/clothes_btn"-->
-<!--            android:layout_marginTop="40dp"-->
-<!--            android:paddingStart="15dp"-->
-<!--            android:paddingEnd="20dp"-->
-<!--            android:drawableStart="@drawable/hanger_small_size"-->
-<!--            android:text="의류 등록하기"-->
-<!--            android:textSize="16sp"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/weather_iv"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"/>-->
+        <TextView
+            android:id="@+id/home_weather_lowest_temperature_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="24"
+            android:textSize="30dp"
+            app:layout_constraintStart_toStartOf="@id/home_weather_highest_temperature_tv"
+            app:layout_constraintEnd_toEndOf="@id/home_weather_highest_temperature_tv"
+            app:layout_constraintTop_toBottomOf="@id/home_weather_highest_temperature_tv"/>
+
+        <TextView
+            android:id="@+id/home_weather_precipitation_probability_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비 올 확률 : "
+            android:textStyle="bold"
+            android:textSize="15dp"
+            app:layout_constraintTop_toTopOf="@id/home_weather_precipitation_probability_input_tv"
+            app:layout_constraintEnd_toStartOf="@id/home_weather_precipitation_probability_input_tv"
+            app:layout_constraintBottom_toBottomOf="@id/home_weather_precipitation_probability_input_tv"/>
+
+        <TextView
+            android:id="@+id/home_weather_precipitation_probability_input_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="39%"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/home_weather_humidity_input_tv"/>
+
+        <TextView
+            android:id="@+id/home_weather_humidity_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="습도 : "
+            android:textStyle="bold"
+            android:textSize="15dp"
+            app:layout_constraintTop_toTopOf="@id/home_weather_humidity_input_tv"
+            app:layout_constraintEnd_toStartOf="@id/home_weather_humidity_input_tv"
+            app:layout_constraintBottom_toBottomOf="@id/home_weather_humidity_input_tv"/>
+
+        <TextView
+            android:id="@+id/home_weather_humidity_input_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="39%"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/home_recommend_vp"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/home_weather_cl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+        android:id="@+id/home_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:dampingRatio="0.5"
+        app:dotsColor="@color/bottom"
+        app:dotsStrokeColor="@color/indicator"
+        app:dotsSize="10dp"
+        app:dotsSpacing="6dp"
+        app:dotsStrokeWidth="2dp"
+        app:stiffness="300"
+        app:layout_constraintTop_toBottomOf="@id/home_recommend_vp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

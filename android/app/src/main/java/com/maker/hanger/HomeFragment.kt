@@ -1,5 +1,6 @@
 package com.maker.hanger
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.maker.hanger.adapter.PanelVPAdapter
+import com.bumptech.glide.Glide
+import com.maker.hanger.adapter.RecommendVPAdapter
 import com.maker.hanger.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var handler: Handler
+    private lateinit var recommendVPAdapter: RecommendVPAdapter
     private var position: Int = 0
 
     override fun onCreateView(
@@ -23,40 +26,55 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        val panelAdapter = PanelVPAdapter(this)
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        panelAdapter.addFragment(PanelFragment())
-        binding.homePanelVp.adapter = panelAdapter
-        binding.homeIndicator.setViewPager2(binding.homePanelVp)
+        initViewPager()
+        modifyUser()
 
         handler = Handler(Looper.getMainLooper())
-        val autoViewPager = AutoViewPager(panelAdapter)
+        val autoViewPager = AutoViewPager(recommendVPAdapter)
         autoViewPager.start()
+
+        // weather image test
+        Glide.with(this).load(R.raw.weather_hot).into(binding.homeWeatherIv)
 
         return binding.root
     }
 
-    private fun switchPanel(panelAdapter: PanelVPAdapter) {
-        position = (position + 1) % panelAdapter.itemCount
-        binding.homePanelVp.setCurrentItem(position, true)
+    private fun initViewPager() {
+        recommendVPAdapter = RecommendVPAdapter(this)
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        recommendVPAdapter.addFragment(RecommendFragment())
+        binding.homeRecommendVp.adapter = recommendVPAdapter
+        binding.homeIndicator.setViewPager2(binding.homeRecommendVp)
     }
 
-    inner class AutoViewPager(private val panelAdapter: PanelVPAdapter) : Thread() {
+    private fun recommendClothes(recommendAdapter: RecommendVPAdapter) {
+        position = (position + 1) % recommendAdapter.itemCount
+        binding.homeRecommendVp.setCurrentItem(position, true)
+    }
+
+    private fun modifyUser() {
+        binding.homeUserInfoModifyIv.setOnClickListener {
+            val intent = Intent(requireContext(), ModifyActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    inner class AutoViewPager(private val recommendAdapter: RecommendVPAdapter) : Thread() {
         override fun run() {
             super.run()
             try {
                 while (true) {
                     sleep(2500)
                     handler.post {
-                        switchPanel(panelAdapter)
+                        recommendClothes(recommendAdapter)
                     }
                 }
             } catch (e: InterruptedException) {
-                Log.d("PANEL", "Home Panel Thread is dead.")
+                Log.d("Recommend", "Home Recommend Thread is dead.")
             }
         }
     }

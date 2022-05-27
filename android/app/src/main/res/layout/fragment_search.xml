@@ -5,23 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/search_clothes_add_iv"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/clothes_add"
+        android:id="@+id/search_clothes_bookmark_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/bookmark_off_search"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/search_clothes_bookmark_iv"/>
+        app:layout_constraintEnd_toStartOf="@id/search_clothes_add_iv"/>
 
     <ImageView
-        android:id="@+id/search_clothes_bookmark_iv"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="25dp"
-        android:src="@drawable/clothes_bookmark"
-        app:layout_constraintTop_toTopOf="@id/search_clothes_add_iv"
-        app:layout_constraintBottom_toBottomOf="@id/search_clothes_add_iv"
+        android:id="@+id/search_clothes_add_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/clothes_add"
+        app:layout_constraintTop_toTopOf="@id/search_clothes_bookmark_iv"
+        app:layout_constraintBottom_toBottomOf="@id/search_clothes_bookmark_iv"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <HorizontalScrollView
@@ -29,8 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@id/search_clothes_add_iv"
@@ -42,22 +42,49 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:text="봄"/>
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:text="여름"/>
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:text="가을"/>
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:text="겨울"/>
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="봄"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="15dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/clothes_search_btn_background"/>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="여름"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="15dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/clothes_search_btn_background"/>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="가을"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="15dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/clothes_search_btn_background"/>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="겨울"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="15dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/clothes_search_btn_background"/>
 
         </LinearLayout>
 
@@ -68,8 +95,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@id/search_season_nsv"
@@ -89,36 +116,60 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="상의"/>
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="아우터"/>
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="바지"/>
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="원피스"/>
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="스커트"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="상의"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/clothes_search_btn_background"/>
 
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="신발"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아우터"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/clothes_search_btn_background"/>
 
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:text="악세서리"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="바지"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/clothes_search_btn_background"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="신발"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/clothes_search_btn_background"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="악세서리"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/clothes_search_btn_background"/>
 
             </LinearLayout>
 
@@ -129,7 +180,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_clothes_rv"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="500dp"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="10dp"
         android:paddingHorizontal="10dp"
