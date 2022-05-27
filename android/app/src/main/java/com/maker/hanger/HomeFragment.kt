@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.maker.hanger.adapter.RecommendVPAdapter
 import com.maker.hanger.databinding.FragmentHomeBinding
 
@@ -31,6 +32,9 @@ class HomeFragment : Fragment() {
         handler = Handler(Looper.getMainLooper())
         val autoViewPager = AutoViewPager(recommendVPAdapter)
         autoViewPager.start()
+
+        // weather image test
+        Glide.with(this).load(R.raw.weather_hot).into(binding.homeWeatherIv)
 
         return binding.root
     }
