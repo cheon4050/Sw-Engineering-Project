@@ -1,4 +1,4 @@
-package maker.server.Dto;
+package maker.server.Dto.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class User {
-    private int userIdx;
+public class UserLoginDto {
     private String userId;
     private String password;
-    private int birth;
 }

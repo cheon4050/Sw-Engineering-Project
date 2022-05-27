@@ -1,27 +1,34 @@
 package maker.server.Auth;
 
-import maker.server.Dto.User;
+import lombok.RequiredArgsConstructor;
+import maker.server.Dto.User.UserDto;
+import maker.server.Dto.User.UserFindDto;
+import maker.server.Dto.User.UserLoginDto;
+import maker.server.Entity.User;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
-
 @Service
+@RequiredArgsConstructor
 public class AuthService {
-    public void addUser(User user) {
-        System.out.printf("userIdx = %d, userId = %s, password = %s, birth = %d", user.getUserIdx(),user.getUserId(), user.getPassword(), user.getBirth());
+    private final AuthRepository authRepository;
+
+    public void addUser(UserDto user) {
+        authRepository.save(user);
     }
 
-    public int getUserIdx(Object obj) {
-        return 1;
+    public String getUserToken(UserLoginDto user) {
+        return authRepository.findUserToken(user);
     }
 
-    public String getPassword(Object obj) {
-        return "";
+    public String getPassword(UserFindDto user) {
+        return authRepository.findPassword(user);
     }
 
-    public void updateUser(Object obj) {
+    public void updateUser(UserDto user) {
+        authRepository.update(user);
     }
 
-    public void deleteUser(Object obj) {
+    public void deleteUser(String userToken) {
+        authRepository.delete(userToken);
     }
 }
