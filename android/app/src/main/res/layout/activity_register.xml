@@ -26,6 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
+            android:id="@+id/register_clothes_photo_add_iv"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/clothes_attach_photo"
@@ -36,9 +37,9 @@
 
         <ImageView
             android:id="@+id/register_clothes_iv"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="480dp"
-            android:scaleType="fitCenter"
+            android:scaleType="center"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
