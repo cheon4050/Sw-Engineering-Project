@@ -66,6 +66,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/register_clothes_spring_tv"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:text="봄"
@@ -74,9 +75,10 @@
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/clothes_search_btn_background"/>
+                    android:background="@drawable/clothes_search_select_off_background"/>
 
                 <TextView
+                    android:id="@+id/register_clothes_summer_tv"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:text="여름"
@@ -85,9 +87,10 @@
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/clothes_search_btn_background"/>
+                    android:background="@drawable/clothes_search_select_off_background"/>
 
                 <TextView
+                    android:id="@+id/register_clothes_autumn_tv"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:text="가을"
@@ -96,9 +99,10 @@
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/clothes_search_btn_background"/>
+                    android:background="@drawable/clothes_search_select_off_background"/>
 
                 <TextView
+                    android:id="@+id/register_clothes_winter_tv"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:text="겨울"
@@ -107,7 +111,7 @@
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/clothes_search_btn_background"/>
+                    android:background="@drawable/clothes_search_select_off_background"/>
 
             </LinearLayout>
 
@@ -140,6 +144,7 @@
                     app:layout_constraintBottom_toBottomOf="parent">
 
                     <TextView
+                        android:id="@+id/register_clothes_top_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="상의"
@@ -148,9 +153,10 @@
                         android:textColor="#ffffff"
                         android:gravity="center"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/clothes_search_btn_background"/>
+                        android:background="@drawable/clothes_search_select_off_background"/>
 
                     <TextView
+                        android:id="@+id/register_clothes_outer_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="아우터"
@@ -159,20 +165,22 @@
                         android:textColor="#ffffff"
                         android:gravity="center"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/clothes_search_btn_background"/>
+                        android:background="@drawable/clothes_search_select_off_background"/>
 
                     <TextView
+                        android:id="@+id/register_clothes_bottoms_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="바지"
+                        android:text="하의"
                         android:paddingVertical="8dp"
                         android:paddingHorizontal="15dp"
                         android:textColor="#ffffff"
                         android:gravity="center"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/clothes_search_btn_background"/>
+                        android:background="@drawable/clothes_search_select_off_background"/>
 
                     <TextView
+                        android:id="@+id/register_clothes_shoes_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="신발"
@@ -181,9 +189,10 @@
                         android:textColor="#ffffff"
                         android:gravity="center"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/clothes_search_btn_background"/>
+                        android:background="@drawable/clothes_search_select_off_background"/>
 
                     <TextView
+                        android:id="@+id/register_clothes_accessories_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="악세서리"
@@ -192,7 +201,7 @@
                         android:textColor="#ffffff"
                         android:gravity="center"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/clothes_search_btn_background"/>
+                        android:background="@drawable/clothes_search_select_off_background"/>
 
                 </LinearLayout>
 

@@ -1,10 +1,8 @@
 package com.maker.hanger.connection
 
 import android.util.Log
-import com.maker.hanger.data.Clothes
 import com.maker.hanger.data.ClothesResponse
 import okhttp3.MultipartBody
-import okhttp3.Request
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,7 +21,7 @@ class ClothesService {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
                 Log.d("ADD/SUCCESS", response.toString())
                 val resp: ClothesResponse = response.body()!!
-                when (resp.state) {
+                when (resp.status) {
                     200 -> registerView.onRegisterSuccess()
                     else -> registerView.onRegisterFailure()
                 }

@@ -1,8 +1,6 @@
 package com.maker.hanger.connection
 
-import com.maker.hanger.data.Clothes
-import com.maker.hanger.data.ClothesResponse
-import com.maker.hanger.data.Style
+import com.maker.hanger.data.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -19,21 +17,34 @@ interface ClothesRetrofitInterface {
     ): Call<ClothesResponse>
 
     @GET("/clothes")
-    fun search(@Query("season") season: String?, @Query("kind") kind: String?,
-               @Query("bookmark") bookmark: Boolean?, @Header("userToken") userToken: String?): Call<ArrayList<Clothes>>
+    fun search(
+        @Header("userToken") userToken: String?
+    ): Call<ClothesSearchResponse>
 
     @DELETE("/clothes")
-    fun delete(@Query("clothesIdx") clothesIdx: Int, @Header("userToken") userToken: String?)
+    fun delete(
+        @Header("userToken") userToken: String?,
+        @Query("clothesIdx") clothesIdx: Int
+    ): Call<ClothesResponse>
 
+    @Multipart
     @PUT("/clothes")
-    fun modify(@Query("clothesIdx") clothesIdx: Int, @Header("userToken") userToken: String?, @Body clothes: Clothes)
+    fun update(
+        @Header("userToken") userToken: String?,
+        @Part clothesImage: MultipartBody.Part,
+        @Part("clothes") clothes: RequestBody,
+        @Query("clothesIdx") clothesIdx: Int
+    ): Call<ClothesResponse>
 
-    @GET("/clothes/Info")
-    fun searchInfo(@Query("clothesIdx") clothesIdx: Int, @Header("userToken") userToken: String?): Call<Clothes>
+    @POST("/clothes/bookmark")
+    fun bookmark(
+        @Header("userToken") userToken: String?,
+        @Query("clothesIdx") clothesIdx: Int,
+        @Query("bookmark") bookmark: Boolean,
+    ): Call<ClothesResponse>
 
-    @POST("/clothes/Bookmark")
-    fun bookmark(@Query("clothesIdx") clothesIdx: Int, @Header("userToken") userToken: String?)
-
-    @GET("/clothes/Recommend")
-    fun recommend(@Header("userToken") userToken: String?): Call<ArrayList<Style>>
+    @GET("/clothes/recommend")
+    fun recommend(
+        @Header("userToken") userToken: String?
+    ): Call<ClothesRecommendResponse>
 }
