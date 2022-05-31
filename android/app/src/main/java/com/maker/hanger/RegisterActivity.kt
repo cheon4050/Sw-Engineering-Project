@@ -5,10 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -20,28 +24,45 @@ import com.maker.hanger.data.ClothesRequest
 import com.maker.hanger.databinding.ActivityRegisterBinding
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
-import okhttp3.Request
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var clothes: ClothesRequest
-    private lateinit var gson: Gson
     private lateinit var file: File
-
     private lateinit var launcher: ActivityResultLauncher<Intent>
+    private var gson = Gson()
+    private val season: ArrayList<String> = ArrayList()
+    private val kind: ArrayList<String> = ArrayList()
+    private var size: Char = 'S'
+    private val washingMethod: ArrayList<Int> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setPermission()
         setActivityResultLauncher()
 
         attachPhoto()
+        selectSeason()
+        selectKind()
+        selectWashingMethod()
+        selectSize()
+
         addClothes()
+    }
+
+    private fun setPermission() {
+        if (Build.VERSION.SDK_INT >= 30) {
+            if (!Environment.isExternalStorageManager()) {
+                val getPermission = Intent()
+                getPermission.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION;
+                startActivity(getPermission);
+            }
+        }
     }
 
     private fun setActivityResultLauncher() {
@@ -71,35 +92,14 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun addClothes() {
         binding.registerClothesAddIv.setOnClickListener {
-            //Toast.makeText(this, "의류가 등록되었습니다.", Toast.LENGTH_SHORT).show()
-            //finish()
-
-            // dummy
-            val data = "990213"
-            val season = ArrayList<String>()
-            season.apply {
-                add("봄")
-                add("여름")
-            }
-            val kind = ArrayList<String>()
-            kind.apply {
-                add("상의")
-            }
-            val washingMethod = ArrayList<Int>()
-            washingMethod.apply {
-                add(1)
-                add(2)
-            }
-            clothes = ClothesRequest(data, season, kind, washingMethod)
-            val clothesBody = gson.toJson(clothes).toRequestBody("application/json; charset=utf-8".toMediaType())
-
-            val fileBody = file.asRequestBody("text/x-markdown; charset=utf-8".toMediaType())
-            val requestFile = MultipartBody.Part.createFormData("clothesImage", file.name, fileBody)
+            val clothes = ClothesRequest("22.06.01", season, kind, washingMethod, size)
+            val clothesRequestBody = gson.toJson(clothes).toRequestBody("application/json; charset=utf-8".toMediaType())
+            val fileRequestBody = file.asRequestBody("text/x-markdown; charset=utf-8".toMediaType())
+            val multipartBodyPartFile = MultipartBody.Part.createFormData("clothesImage", file.name, fileRequestBody)
 
             val clothesService = ClothesService()
             clothesService.setRegisterView(this)
-
-            clothesService.add("1", requestFile, clothesBody)
+            clothesService.add("1", multipartBodyPartFile, clothesRequestBody)
         }
     }
 
@@ -113,28 +113,152 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     }
 
     private fun selectSeason() {
-        // 계절 선택하기
+        with(binding) {
+            registerClothesSpringTv.setOnClickListener {
+                if (!season.contains("spring")) {
+                    registerClothesSpringTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    season.add("spring")
+                } else {
+                    registerClothesSpringTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    season.remove("spring")
+                }
+            }
+            registerClothesSummerTv.setOnClickListener {
+                if (!season.contains("summer")) {
+                    registerClothesSummerTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    season.add("summer")
+                } else {
+                    registerClothesSummerTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    season.remove("summer")
+                }
+            }
+            registerClothesAutumnTv.setOnClickListener {
+                if (!season.contains("autumn")) {
+                    registerClothesAutumnTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    season.add("autumn")
+                } else {
+                    registerClothesAutumnTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    season.remove("autumn")
+                }
+            }
+            registerClothesWinterTv.setOnClickListener {
+                if (!season.contains("winter")) {
+                    registerClothesWinterTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    season.add("winter")
+                } else {
+                    registerClothesWinterTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    season.remove("winter")
+                }
+            }
+        }
     }
 
     private fun selectKind() {
-        // 종류 선택하기
+        with(binding) {
+            registerClothesTopTv.setOnClickListener {
+                if (!kind.contains("top")) {
+                    registerClothesTopTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    kind.add("top")
+                } else {
+                    registerClothesTopTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    kind.remove("top")
+                }
+            }
+            registerClothesOuterTv.setOnClickListener {
+                if (!kind.contains("outer")) {
+                    registerClothesOuterTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    kind.add("outer")
+                } else {
+                    registerClothesOuterTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    kind.remove("outer")
+                }
+            }
+            registerClothesBottomsTv.setOnClickListener {
+                if (!kind.contains("bottoms")) {
+                    registerClothesBottomsTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    kind.add("bottoms")
+                } else {
+                    registerClothesBottomsTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    kind.remove("bottoms")
+                }
+            }
+            registerClothesShoesTv.setOnClickListener {
+                if (!kind.contains("shoes")) {
+                    registerClothesShoesTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    kind.add("shoes")
+                } else {
+                    registerClothesShoesTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    kind.remove("shoes")
+                }
+            }
+            registerClothesAccessoriesTv.setOnClickListener {
+                if (!kind.contains("accessories")) {
+                    registerClothesAccessoriesTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    kind.add("accessories")
+                } else {
+                    registerClothesAccessoriesTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    kind.remove("accessories")
+                }
+            }
+        }
     }
 
     private fun selectWashingMethod() {
-        // 세탁법 선택하기
+        with(binding) {
+            registerClothesWashing40Btn.setOnClickListener {
+                if (!washingMethod.contains(40)) {
+                    registerClothesWashing40Btn.setImageResource(R.drawable.washing_select)
+                    washingMethod.add(40)
+                } else {
+                    registerClothesWashing40Btn.setImageResource(R.drawable.washing_40)
+                    washingMethod.remove(40)
+                }
+            }
+            registerClothesWashing60Btn.setOnClickListener {
+                if (!washingMethod.contains(60)) {
+                    registerClothesWashing60Btn.setImageResource(R.drawable.washing_select)
+                    washingMethod.add(60)
+                } else {
+                    registerClothesWashing60Btn.setImageResource(R.drawable.washing_60)
+                    washingMethod.remove(60)
+                }
+            }
+            registerClothesWashing95Btn.setOnClickListener {
+                if (!washingMethod.contains(95)) {
+                    registerClothesWashing95Btn.setImageResource(R.drawable.washing_select)
+                    washingMethod.add(95)
+                } else {
+                    registerClothesWashing95Btn.setImageResource(R.drawable.washing_95)
+                    washingMethod.remove(95)
+                }
+            }
+            registerClothesWashingNoBtn.setOnClickListener {
+                if (!washingMethod.contains(0)) {
+                    registerClothesWashingNoBtn.setImageResource(R.drawable.washing_select)
+                    washingMethod.add(0)
+                } else {
+                    registerClothesWashingNoBtn.setImageResource(R.drawable.washing_no)
+                    washingMethod.remove(0)
+                }
+            }
+        }
     }
 
     private fun selectSize() {
-        // 사이즈 입력하기
+        if (binding.registerClothesSizeInputEt.text.length == 1) {
+            size = binding.registerClothesSizeInputEt.text.toString()[0]
+        }
     }
 
     override fun onRegisterSuccess() {
         Log.d("ADD/SUCCESS", "의류 등록을 성공했습니다.")
+        Toast.makeText(this,"의류를 등록했습니다.", Toast.LENGTH_SHORT).show()
         finish()
     }
 
     override fun onRegisterFailure() {
         Log.d("ADD/FAILURE", "의류 등록을 실패했습니다.")
+        Toast.makeText(this,"의류를 등록을 실패했습니다.", Toast.LENGTH_SHORT).show()
         finish()
     }
 }
