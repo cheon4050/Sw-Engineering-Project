@@ -13,3 +13,16 @@ data class Clothes(
     @SerializedName(value = "size") var size: Char,
     @SerializedName(value = "bookmark") var bookmark: Boolean
 ) : Serializable
+
+data class ClothesResponse(
+    var state: Int,
+    var message: String,
+    var clothes: Clothes
+)
+
+data class ClothesRequest(
+    var data: String,
+    var season: ArrayList<String>,
+    var kind: ArrayList<String>,
+    var washingMethod: ArrayList<Int>
+)
