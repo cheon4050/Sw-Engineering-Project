@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import maker.server.Dto.Clothes.ClothesDto;
 import maker.server.Entity.Clothes;
 import maker.server.Entity.style;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,14 +18,14 @@ public class ClothesController {
     private final ClothesService clothesService;
 
     @PostMapping
-    public void postClothes(@RequestHeader String userToken,
-                            @RequestPart(value="clothesImage") MultipartFile clothesImage,
-                            @RequestPart(value = "clothes") String clothes
+    public ResponseEntity postClothes(@RequestHeader String userToken,
+                                      @RequestPart(value="clothesImage") MultipartFile clothesImage,
+                                      @RequestPart(value = "clothes") String clothes
                             )throws java.io.IOException{
         System.out.println(userToken);
         System.out.println(clothesImage);
         System.out.println(clothes);
-        clothesService.postClothes(userToken, clothesImage, clothes);
+        return clothesService.postClothes(userToken, clothesImage, clothes);
     }
 
 //    @GetMapping
