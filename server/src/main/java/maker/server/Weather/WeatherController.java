@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class WeatherController {
     private final WeatherService weatherService;
 
-    @GetMapping
-    public weather getWeather(){
-        return weatherService.getWeather();
-    }
+//    @GetMapping
+//    public weather getWeather(){
+//        return weatherService.getWeather();
+//    }
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class WeatherService {
 
 
-    public weather getWeather() {
-
-    }
+//    public weather getWeather() {
+//
+//    }
 }

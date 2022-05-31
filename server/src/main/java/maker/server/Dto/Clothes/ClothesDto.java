@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +14,6 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ClothesDto {
-    private String clothesImage;
     private Date date;
     private ArrayList<String> season;
     private ArrayList<String> kind;

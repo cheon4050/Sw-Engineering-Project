@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Repository
@@ -20,7 +23,7 @@ public class ClothesRepository {
     private final RowMapper<Clothes> clothesRowMapper = (rs, count) ->{
         Clothes clothes = new Clothes(
                 rs.getInt("clothesIdx"),
-                rs.getString("clothesImage"),
+                rs.getString("clothesImageUrl"),
                 rs.getDate("date"),
                 rs.getObject("season", ArrayList.class),
                 rs.getObject("kind", ArrayList.class),
@@ -34,24 +37,24 @@ public class ClothesRepository {
     public void save(String userToken, ClothesDto clothes) {
     }
 
-    public ArrayList<Clothes> findByCategory(String userToken, String season, String kind, boolean bookmark) {
-        return
-    }
+//    public ArrayList<Clothes> findByCategory(String userToken, String season, String kind, boolean bookmark) {
+//        return new
+//    }
 
-    public void delete(String userToken, int clothesIdx) {
-    }
-
-    public void update(String userToken, int clothesIdx, ClothesDto clothes) {
-    }
-
-    public Clothes findByClothesIdx(String userToken, int clothesIdx) {
-        return
-    }
-
-    public void bookmarkByClothesIdx(String userToken, int clothesIdx) {
-    }
-
-    public ArrayList<style> recommend(String userToken, weather weather) {
-        return
-    }
+//    public void delete(String userToken, int clothesIdx) {
+//    }
+//
+//    public void update(String userToken, int clothesIdx, ClothesDto clothes) {
+//    }
+//
+//    public Clothes findByClothesIdx(String userToken, int clothesIdx) {
+//        return
+//    }
+//
+//    public void bookmarkByClothesIdx(String userToken, int clothesIdx) {
+//    }
+//
+//    public ArrayList<style> recommend(String userToken, weather weather) {
+//        return
+//    }
 }

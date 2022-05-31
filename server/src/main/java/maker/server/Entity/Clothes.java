@@ -14,7 +14,7 @@ import java.util.Date;
 @ToString
 public class Clothes {
     private int clothesIdx;
-    private String clothesImage;
+    private String clothesImageURL;
     private Date date;
     private ArrayList<String> season;
     private ArrayList<String> kind;
