@@ -9,17 +9,27 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.maker.hanger.data.Clothes
+import com.google.gson.Gson
+import com.maker.hanger.connection.ClothesService
+import com.maker.hanger.connection.RegisterView
+import com.maker.hanger.data.ClothesRequest
 import com.maker.hanger.databinding.ActivityRegisterBinding
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), RegisterView {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var clothes: Clothes
+    private lateinit var clothes: ClothesRequest
+    private lateinit var gson: Gson
+    private lateinit var file: File
 
     private lateinit var launcher: ActivityResultLauncher<Intent>
 
@@ -44,6 +54,7 @@ class RegisterActivity : AppCompatActivity() {
                     binding.registerClothesPhotoAddIv.visibility = View.GONE
                     // 이미지 절대 경로
                     Log.d("TEST", getAbsolutelyPath(uri, this).toString())
+                    file = File(getAbsolutelyPath(uri, this))
                 }
             }
     }
@@ -60,8 +71,35 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun addClothes() {
         binding.registerClothesAddIv.setOnClickListener {
-            Toast.makeText(this, "의류가 등록되었습니다.", Toast.LENGTH_SHORT).show()
-            finish()
+            //Toast.makeText(this, "의류가 등록되었습니다.", Toast.LENGTH_SHORT).show()
+            //finish()
+
+            // dummy
+            val data = "990213"
+            val season = ArrayList<String>()
+            season.apply {
+                add("봄")
+                add("여름")
+            }
+            val kind = ArrayList<String>()
+            kind.apply {
+                add("상의")
+            }
+            val washingMethod = ArrayList<Int>()
+            washingMethod.apply {
+                add(1)
+                add(2)
+            }
+            clothes = ClothesRequest(data, season, kind, washingMethod)
+            val clothesBody = gson.toJson(clothes).toRequestBody("application/json; charset=utf-8".toMediaType())
+
+            val fileBody = file.asRequestBody("text/x-markdown; charset=utf-8".toMediaType())
+            val requestFile = MultipartBody.Part.createFormData("clothesImage", file.name, fileBody)
+
+            val clothesService = ClothesService()
+            clothesService.setRegisterView(this)
+
+            clothesService.add("1", requestFile, clothesBody)
         }
     }
 
@@ -88,5 +126,15 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun selectSize() {
         // 사이즈 입력하기
+    }
+
+    override fun onRegisterSuccess() {
+        Log.d("ADD/SUCCESS", "의류 등록을 성공했습니다.")
+        finish()
+    }
+
+    override fun onRegisterFailure() {
+        Log.d("ADD/FAILURE", "의류 등록을 실패했습니다.")
+        finish()
     }
 }
