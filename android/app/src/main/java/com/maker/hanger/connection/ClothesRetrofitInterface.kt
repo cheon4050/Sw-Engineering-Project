@@ -18,7 +18,10 @@ interface ClothesRetrofitInterface {
 
     @GET("/clothes")
     fun search(
-        @Header("userToken") userToken: String?
+        @Header("userToken") userToken: String?,
+        @Query("season") season: ArrayList<String>,
+        @Query("kind") kind: ArrayList<String>,
+        @Query("bookmark") bookmark: Boolean
     ): Call<ClothesSearchResponse>
 
     @DELETE("/clothes")

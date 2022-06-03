@@ -180,6 +180,18 @@
                         android:background="@drawable/clothes_search_select_off_background"/>
 
                     <TextView
+                        android:id="@+id/register_clothes_onepiece_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="원피스"
+                        android:paddingVertical="8dp"
+                        android:paddingHorizontal="15dp"
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/clothes_search_select_off_background"/>
+
+                    <TextView
                         android:id="@+id/register_clothes_shoes_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
