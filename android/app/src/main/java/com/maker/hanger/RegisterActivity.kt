@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var file: File
     private lateinit var launcher: ActivityResultLauncher<Intent>
-    private var gson = Gson()
+    private val gson = Gson()
     private val season: ArrayList<String> = ArrayList()
     private val kind: ArrayList<String> = ArrayList()
     private var size: Char = 'S'
@@ -180,6 +180,15 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
                 } else {
                     registerClothesBottomsTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
                     kind.remove("bottoms")
+                }
+            }
+            registerClothesOnepieceTv.setOnClickListener {
+                if (!kind.contains("onepiece")) {
+                    registerClothesOnepieceTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    kind.add("onepiece")
+                } else {
+                    registerClothesOnepieceTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    kind.remove("onepiece")
                 }
             }
             registerClothesShoesTv.setOnClickListener {
