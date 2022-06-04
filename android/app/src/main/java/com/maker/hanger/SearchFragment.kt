@@ -2,9 +2,11 @@ package com.maker.hanger
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maker.hanger.adapter.SearchRVAdapter
@@ -61,7 +63,8 @@ class SearchFragment : Fragment(), SearchView {
         searchRVAdapter.setOnItemClickListener(object: SearchRVAdapter.OnItemClickListener {
             override fun onDetailedInfoItem(clothes: Clothes) {
                 val intent = Intent(requireContext(), DetailedInfoActivity::class.java)
-                intent.putExtra("clothes", clothes)
+                intent.putExtra("userToken", "1")
+                intent.putExtra("clothesIdx", clothes.clothesIdx.toString())
                 startActivity(intent)
             }
 
@@ -209,10 +212,11 @@ class SearchFragment : Fragment(), SearchView {
 
     override fun onSearchSuccess(clothes: ArrayList<Clothes>) {
         initRecyclerView(clothes)
+        Log.d("SEARCH/SUCCESS", "의류 조회를 성공했습니다.")
     }
 
     override fun onSearchFailure() {
-        TODO("Not yet implemented")
+        Log.d("SEARCH/FAILURE", "의류 조회를 실패했습니다.")
     }
 
 //    private fun dummyInput() {

@@ -57,7 +57,7 @@
 
         <ImageView
             android:id="@+id/detail_info_clothes_iv"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="480dp"
             android:src="@drawable/tshirt"
             android:scaleType="fitCenter"

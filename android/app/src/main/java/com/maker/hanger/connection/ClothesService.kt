@@ -2,6 +2,7 @@ package com.maker.hanger.connection
 
 import android.util.Log
 import com.maker.hanger.data.ClothesResponse
+import com.maker.hanger.data.ClothesSearchInfoResponse
 import com.maker.hanger.data.ClothesSearchResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -13,6 +14,7 @@ class ClothesService {
     private lateinit var registerView: RegisterView
     private lateinit var searchView: SearchView
     private lateinit var bookmarkView: BookmarkView
+    private lateinit var detailedInfoView: DetailedInfoView
 
     fun setRegisterView(registerView: RegisterView) {
         this.registerView = registerView
@@ -24,6 +26,10 @@ class ClothesService {
 
     fun setBookmarkView(bookmarkView: BookmarkView) {
         this.bookmarkView = bookmarkView
+    }
+
+    fun setDetailedInfoView(detailedInfoView: DetailedInfoView) {
+        this.detailedInfoView = detailedInfoView
     }
 
     fun add(userToken: String?, clothesImage: MultipartBody.Part, clothes: RequestBody) {
@@ -76,6 +82,24 @@ class ClothesService {
 
             override fun onFailure(call: Call<ClothesResponse>, t: Throwable) {
                 Log.d("BOOKMARK/FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    fun searchInfo(userToken: String?, clothesIdx: Int) {
+        val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
+        clothesService.searchInfo(userToken, clothesIdx).enqueue(object: Callback<ClothesSearchInfoResponse> {
+            override fun onResponse(call: Call<ClothesSearchInfoResponse>, response: Response<ClothesSearchInfoResponse>) {
+                Log.d("SEARCHINFO/SUCCESS", response.toString())
+                val resp: ClothesSearchInfoResponse = response.body()!!
+                when (resp.status) {
+                    200 -> detailedInfoView.onSearchInfoSuccess(resp.clothes)
+                    else -> detailedInfoView.onSearchInfoFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<ClothesSearchInfoResponse>, t: Throwable) {
+                Log.d("SEARCHINFO/FAILURE", t.message.toString())
             }
         })
     }

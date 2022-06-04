@@ -39,6 +39,12 @@ interface ClothesRetrofitInterface {
         @Query("clothesIdx") clothesIdx: Int
     ): Call<ClothesResponse>
 
+    @GET("/clothes/info")
+    fun searchInfo(
+        @Header("userToken") userToken: String?,
+        @Query("clothesIdx") clothesIdx: Int
+    ): Call<ClothesSearchInfoResponse>
+
     @POST("/clothes/bookmark")
     fun bookmark(
         @Header("userToken") userToken: String?,
