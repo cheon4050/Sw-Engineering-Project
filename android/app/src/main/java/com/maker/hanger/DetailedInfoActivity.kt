@@ -21,6 +21,8 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailedInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        closeDetailedInfo()
     }
 
     override fun onStart() {
@@ -98,11 +100,15 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
 
     private fun isBookmark(isLike: Boolean) {
         if (isLike) {
-            binding.detailInfoClothesBookmarkOnIv.visibility = View.VISIBLE
-            binding.detailInfoClothesBookmarkOffIv.visibility = View.GONE
+            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_on_search)
         } else {
-            binding.detailInfoClothesBookmarkOnIv.visibility = View.GONE
-            binding.detailInfoClothesBookmarkOffIv.visibility = View.VISIBLE
+            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_off_search)
+        }
+    }
+
+    private fun closeDetailedInfo() {
+        binding.detailInfoClothesCloseIv.setOnClickListener {
+            finish()
         }
     }
 
