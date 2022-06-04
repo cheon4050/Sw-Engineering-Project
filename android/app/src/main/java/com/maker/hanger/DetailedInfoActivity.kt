@@ -46,21 +46,20 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     }
 
     private fun searchWashingMethod() {
-        binding.detailInfoClothesWashing40Iv.setOnClickListener {
-            val intent = Intent(this, WashingMethodActivity::class.java)
-            startActivity(intent)
-        }
-        binding.detailInfoClothesWashing60Iv.setOnClickListener {
-            val intent = Intent(this, WashingMethodActivity::class.java)
-            startActivity(intent)
-        }
-        binding.detailInfoClothesWashing95Iv.setOnClickListener {
-            val intent = Intent(this, WashingMethodActivity::class.java)
-            startActivity(intent)
-        }
-        binding.detailInfoClothesWashingNoIv.setOnClickListener {
-            val intent = Intent(this, WashingMethodActivity::class.java)
-            startActivity(intent)
+        val intent = Intent(this, WashingMethodActivity::class.java)
+        with (binding) {
+            detailInfoClothesWashing40Iv.setOnClickListener {
+                startActivity(intent)
+            }
+            detailInfoClothesWashing60Iv.setOnClickListener {
+                startActivity(intent)
+            }
+            detailInfoClothesWashing95Iv.setOnClickListener {
+                startActivity(intent)
+            }
+            detailInfoClothesWashingNoIv.setOnClickListener {
+                startActivity(intent)
+            }
         }
     }
 
