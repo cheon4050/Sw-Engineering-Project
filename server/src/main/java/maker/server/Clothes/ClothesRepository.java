@@ -1,6 +1,7 @@
 package maker.server.Clothes;
 
 import maker.server.Dto.Clothes.ClothesDto;
+import maker.server.Dto.Clothes.ClothesPostDto;
 import maker.server.Entity.Clothes;
 import maker.server.Entity.style;
 import maker.server.Entity.weather;
@@ -34,11 +35,26 @@ public class ClothesRepository {
         return clothes;
     };
 
-    public void save(String userToken, ClothesDto clothes) {
+    public void save(String userToken, ClothesPostDto clothes) {
+        jdbcTemplate.execute("INSERT INTO clothes(userIdx,date,bookmark,size,clothesImageUrl,kind,season,washingMethod) VALUES ("+
+                userToken + ",'"+
+                clothes.getDate()+ "',"+
+                clothes.isBookmark()+ ",'"+
+                clothes.getSize()+ "','" +
+                clothes.getClothesImageUrl() + "','"+
+                clothes.getKind() + "','"+
+                clothes.getSeason() + "','"+
+                clothes.getWashingMethod() + "')");
     }
 
-//    public ArrayList<Clothes> findByCategory(String userToken, String season, String kind, boolean bookmark) {
-//        return new
+//    public ArrayList<Clothes> findByCategory(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
+//        ArrayList<Clothes> clothesList= jdbcTemplate.queryForObject(
+//                "Select * From Clothes where userIdx = " +userToken,
+//                clothesRowMapper,
+//                1000L
+//
+//        );
+//        return "";
 //    }
 
 //    public void delete(String userToken, int clothesIdx) {

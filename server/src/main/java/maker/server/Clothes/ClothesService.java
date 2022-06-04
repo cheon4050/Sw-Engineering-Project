@@ -1,13 +1,10 @@
 package maker.server.Clothes;
 
 import lombok.RequiredArgsConstructor;
-import maker.server.Dto.Clothes.ClothesDto;
-import maker.server.Entity.Clothes;
-import maker.server.Entity.clothesPostResponse;
-import maker.server.Entity.style;
-import maker.server.Entity.weather;
+import maker.server.Dto.Clothes.ClothesPostDto;
+import maker.server.Entity.clothesResponse;
 import maker.server.Weather.WeatherService;
-import org.springframework.http.HttpEntity;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,8 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
@@ -27,18 +24,35 @@ public class ClothesService {
 
     public ResponseEntity  postClothes(String userToken, MultipartFile clothesImage, String clothes) throws IOException
     {
-        String filename = clothesImage.getOriginalFilename();
-
-        String fileSavePath = "/Users/kodongcheon/Desktop/sw-engineering-project/Sw-Engineering-Project/server/";
-        File f = new File(fileSavePath + filename);
+        LocalTime now = LocalTime.now();
+        String fileSavePath = "/Users/kodongcheon/Desktop/sw-engineering-project/Sw-Engineering-Project/server/"+now+".png";
+        File f = new File(fileSavePath);
         clothesImage.transferTo(f);
-        clothesPostResponse clothesResponse =  new clothesPostResponse(200, "저장이 되었습니다.");
-        return new ResponseEntity(clothesResponse,HttpStatus.OK);
-//        clothesRepository.save(userToken, clothes);
+        JSONObject jObject = new JSONObject(clothes);
+        String date = jObject.getString("date");
+        String size = jObject.getString("size");
+        ArrayList<String> season = new ArrayList<String>();
+        jObject.getJSONArray("season").forEach(x-> season.add((String)x));
+        ArrayList<String> kind = new ArrayList<String>();
+        jObject.getJSONArray("kind").forEach(x-> kind.add((String)x));
+        ArrayList<Integer> washingMethod = new ArrayList<Integer>();
+        jObject.getJSONArray("washingMethod").forEach(x-> washingMethod.add((Integer) x));
+        ClothesPostDto clothesPostDto = new ClothesPostDto(fileSavePath,date, season, kind, washingMethod, size,false);
+        try{
+            clothesRepository.save(userToken, clothesPostDto);
+            clothesResponse clothesResponse =  new clothesResponse(200, "등록 성공");
+            return new ResponseEntity(clothesResponse,HttpStatus.OK);
+        }
+        catch (Exception e){
+            clothesResponse clothesResponse =  new clothesResponse(404, "등록되지 않았습니다.");
+            return new ResponseEntity(clothesResponse,HttpStatus.BAD_REQUEST);
+        }
     }
 
-//    public ArrayList<Clothes> getClothes(String userToken, String season, String kind, boolean bookmark) {
-//        return clothesRepository.findByCategory(userToken, season, kind, bookmark);
+//    public ResponseEntity getClothes(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
+//        clothesRepository.findByCategory(userToken, season, kind, bookmark);
+//        clothesResponse clothesResponse =  new clothesResponse(200, "조회 성공");
+//        return new ResponseEntity(clothesResponse,HttpStatus.OK);
 //    }
 //
 //    public void deleteClothes(String userToken, int clothesIdx) {
