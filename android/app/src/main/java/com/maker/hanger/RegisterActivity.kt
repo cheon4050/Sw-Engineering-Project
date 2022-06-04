@@ -45,6 +45,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
         setPermission()
         setActivityResultLauncher()
+        closeRegister()
 
         attachPhoto()
         selectSeason()
@@ -256,6 +257,12 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     private fun selectSize() {
         if (binding.registerClothesSizeInputEt.text.length == 1) {
             size = binding.registerClothesSizeInputEt.text.toString()[0]
+        }
+    }
+
+    private fun closeRegister() {
+        binding.registerClothesCloseIv.setOnClickListener {
+            finish()
         }
     }
 
