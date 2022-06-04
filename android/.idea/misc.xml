@@ -40,12 +40,14 @@
         <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/drawable/clothes_search_select_off_background.xml" value="0.145" />
         <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/drawable/user_modify.xml" value="0.1455" />
         <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/drawable/washing_select.xml" value="0.1455" />
-        <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_detailed_info.xml" value="0.264" />
+        <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_detailed_info.xml" value="0.2" />
         <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_detailedinfo.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_find_password.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_modify.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_modify_clothes.xml" value="0.264" />
+        <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_modify_clothes.xml" value="0.2" />
         <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_modify_user.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/activity_washingmethod.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/sunwo/Github/Sw-Engineering-Project/android/app/src/main/res/layout/fragment_search.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/sunwo/Github/SwEngineeringProject/android/app/src/main/res/drawable/baseline_add_photo_alternate_24.xml" value="0.1" />
         <entry key="..\:/Users/sunwo/Github/SwEngineeringProject/android/app/src/main/res/drawable/baseline_edit_24.xml" value="0.1" />

@@ -53,6 +53,9 @@
             android:name=".ModifyUserActivity"
             android:exported="true"/>
         <activity
+            android:name=".ModifyClothesActivity"
+            android:exported="true"/>
+        <activity
             android:name=".FindPasswordActivity"
             android:exported="true"/>
         <activity
