@@ -10,24 +10,28 @@ import com.bumptech.glide.Glide
 import com.maker.hanger.connection.ClothesService
 import com.maker.hanger.connection.DetailedInfoView
 import com.maker.hanger.data.Clothes
-import com.maker.hanger.databinding.ActivityDetailedinfoBinding
+import com.maker.hanger.databinding.ActivityDetailedInfoBinding
 
 class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
-    private lateinit var binding: ActivityDetailedinfoBinding
+    private lateinit var binding: ActivityDetailedInfoBinding
     private lateinit var clothes: Clothes
     private var isSuccess: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailedinfoBinding.inflate(layoutInflater)
+        binding = ActivityDetailedInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         searchInfoClothes()
 
         if (isSuccess) {
+            searchWashingMethod()
             initClothesInfo()
             deleteClothes()
-            searchWashingMethod()
         }
     }
 
@@ -60,8 +64,11 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
 
     private fun deleteClothes() {
         binding.detailInfoClothesDeleteIv.setOnClickListener {
-            Toast.makeText(this, "의류가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
-            finish()
+            val userToken = intent.getStringExtra("userToken")
+            val clothesIdx = intent.getStringExtra("clothesIdx")!!.toInt()
+            val clothesService = ClothesService()
+            clothesService.setDetailedInfoView(this)
+            clothesService.delete(userToken, clothesIdx)
         }
     }
 
@@ -102,19 +109,21 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     override fun onSearchInfoSuccess(clothes: Clothes) {
         this.clothes = clothes
         isSuccess = true
-        Log.d("SEARCHINFO/SUCCESS", "의류 조회를 성공했습니다.")
+        Log.d("SEARCHINFO/SUCCESS", "의류 상세정보 조회를 성공했습니다.")
     }
 
     override fun onSearchInfoFailure() {
-        Log.d("SEARCHINFO/FAILURE", "의류 조회를 성공했습니다.")
+        Log.d("SEARCHINFO/FAILURE", "의류 상세정보 조회를 실패했습니다.")
         finish()
     }
 
     override fun onDeleteSuccess() {
-        TODO("Not yet implemented")
+        Log.d("DELETE/FAILURE", "의류 삭제를 성공했습니다.")
+        Toast.makeText(this, "의류가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
     override fun onDeleteFailure() {
-        TODO("Not yet implemented")
+        Log.d("DELETE/FAILURE", "의류 삭제를 실패했습니다.")
     }
 }

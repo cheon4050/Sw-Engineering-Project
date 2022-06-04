@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
 
     private fun modifyUser() {
         binding.homeUserInfoModifyIv.setOnClickListener {
-            val intent = Intent(requireContext(), ModifyActivity::class.java)
+            val intent = Intent(requireContext(), ModifyUserActivity::class.java)
             startActivity(intent)
         }
     }

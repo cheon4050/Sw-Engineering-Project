@@ -50,10 +50,10 @@
             android:name=".SignUpActivity"
             android:exported="true"/>
         <activity
-            android:name=".ModifyActivity"
+            android:name=".ModifyUserActivity"
             android:exported="true"/>
         <activity
-            android:name=".FindActivity"
+            android:name=".FindPasswordActivity"
             android:exported="true"/>
         <activity
             android:name=".WashingMethodActivity"

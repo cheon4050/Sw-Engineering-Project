@@ -103,4 +103,22 @@ class ClothesService {
             }
         })
     }
+
+    fun delete(userToken: String?, clothesIdx: Int) {
+        val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
+        clothesService.delete(userToken, clothesIdx).enqueue(object: Callback<ClothesResponse> {
+            override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
+                Log.d("DELETE/SUCCESS", response.toString())
+                val resp: ClothesResponse = response.body()!!
+                when (resp.status) {
+                    200 -> detailedInfoView.onDeleteSuccess()
+                    else -> detailedInfoView.onDeleteFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<ClothesResponse>, t: Throwable) {
+                Log.d("DELETE/FAILURE", t.message.toString())
+            }
+        })
+    }
 }
