@@ -3,15 +3,15 @@ package com.maker.hanger
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maker.hanger.data.User
-import com.maker.hanger.databinding.ActivityModifyBinding
+import com.maker.hanger.databinding.ActivityModifyUserBinding
 
-class ModifyActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityModifyBinding
+class ModifyUserActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityModifyUserBinding
     private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityModifyBinding.inflate(layoutInflater)
+        binding = ActivityModifyUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         modifyUser()

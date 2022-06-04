@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun findPassword() {
         binding.loginFindPasswordTv.setOnClickListener {
-            val intent = Intent(this, FindActivity::class.java)
+            val intent = Intent(this, FindPasswordActivity::class.java)
             startActivity(intent)
         }
     }
