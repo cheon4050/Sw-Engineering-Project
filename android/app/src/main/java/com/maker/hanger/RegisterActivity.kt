@@ -27,6 +27,9 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
     private lateinit var binding: ActivityRegisterBinding
@@ -35,7 +38,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     private val gson = Gson()
     private val season: ArrayList<String> = ArrayList()
     private val kind: ArrayList<String> = ArrayList()
-    private var size: Char = 'S'
+    private var size: Char = 'X'
     private val washingMethod: ArrayList<Int> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,7 +96,8 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun addClothes() {
         binding.registerClothesAddIv.setOnClickListener {
-            val clothes = ClothesRequest("22.06.01", season, kind, washingMethod, size)
+            val today = SimpleDateFormat("yyyy년 MM월 dd일").format(Date())
+            val clothes = ClothesRequest(today, season, kind, washingMethod, size)
             val clothesRequestBody = gson.toJson(clothes).toRequestBody("application/json; charset=utf-8".toMediaType())
             val fileRequestBody = file.asRequestBody("text/x-markdown; charset=utf-8".toMediaType())
             val multipartBodyPartFile = MultipartBody.Part.createFormData("clothesImage", file.name, fileRequestBody)
@@ -215,39 +219,39 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun selectWashingMethod() {
         with(binding) {
-            registerClothesWashing40Btn.setOnClickListener {
+            registerClothesWashing40Iv.setOnClickListener {
                 if (!washingMethod.contains(40)) {
-                    registerClothesWashing40Btn.setImageResource(R.drawable.washing_select)
+                    registerClothesWashing40Iv.setImageResource(R.drawable.washing_select)
                     washingMethod.add(40)
                 } else {
-                    registerClothesWashing40Btn.setImageResource(R.drawable.washing_40)
+                    registerClothesWashing40Iv.setImageResource(R.drawable.washing_40)
                     washingMethod.remove(40)
                 }
             }
-            registerClothesWashing60Btn.setOnClickListener {
+            registerClothesWashing60Iv.setOnClickListener {
                 if (!washingMethod.contains(60)) {
-                    registerClothesWashing60Btn.setImageResource(R.drawable.washing_select)
+                    registerClothesWashing60Iv.setImageResource(R.drawable.washing_select)
                     washingMethod.add(60)
                 } else {
-                    registerClothesWashing60Btn.setImageResource(R.drawable.washing_60)
+                    registerClothesWashing60Iv.setImageResource(R.drawable.washing_60)
                     washingMethod.remove(60)
                 }
             }
-            registerClothesWashing95Btn.setOnClickListener {
+            registerClothesWashing95Iv.setOnClickListener {
                 if (!washingMethod.contains(95)) {
-                    registerClothesWashing95Btn.setImageResource(R.drawable.washing_select)
+                    registerClothesWashing95Iv.setImageResource(R.drawable.washing_select)
                     washingMethod.add(95)
                 } else {
-                    registerClothesWashing95Btn.setImageResource(R.drawable.washing_95)
+                    registerClothesWashing95Iv.setImageResource(R.drawable.washing_95)
                     washingMethod.remove(95)
                 }
             }
-            registerClothesWashingNoBtn.setOnClickListener {
+            registerClothesWashingNoIv.setOnClickListener {
                 if (!washingMethod.contains(0)) {
-                    registerClothesWashingNoBtn.setImageResource(R.drawable.washing_select)
+                    registerClothesWashingNoIv.setImageResource(R.drawable.washing_select)
                     washingMethod.add(0)
                 } else {
-                    registerClothesWashingNoBtn.setImageResource(R.drawable.washing_no)
+                    registerClothesWashingNoIv.setImageResource(R.drawable.washing_no)
                     washingMethod.remove(0)
                 }
             }
@@ -255,8 +259,40 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     }
 
     private fun selectSize() {
-        if (binding.registerClothesSizeInputEt.text.length == 1) {
-            size = binding.registerClothesSizeInputEt.text.toString()[0]
+        with(binding) {
+            registerClothesSmallTv.setOnClickListener {
+                if (size != 'S') {
+                    registerClothesSmallTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    registerClothesMediumTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    registerClothesLargeTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    size = 'S'
+                } else {
+                    registerClothesSmallTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    size = 'X'
+                }
+            }
+            registerClothesMediumTv.setOnClickListener {
+                if (size != 'M') {
+                    registerClothesSmallTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    registerClothesMediumTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    registerClothesLargeTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    size = 'M'
+                } else {
+                    registerClothesMediumTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    size = 'X'
+                }
+            }
+            registerClothesLargeTv.setOnClickListener {
+                if (size != 'L') {
+                    registerClothesSmallTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    registerClothesMediumTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    registerClothesLargeTv.setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                    size = 'L'
+                } else {
+                    registerClothesLargeTv.setBackgroundResource(R.drawable.clothes_search_select_off_background)
+                    size = 'X'
+                }
+            }
         }
     }
 

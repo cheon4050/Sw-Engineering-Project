@@ -51,8 +51,7 @@
             android:layout_height="480dp"
             android:scaleType="center"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginHorizontal="10dp"
             app:layout_constraintTop_toBottomOf="@id/register_clothes_add_iv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -62,8 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginHorizontal="10dp"
             android:fillViewport="true"
             android:scrollbars="none"
             app:layout_constraintTop_toBottomOf="@id/register_clothes_iv"
@@ -132,8 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginHorizontal="10dp"
             android:fillViewport="true"
             android:scrollbars="none"
             app:layout_constraintTop_toBottomOf="@id/register_season_nsv"
@@ -236,24 +233,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:text="치수:"
+            android:layout_marginLeft="10dp"
+            android:text="치수 : "
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/register_kind_nsv"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <EditText
-            android:id="@+id/register_clothes_size_input_et"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/register_clothes_size_ll"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="25dp"
+            android:orientation="horizontal"
+            android:gravity="center"
             app:layout_constraintTop_toTopOf="@id/register_clothes_size_tv"
             app:layout_constraintStart_toEndOf="@id/register_clothes_size_tv"
-            app:layout_constraintBottom_toBottomOf="@id/register_clothes_size_tv"
-            app:layout_constraintEnd_toStartOf="@id/register_clothes_washing_ll"/>
+            app:layout_constraintBottom_toBottomOf="@id/register_clothes_size_tv">
 
+            <TextView
+                android:id="@+id/register_clothes_small_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="S"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="15dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/clothes_search_select_off_background"/>
+
+            <TextView
+                android:id="@+id/register_clothes_medium_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="15dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/clothes_search_select_off_background"/>
+
+            <TextView
+                android:id="@+id/register_clothes_large_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="L"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="15dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/clothes_search_select_off_background"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/register_clothes_washing_ll"
@@ -261,7 +297,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:orientation="horizontal"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/register_kind_nsv"
@@ -269,30 +305,30 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <ImageView
-                android:id="@+id/register_clothes_washing_40_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/register_clothes_washing_40_iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginHorizontal="3dp"
                 android:src="@drawable/washing_40"/>
 
             <ImageView
-                android:id="@+id/register_clothes_washing_60_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/register_clothes_washing_60_iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginHorizontal="3dp"
                 android:src="@drawable/washing_60"/>
 
             <ImageView
-                android:id="@+id/register_clothes_washing_95_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/register_clothes_washing_95_iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginHorizontal="3dp"
                 android:src="@drawable/washing_95"/>
 
             <ImageView
-                android:id="@+id/register_clothes_washing_no_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:id="@+id/register_clothes_washing_no_iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginHorizontal="3dp"
                 android:src="@drawable/washing_no"/>
 

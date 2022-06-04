@@ -75,13 +75,65 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     }
 
     private fun initClothesInfo() {
-        isBookmark(clothes.bookmark)
+        setBookmark(clothes.bookmark)
         Glide.with(applicationContext).load(clothes.clothesImage).override(350, 480)
             .into(binding.detailInfoClothesIv)
-        binding.detailInfoClothesKindInputTv.text = clothes.kind.toString()
-        binding.detailInfoClothesSizeInputTv.text = clothes.size.toString()
-        for (i in 0 until clothes.washingMethod.size) {
-            when (clothes.washingMethod[i]) {
+        setDate()
+        setSeason()
+        setKind()
+        setSize()
+        setWashingMethod()
+    }
+
+    private fun setDate() {
+        binding.detailInfoClothesDateInputTv.text = clothes.date
+    }
+
+    private fun setSeason() {
+        for (season in clothes.season) {
+            when (season) {
+                "spring" -> binding.detailInfoClothesSpringTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                "summer" -> binding.detailInfoClothesSummerTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                "autumn" -> binding.detailInfoClothesAutumnTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                "winter" -> binding.detailInfoClothesWinterTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+            }
+        }
+    }
+
+    private fun setKind() {
+        for (kind in clothes.kind) {
+            when (kind) {
+                "top" -> binding.detailInfoClothesTopTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                "outer" -> binding.detailInfoClothesOuterTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                "bottoms" -> binding.detailInfoClothesBottomsTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                "onepiece" -> binding.detailInfoClothesOnepieceTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                "shoes" -> binding.detailInfoClothesShoesTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+                "accessories" -> binding.detailInfoClothesAccessoriesTv
+                    .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+            }
+        }
+    }
+
+    private fun setBookmark(isLike: Boolean) {
+        if (isLike) {
+            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_on_search)
+        } else {
+            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_off_search)
+        }
+    }
+
+    private fun setWashingMethod() {
+        for (washingMethod in clothes.washingMethod) {
+            when (washingMethod) {
                 40 -> {
                     binding.detailInfoClothesWashing40Iv.visibility = View.VISIBLE
                 }
@@ -98,11 +150,14 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         }
     }
 
-    private fun isBookmark(isLike: Boolean) {
-        if (isLike) {
-            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_on_search)
-        } else {
-            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_off_search)
+    private fun setSize() {
+        when (clothes.size) {
+            'S' -> binding.detailInfoClothesSmallTv
+                .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+            'M' -> binding.detailInfoClothesMediumTv
+                .setBackgroundResource(R.drawable.clothes_search_select_on_background)
+            'L' -> binding.detailInfoClothesLargeTv
+                .setBackgroundResource(R.drawable.clothes_search_select_on_background)
         }
     }
 
