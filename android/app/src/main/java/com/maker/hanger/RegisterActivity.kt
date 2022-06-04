@@ -59,8 +59,8 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         if (Build.VERSION.SDK_INT >= 30) {
             if (!Environment.isExternalStorageManager()) {
                 val getPermission = Intent()
-                getPermission.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION;
-                startActivity(getPermission);
+                getPermission.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
+                startActivity(getPermission)
             }
         }
     }
@@ -74,7 +74,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
                         .into(binding.registerClothesIv)
                     binding.registerClothesPhotoAddIv.visibility = View.GONE
                     // 이미지 절대 경로
-                    Log.d("TEST", getAbsolutelyPath(uri, this).toString())
+                    Log.d("TEST", getAbsolutelyPath(uri, this))
                     file = File(getAbsolutelyPath(uri, this))
                 }
             }
@@ -267,7 +267,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     override fun onRegisterFailure() {
         Log.d("ADD/FAILURE", "의류 등록을 실패했습니다.")
-        Toast.makeText(this,"의류를 등록을 실패했습니다.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"의류 등록을 실패했습니다.", Toast.LENGTH_SHORT).show()
         finish()
     }
 }

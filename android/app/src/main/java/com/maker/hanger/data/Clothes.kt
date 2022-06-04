@@ -33,6 +33,12 @@ data class ClothesSearchResponse(
     @SerializedName(value = "clothes") var clothes: ArrayList<Clothes>
 )
 
+data class ClothesSearchInfoResponse(
+    @SerializedName(value = "status") var status: Int,
+    @SerializedName(value = "message") var message: String,
+    @SerializedName(value = "clothes") var clothes: Clothes
+)
+
 data class ClothesRecommendResponse(
     @SerializedName(value = "status") var status: Int,
     @SerializedName(value = "message") var message: String,
