@@ -215,14 +215,6 @@ class SearchFragment : Fragment(), SearchView {
         TODO("Not yet implemented")
     }
 
-    override fun onBookmarkSuccess() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onBookmarkFailure() {
-        TODO("Not yet implemented")
-    }
-
 //    private fun dummyInput() {
 //        dummyKind1.add("상의")
 //        dummyKind2.add("하의")

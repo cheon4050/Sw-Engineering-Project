@@ -12,6 +12,7 @@ import retrofit2.Response
 class ClothesService {
     private lateinit var registerView: RegisterView
     private lateinit var searchView: SearchView
+    private lateinit var bookmarkView: BookmarkView
 
     fun setRegisterView(registerView: RegisterView) {
         this.registerView = registerView
@@ -19,6 +20,10 @@ class ClothesService {
 
     fun setSearchView(searchView: SearchView) {
         this.searchView = searchView
+    }
+
+    fun setBookmarkView(bookmarkView: BookmarkView) {
+        this.bookmarkView = bookmarkView
     }
 
     fun add(userToken: String?, clothesImage: MultipartBody.Part, clothes: RequestBody) {
@@ -53,6 +58,24 @@ class ClothesService {
 
             override fun onFailure(call: Call<ClothesSearchResponse>, t: Throwable) {
                 Log.d("SEARCH/FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    fun bookmark(userToken: String?, clothesIdx: Int, bookmark: Boolean) {
+        val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
+        clothesService.bookmark(userToken, clothesIdx, bookmark).enqueue(object: Callback<ClothesResponse> {
+            override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
+                Log.d("BOOKMARK/SUCCESS", response.toString())
+                val resp: ClothesResponse = response.body()!!
+                when (resp.status) {
+                    200 -> bookmarkView.onBookmarkSuccess()
+                    else -> bookmarkView.onBookmarkFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<ClothesResponse>, t: Throwable) {
+                Log.d("BOOKMARK/FAILURE", t.message.toString())
             }
         })
     }
