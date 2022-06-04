@@ -1,13 +1,20 @@
 package com.maker.hanger.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.maker.hanger.MainActivity
 import com.maker.hanger.R
+import com.maker.hanger.SearchFragment
+import com.maker.hanger.connection.BookmarkView
+import com.maker.hanger.connection.ClothesService
+import com.maker.hanger.connection.SearchView
 import com.maker.hanger.data.Clothes
 import com.maker.hanger.databinding.ItemClothesBinding
 
-class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Adapter<SearchRVAdapter.ViewHolder>() {
+class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Adapter<SearchRVAdapter.ViewHolder>(), BookmarkView {
     interface OnItemClickListener {
         fun onDetailedInfoItem(clothes: Clothes)
         fun onBookmarkItem(position: Int, binding: ItemClothesBinding)
@@ -21,6 +28,9 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
 
     fun onBookmark(position: Int) {
         clothes[position].bookmark = !clothes[position].bookmark
+        val clothesService = ClothesService()
+        clothesService.setBookmarkView(this)
+        clothesService.bookmark("1", clothes[position].clothesIdx, clothes[position].bookmark)
     }
 
     fun isBookmark(position: Int, binding: ItemClothesBinding) {
@@ -60,5 +70,13 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
                 binding.clothesBookmarkIv.setImageResource(R.drawable.bookmark_off_search)
             }
         }
+    }
+
+    override fun onBookmarkSuccess() {
+        Log.d("BOOKMARK/SUCCESS", "의류 등록을 성공했습니다.")
+    }
+
+    override fun onBookmarkFailure() {
+        Log.d("BOOKMARK/FAILURE", "의류 등록을 실패했습니다.")
     }
 }
