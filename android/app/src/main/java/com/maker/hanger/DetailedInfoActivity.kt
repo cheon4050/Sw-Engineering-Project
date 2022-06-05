@@ -34,6 +34,7 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
             searchWashingMethod()
             initClothesInfo()
             deleteClothes()
+            updateClothes()
         }
     }
 
@@ -73,9 +74,17 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         }
     }
 
+    private fun updateClothes() {
+        binding.detailInfoClothesModifyIv.setOnClickListener {
+            val intent = Intent(this, ModifyClothesActivity::class.java)
+            intent.putExtra("clothes", clothes)
+            startActivity(intent)
+        }
+    }
+
     private fun initClothesInfo() {
         setBookmark(clothes.bookmark)
-        Glide.with(applicationContext).load(clothes.clothesImage).override(350, 480)
+        Glide.with(applicationContext).load(clothes.clothesImageUrl).override(350, 480)
             .into(binding.detailInfoClothesIv)
         setDate()
         setSeason()
@@ -167,9 +176,9 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     }
 
     override fun onSearchInfoSuccess(clothes: Clothes) {
+        Log.d("SEARCHINFO/SUCCESS", "의류 상세정보 조회를 성공했습니다.")
         this.clothes = clothes
         isSuccess = true
-        Log.d("SEARCHINFO/SUCCESS", "의류 상세정보 조회를 성공했습니다.")
     }
 
     override fun onSearchInfoFailure() {
