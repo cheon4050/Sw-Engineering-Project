@@ -12,9 +12,9 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @ToString
 public class clothesGetResponse extends clothesResponse{
-    private ArrayList<Clothes> clothesArrayList;
-    public clothesGetResponse(ArrayList<Clothes> clothesArrayList, int status, String message){
+    private ArrayList<Clothes> clothes;
+    public clothesGetResponse(ArrayList<Clothes> clothes, int status, String message){
         super(status,message);
-        this.clothesArrayList = clothesArrayList;
+        this.clothes = clothes;
     }
 }

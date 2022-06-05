@@ -41,13 +41,13 @@ public class ClothesController {
         return clothesService.getClothes(userToken, season, kind, bookmark);
     }
 
-//    @DeleteMapping
-//    public void deleteClothes(
-//            @RequestHeader String userToken,
-//            @RequestParam int clothesIdx){
-//        clothesService.deleteClothes(userToken, clothesIdx);
-//    }
-//
+    @DeleteMapping
+    public ResponseEntity deleteClothes(
+            @RequestHeader String userToken,
+            @RequestParam int clothesIdx){
+        return clothesService.deleteClothes(userToken, clothesIdx);
+    }
+
 //    @PutMapping
 //    public void updateClothes(
 //            @RequestHeader String userToken,

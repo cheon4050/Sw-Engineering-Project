@@ -38,8 +38,17 @@ public class ClothesRepository {
     }
 
     public ArrayList<Clothes> findByCategory(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
+        final String[] query = {"Select * From Clothes where userIdx = " + userToken + " and "};
+        if (bookmark)
+            query[0] = query[0] + "bookmark = true ";
+        else
+            query[0] = query[0] + "bookmark = false ";
+        if (season != null)
+            query[0] = query[0] + "and(season like '%"+String.join("%' OR season '%", season) + "%') ";
+        if(kind != null)
+            query[0] = query[0] + "and(kind like '%"+String.join("%' OR kind like '%", kind) + "%') ";
         ArrayList<Clothes> clothesList= (ArrayList<Clothes>) jdbcTemplate.query(
-                "Select * From Clothes where userIdx = " +userToken,
+                query[0],
                 new RowMapper<Clothes>() {
                     public Clothes mapRow(ResultSet rs, int rowNum) throws SQLException{
                         Clothes clothes = new Clothes();
@@ -59,12 +68,13 @@ public class ClothesRepository {
         return clothesList;
     }
 
-//    public void delete(String userToken, int clothesIdx) {
-//    }
-//
+    public void delete(String userToken, int clothesIdx) {
+        jdbcTemplate.execute("Delete From clothes where clothesIdx = " + clothesIdx);
+    }
+
 //    public void update(String userToken, int clothesIdx, ClothesDto clothes) {
 //    }
-//
+
 //    public Clothes findByClothesIdx(String userToken, int clothesIdx) {
 //        return
 //    }

@@ -6,6 +6,7 @@ import maker.server.Entity.Clothes;
 import maker.server.Entity.clothesGetResponse;
 import maker.server.Entity.clothesResponse;
 import maker.server.Weather.WeatherService;
+import org.json.HTTP;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,15 +63,17 @@ public class ClothesService {
             return new ResponseEntity(clothesResponse,HttpStatus.BAD_REQUEST);
         }
     }
-//
-//    public void deleteClothes(String userToken, int clothesIdx) {
-//        clothesRepository.delete(userToken, clothesIdx);
-//    }
+
+    public ResponseEntity deleteClothes(String userToken, int clothesIdx) {
+        clothesRepository.delete(userToken, clothesIdx);
+        clothesResponse clothesResponse = new clothesResponse(200, "삭제 성공");
+        return new ResponseEntity(clothesResponse, HttpStatus.OK);
+    }
 //
 //    public void updateClothes(String userToken, int clothesIdx, ClothesDto clothes) {
 //        clothesRepository.update(userToken, clothesIdx, clothes);
 //    }
-//
+////
 //    public Clothes getClothesInfo(String userToken, int clothesIdx) {
 //        return clothesRepository.findByClothesIdx(userToken, clothesIdx);
 //    }
