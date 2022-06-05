@@ -15,7 +15,6 @@ import com.maker.hanger.databinding.ActivityDetailedInfoBinding
 class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     private lateinit var binding: ActivityDetailedInfoBinding
     private lateinit var clothes: Clothes
-    private var isSuccess: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +28,6 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         super.onStart()
 
         searchInfoClothes()
-
-        if (isSuccess) {
-            searchWashingMethod()
-            initClothesInfo()
-            deleteClothes()
-            updateClothes()
-        }
     }
 
     private fun searchInfoClothes() {
@@ -178,7 +170,10 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     override fun onSearchInfoSuccess(clothes: Clothes) {
         Log.d("SEARCHINFO/SUCCESS", "의류 상세정보 조회를 성공했습니다.")
         this.clothes = clothes
-        isSuccess = true
+        searchWashingMethod()
+        initClothesInfo()
+        deleteClothes()
+        updateClothes()
     }
 
     override fun onSearchInfoFailure() {
@@ -187,7 +182,7 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     }
 
     override fun onDeleteSuccess() {
-        Log.d("DELETE/FAILURE", "의류 삭제를 성공했습니다.")
+        Log.d("DELETE/SUCCESS", "의류 삭제를 성공했습니다.")
         Toast.makeText(this, "의류가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
         finish()
     }

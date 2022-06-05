@@ -1,13 +1,11 @@
 package com.maker.hanger
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maker.hanger.adapter.SearchRVAdapter
@@ -48,7 +46,7 @@ class SearchFragment : Fragment(), SearchView {
     }
 
     private fun initRecyclerView(clothes: ArrayList<Clothes>) {
-        searchRVAdapter = SearchRVAdapter(requireContext(), clothes)
+        searchRVAdapter = SearchRVAdapter(clothes)
         binding.searchClothesRv.adapter = searchRVAdapter
         binding.searchClothesRv.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 
