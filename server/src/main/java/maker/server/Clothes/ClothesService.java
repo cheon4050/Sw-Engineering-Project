@@ -2,6 +2,8 @@ package maker.server.Clothes;
 
 import lombok.RequiredArgsConstructor;
 import maker.server.Dto.Clothes.ClothesPostDto;
+import maker.server.Entity.Clothes;
+import maker.server.Entity.clothesGetResponse;
 import maker.server.Entity.clothesResponse;
 import maker.server.Weather.WeatherService;
 import org.json.JSONObject;
@@ -49,11 +51,17 @@ public class ClothesService {
         }
     }
 
-//    public ResponseEntity getClothes(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
-//        clothesRepository.findByCategory(userToken, season, kind, bookmark);
-//        clothesResponse clothesResponse =  new clothesResponse(200, "조회 성공");
-//        return new ResponseEntity(clothesResponse,HttpStatus.OK);
-//    }
+    public ResponseEntity getClothes(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
+        try {
+            ArrayList<Clothes> clothesArrayList = clothesRepository.findByCategory(userToken, season, kind, bookmark);
+            clothesGetResponse clothesGetResponse = new clothesGetResponse(clothesArrayList, 200, "조회 성공");
+            return new ResponseEntity(clothesGetResponse, HttpStatus.OK);
+        }
+        catch (Exception e){
+            clothesResponse clothesResponse =  new clothesResponse(404, "조회 실패");
+            return new ResponseEntity(clothesResponse,HttpStatus.BAD_REQUEST);
+        }
+    }
 //
 //    public void deleteClothes(String userToken, int clothesIdx) {
 //        clothesRepository.delete(userToken, clothesIdx);

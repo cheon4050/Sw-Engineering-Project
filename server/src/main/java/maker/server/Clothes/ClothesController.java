@@ -28,15 +28,19 @@ public class ClothesController {
         return clothesService.postClothes(userToken, clothesImage, clothes);
     }
 
-//    @GetMapping
-//    public ArrayList<Clothes> getClothes(
-//            @RequestHeader String userToken,
-//            @RequestParam(value = "season", required = false)String season,
-//            @RequestParam(value = "kind", required = false)String kind,
-//            @RequestParam(value = "bookmark", required = false) boolean bookmark){
-//        return clothesService.getClothes(userToken, season, kind, bookmark);
-//    }
-//
+    @GetMapping
+    public ResponseEntity getClothes(
+            @RequestHeader String userToken,
+            @RequestParam(value = "season", required = false)ArrayList<String> season,
+            @RequestParam(value = "kind", required = false)ArrayList<String> kind,
+            @RequestParam(value = "bookmark", required = false) boolean bookmark){
+        System.out.println("userToken = " + userToken);
+        System.out.println("season = " + season);
+        System.out.println("kind = " + kind);
+        System.out.println("bookmark = " + bookmark);
+        return clothesService.getClothes(userToken, season, kind, bookmark);
+    }
+
 //    @DeleteMapping
 //    public void deleteClothes(
 //            @RequestHeader String userToken,

@@ -8,33 +8,23 @@ import maker.server.Entity.weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.SQLErrorCodes;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 @Repository
 public class ClothesRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    private final RowMapper<Clothes> clothesRowMapper = (rs, count) ->{
-        Clothes clothes = new Clothes(
-                rs.getInt("clothesIdx"),
-                rs.getString("clothesImageUrl"),
-                rs.getDate("date"),
-                rs.getObject("season", ArrayList.class),
-                rs.getObject("kind", ArrayList.class),
-                rs.getObject("washingMethod", ArrayList.class),
-                rs.getObject("size", Character.class),
-                rs.getBoolean("bookmark")
-        );
-        return clothes;
-    };
-
     public void save(String userToken, ClothesPostDto clothes) {
         jdbcTemplate.execute("INSERT INTO clothes(userIdx,date,bookmark,size,clothesImageUrl,kind,season,washingMethod) VALUES ("+
                 userToken + ",'"+
@@ -47,15 +37,27 @@ public class ClothesRepository {
                 clothes.getWashingMethod() + "')");
     }
 
-//    public ArrayList<Clothes> findByCategory(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
-//        ArrayList<Clothes> clothesList= jdbcTemplate.queryForObject(
-//                "Select * From Clothes where userIdx = " +userToken,
-//                clothesRowMapper,
-//                1000L
-//
-//        );
-//        return "";
-//    }
+    public ArrayList<Clothes> findByCategory(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
+        ArrayList<Clothes> clothesList= (ArrayList<Clothes>) jdbcTemplate.query(
+                "Select * From Clothes where userIdx = " +userToken,
+                new RowMapper<Clothes>() {
+                    public Clothes mapRow(ResultSet rs, int rowNum) throws SQLException{
+                        Clothes clothes = new Clothes();
+                        clothes.setClothesIdx(rs.getInt("clothesIdx"));
+                        clothes.setClothesImageUrl(rs.getString("clothesImageUrl"));
+                        clothes.setDate(rs.getString("date"));
+                        clothes.setSeason(rs.getString("season"));
+                        clothes.setKind(rs.getString("kind"));
+                        clothes.setWashingMethod(rs.getString("washingMethod"));
+                        clothes.setSize(rs.getString("size"));
+                        clothes.setBookmark(rs.getBoolean("bookmark"));
+                        return clothes;
+                    }
+                }
+        );
+        System.out.println("clothesList = " + clothesList);
+        return clothesList;
+    }
 
 //    public void delete(String userToken, int clothesIdx) {
 //    }
