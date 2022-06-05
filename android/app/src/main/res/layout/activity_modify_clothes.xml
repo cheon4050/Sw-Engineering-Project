@@ -299,28 +299,32 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginHorizontal="3dp"
-                android:src="@drawable/washing_40"/>
+                android:src="@drawable/washing_40"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/modify_clothes_washing_60_iv"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginHorizontal="3dp"
-                android:src="@drawable/washing_60"/>
+                android:src="@drawable/washing_60"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/modify_clothes_washing_95_iv"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginHorizontal="3dp"
-                android:src="@drawable/washing_95"/>
+                android:src="@drawable/washing_95"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/modify_clothes_washing_no_iv"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginHorizontal="3dp"
-                android:src="@drawable/washing_no"/>
+                android:src="@drawable/washing_no"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
