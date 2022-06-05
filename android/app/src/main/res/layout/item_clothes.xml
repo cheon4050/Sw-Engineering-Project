@@ -22,7 +22,6 @@
             android:paddingEnd="25dp"
             android:paddingBottom="25dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/tshirt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +40,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="상의"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:maxLines="1"
@@ -54,7 +52,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
-        android:text="치수"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/clothes_cardView"
         app:layout_constraintTop_toBottomOf="@id/clothes_kind_tv"/>

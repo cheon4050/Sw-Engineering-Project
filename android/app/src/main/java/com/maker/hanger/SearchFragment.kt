@@ -1,5 +1,6 @@
 package com.maker.hanger
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -22,15 +23,6 @@ class SearchFragment : Fragment(), SearchView {
     private var season: ArrayList<String> = ArrayList()
     private var kind: ArrayList<String> = ArrayList()
     private var isBookmark: Boolean = false
-
-    // dummy clothes input
-//    private val dummyClothes: ArrayList<Clothes> = ArrayList()
-//    private val dummyKind1: ArrayList<String> = ArrayList()
-//    private val dummyKind2: ArrayList<String> = ArrayList()
-//    private val dummyKind3: ArrayList<String> = ArrayList()
-//    private val dummyWashing1: ArrayList<Int> = ArrayList()
-//    private val dummyWashing2: ArrayList<Int> = ArrayList()
-//    private val dummyWashing3: ArrayList<Int> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +48,7 @@ class SearchFragment : Fragment(), SearchView {
     }
 
     private fun initRecyclerView(clothes: ArrayList<Clothes>) {
-        searchRVAdapter = SearchRVAdapter(clothes)
+        searchRVAdapter = SearchRVAdapter(requireContext(), clothes)
         binding.searchClothesRv.adapter = searchRVAdapter
         binding.searchClothesRv.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 
@@ -218,31 +210,4 @@ class SearchFragment : Fragment(), SearchView {
     override fun onSearchFailure() {
         Log.d("SEARCH/FAILURE", "의류 조회를 실패했습니다.")
     }
-
-//    private fun dummyInput() {
-//        dummyKind1.add("상의")
-//        dummyKind2.add("하의")
-//        dummyKind3.add("원피스")
-//        dummyWashing1.add(40)
-//        dummyWashing2.add(40)
-//        dummyWashing2.add(60)
-//        dummyWashing3.add(95)
-//        dummyWashing3.add(0)
-//        dummyClothes.apply {
-//            add(Clothes(1, "", "", "", dummyKind1, dummyWashing1, 'S', false))
-//            add(Clothes(2, "", "", "", dummyKind2, dummyWashing2, 'M', false))
-//            add(Clothes(3, "", "", "", dummyKind3, dummyWashing3, 'L', false))
-//            add(Clothes(4, "", "", "", dummyKind1, dummyWashing1, 'S', false))
-//            add(Clothes(5, "", "", "", dummyKind2, dummyWashing2, 'M', false))
-//            add(Clothes(6, "", "", "", dummyKind3, dummyWashing3, 'L', false))
-//        }
-//    }
-//
-//    private fun bookmarkDummyInput() : ArrayList<Clothes> {
-//        val bookmarkDummyClothes = ArrayList<Clothes>()
-//        for (clothes in dummyClothes) {
-//            if (clothes.bookmark) bookmarkDummyClothes.add(clothes)
-//        }
-//        return bookmarkDummyClothes
-//    }
 }

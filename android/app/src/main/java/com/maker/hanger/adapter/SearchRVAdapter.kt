@@ -1,20 +1,18 @@
 package com.maker.hanger.adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.maker.hanger.MainActivity
+import com.bumptech.glide.Glide
 import com.maker.hanger.R
-import com.maker.hanger.SearchFragment
 import com.maker.hanger.connection.BookmarkView
 import com.maker.hanger.connection.ClothesService
-import com.maker.hanger.connection.SearchView
 import com.maker.hanger.data.Clothes
 import com.maker.hanger.databinding.ItemClothesBinding
 
-class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Adapter<SearchRVAdapter.ViewHolder>(), BookmarkView {
+class SearchRVAdapter(private val context: Context, private val clothes: ArrayList<Clothes>) : RecyclerView.Adapter<SearchRVAdapter.ViewHolder>(), BookmarkView {
     interface OnItemClickListener {
         fun onDetailedInfoItem(clothes: Clothes)
         fun onBookmarkItem(position: Int, binding: ItemClothesBinding)
@@ -62,6 +60,8 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
     inner class ViewHolder(val binding: ItemClothesBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(clothes: Clothes) {
+            Glide.with(context).load(clothes.clothesImageUrl).override(150, 150)
+                .into(binding.clothesIv)
             binding.clothesKindTv.text = clothes.kind.toString()
             binding.clothesSizeTv.text = clothes.size.toString()
             if (clothes.bookmark) {

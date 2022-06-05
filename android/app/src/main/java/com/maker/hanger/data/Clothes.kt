@@ -5,7 +5,7 @@ import java.io.Serializable
 
 data class Clothes(
     @SerializedName(value = "clothesIdx") var clothesIdx: Int,
-    @SerializedName(value = "clothesImage") var clothesImage: String,
+    @SerializedName(value = "clothesImageUrl") var clothesImageUrl: String,
     @SerializedName(value = "date") var date: String,
     @SerializedName(value = "season") var season: ArrayList<String>,
     @SerializedName(value = "kind") var kind: ArrayList<String>,
@@ -15,7 +15,7 @@ data class Clothes(
 ) : Serializable
 
 data class ClothesRequest(
-    @SerializedName(value = "data") var data: String,
+    @SerializedName(value = "date") var date: String,
     @SerializedName(value = "season") var season: ArrayList<String>,
     @SerializedName(value = "kind") var kind: ArrayList<String>,
     @SerializedName(value = "washingMethod") var washingMethod: ArrayList<Int>,

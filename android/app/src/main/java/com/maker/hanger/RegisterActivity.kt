@@ -96,9 +96,9 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun addClothes() {
         binding.registerClothesAddIv.setOnClickListener {
-            val today = SimpleDateFormat("yyyy년 MM월 dd일").format(Date())
-            val clothes = ClothesRequest(today, season, kind, washingMethod, size)
-            val clothesRequestBody = gson.toJson(clothes).toRequestBody("application/json; charset=utf-8".toMediaType())
+            val today = SimpleDateFormat("yyyy/MM/dd").format(Date())
+            val clothesRequest = ClothesRequest(today, season, kind, washingMethod, size)
+            val clothesRequestBody = gson.toJson(clothesRequest).toRequestBody("application/json; charset=utf-8".toMediaType())
             val fileRequestBody = file.asRequestBody("text/x-markdown; charset=utf-8".toMediaType())
             val multipartBodyPartFile = MultipartBody.Part.createFormData("clothesImage", file.name, fileRequestBody)
 

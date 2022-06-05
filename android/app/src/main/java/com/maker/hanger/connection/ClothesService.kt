@@ -15,6 +15,7 @@ class ClothesService {
     private lateinit var searchView: SearchView
     private lateinit var bookmarkView: BookmarkView
     private lateinit var detailedInfoView: DetailedInfoView
+    private lateinit var modifyClothesView: ModifyClothesView
 
     fun setRegisterView(registerView: RegisterView) {
         this.registerView = registerView
@@ -32,11 +33,15 @@ class ClothesService {
         this.detailedInfoView = detailedInfoView
     }
 
+    fun setModifyClothesView(modifyClothesView: ModifyClothesView) {
+        this.modifyClothesView = modifyClothesView
+    }
+
     fun add(userToken: String?, clothesImage: MultipartBody.Part, clothes: RequestBody) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.add(userToken, clothesImage, clothes).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
-                Log.d("ADD/SUCCESS", response.toString())
+                Log.d("ADD/SUCCESS", response.body()!!.message)
                 val resp: ClothesResponse = response.body()!!
                 when (resp.status) {
                     200 -> registerView.onRegisterSuccess()
@@ -118,6 +123,24 @@ class ClothesService {
 
             override fun onFailure(call: Call<ClothesResponse>, t: Throwable) {
                 Log.d("DELETE/FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    fun update(userToken: String?, clothesImage: MultipartBody.Part, clothes: RequestBody, clothesIdx: Int) {
+        val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
+        clothesService.update(userToken, clothesImage, clothes, clothesIdx).enqueue(object: Callback<ClothesResponse> {
+            override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
+                Log.d("UPDATE/SUCCESS", response.body()!!.message)
+                val resp: ClothesResponse = response.body()!!
+                when (resp.status) {
+                    200 -> modifyClothesView.onUpdateSuccess()
+                    else -> modifyClothesView.onUpdateFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<ClothesResponse>, t: Throwable) {
+                Log.d("UPDATE/FAILURE", t.message.toString())
             }
         })
     }
