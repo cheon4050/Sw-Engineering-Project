@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ClothesPostDto {
+public class ClothesPutDto {
 
     private String clothesImageUrl;
     private String date;

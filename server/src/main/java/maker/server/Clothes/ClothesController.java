@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import maker.server.Dto.Clothes.ClothesDto;
 import maker.server.Entity.Clothes;
 import maker.server.Entity.style;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/clothes")
@@ -48,28 +48,35 @@ public class ClothesController {
         return clothesService.deleteClothes(userToken, clothesIdx);
     }
 
-//    @PutMapping
-//    public void updateClothes(
-//            @RequestHeader String userToken,
-//            @RequestParam int clothesIdx,
-//            @RequestBody ClothesDto clothes){
-//        clothesService.updateClothes(userToken, clothesIdx, clothes);
-//    }
-//
-//    @GetMapping("/info")
-//    public Clothes getClothesInfo(
-//            @RequestHeader String userToken,
-//            @RequestParam int clothesIdx){
-//        return clothesService.getClothesInfo(userToken, clothesIdx);
-//    }
-//
-//    @PostMapping("/Bookmark")
-//    public void bookmark(
-//            @RequestHeader String userToken,
-//            @RequestParam int clothesIdx){
-//        clothesService.bookmark(userToken, clothesIdx);
-//    }
-//
+    @PutMapping
+    public ResponseEntity updateClothes(@RequestHeader String userToken,
+                            @RequestPart(value="clothesImage") MultipartFile clothesImage,
+                            @RequestPart(value = "clothes") String clothes,
+                            @RequestParam int clothesIdx
+    )throws java.io.IOException{
+        System.out.println("userToken = " + userToken);
+        System.out.println("clothesImage = " + clothesImage);
+        System.out.println("clothes = " + clothes);
+        System.out.println("clothesIdx = " + clothesIdx);
+        return clothesService.updateClothes(userToken, clothesImage,clothesIdx, clothes);
+
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity getClothesInfo(
+            @RequestHeader String userToken,
+            @RequestParam int clothesIdx){
+        return clothesService.getClothesInfo(userToken, clothesIdx);
+    }
+
+    @PostMapping("/bookmark")
+    public  ResponseEntity bookmark(
+            @RequestHeader String userToken,
+            @RequestParam int clothesIdx,
+            @RequestParam boolean bookmark){
+        return clothesService.bookmark(userToken, clothesIdx, bookmark);
+    }
+
 //    @GetMapping("/Recommend")
 //    public ArrayList<style> recommend(@RequestHeader String userToken){
 //        return clothesService.recommend(userToken);

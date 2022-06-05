@@ -1,9 +1,12 @@
 package maker.server.Clothes;
 
 import lombok.RequiredArgsConstructor;
+import maker.server.Dto.Clothes.ClothesDto;
 import maker.server.Dto.Clothes.ClothesPostDto;
+import maker.server.Dto.Clothes.ClothesPutDto;
 import maker.server.Entity.Clothes;
 import maker.server.Entity.clothesGetResponse;
+import maker.server.Entity.clothesInfoGetResponse;
 import maker.server.Entity.clothesResponse;
 import maker.server.Weather.WeatherService;
 import org.json.HTTP;
@@ -47,7 +50,7 @@ public class ClothesService {
             return new ResponseEntity(clothesResponse,HttpStatus.OK);
         }
         catch (Exception e){
-            clothesResponse clothesResponse =  new clothesResponse(404, "등록되지 않았습니다.");
+            clothesResponse clothesResponse =  new clothesResponse(404, "등록 실패");
             return new ResponseEntity(clothesResponse,HttpStatus.BAD_REQUEST);
         }
     }
@@ -65,23 +68,67 @@ public class ClothesService {
     }
 
     public ResponseEntity deleteClothes(String userToken, int clothesIdx) {
-        clothesRepository.delete(userToken, clothesIdx);
-        clothesResponse clothesResponse = new clothesResponse(200, "삭제 성공");
-        return new ResponseEntity(clothesResponse, HttpStatus.OK);
+        try {
+            clothesRepository.delete(userToken, clothesIdx);
+            clothesResponse clothesResponse = new clothesResponse(200, "삭제 성공");
+            return new ResponseEntity(clothesResponse, HttpStatus.OK);
+        }
+        catch (Exception e){
+            clothesResponse clothesResponse = new clothesResponse(404, "삭제 실패");
+            return new ResponseEntity(clothesResponse, HttpStatus.OK);
+        }
+    }
+
+    public ResponseEntity updateClothes(String userToken,MultipartFile clothesImage, int clothesIdx, String clothes) throws IOException{
+        String clothesImageUrl = clothesRepository.findClothesImageUrlByClothesIdx(clothesIdx);
+        File f = new File(clothesImageUrl);
+        clothesImage.transferTo(f);
+        JSONObject jObject = new JSONObject(clothes);
+        String date = jObject.getString("date");
+        String size = jObject.getString("size");
+        ArrayList<String> season = new ArrayList<String>();
+        jObject.getJSONArray("season").forEach(x-> season.add((String)x));
+        ArrayList<String> kind = new ArrayList<String>();
+        jObject.getJSONArray("kind").forEach(x-> kind.add((String)x));
+        ArrayList<Integer> washingMethod = new ArrayList<Integer>();
+        jObject.getJSONArray("washingMethod").forEach(x-> washingMethod.add((Integer) x));
+        ClothesPutDto clothesPutDto = new ClothesPutDto(clothesImageUrl,date, season, kind, washingMethod, size,false);
+
+        try {
+            clothesRepository.update(userToken, clothesIdx, clothesPutDto);
+            clothesResponse clothesResponse = new clothesResponse(200, "수정 성공");
+            return new ResponseEntity(clothesResponse, HttpStatus.OK);
+        }
+        catch (Exception e){
+            clothesResponse clothesResponse =  new clothesResponse(404, "수정 실패");
+            return new ResponseEntity(clothesResponse,HttpStatus.BAD_REQUEST);
+        }
     }
 //
-//    public void updateClothes(String userToken, int clothesIdx, ClothesDto clothes) {
-//        clothesRepository.update(userToken, clothesIdx, clothes);
-//    }
-////
-//    public Clothes getClothesInfo(String userToken, int clothesIdx) {
-//        return clothesRepository.findByClothesIdx(userToken, clothesIdx);
-//    }
-//
-//    public void bookmark(String userToken, int clothesIdx) {
-//        clothesRepository.bookmarkByClothesIdx(userToken, clothesIdx);
-//    }
-//
+    public ResponseEntity getClothesInfo(String userToken, int clothesIdx) {
+        try {
+            Clothes clothes = clothesRepository.findByClothesIdx(userToken, clothesIdx);
+            clothesInfoGetResponse clothesInfoGetResponse = new clothesInfoGetResponse(clothes, 200, "상세 조회 성공");
+            return new ResponseEntity(clothesInfoGetResponse, HttpStatus.OK);
+        }
+        catch (Exception e){
+            clothesResponse clothesResponse = new clothesResponse(404, "상세 조회 실패");
+            return new ResponseEntity(clothesResponse, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public ResponseEntity bookmark(String userToken, int clothesIdx, boolean bookmark) {
+        try {
+            clothesRepository.bookmarkByClothesIdx(userToken, clothesIdx, bookmark);
+            clothesResponse clothesResponse = new clothesResponse(200, "즐겨찾기 성공");
+            return new ResponseEntity(clothesResponse, HttpStatus.OK);
+        }
+        catch (Exception e){
+            clothesResponse clothesResponse = new clothesResponse(404,"즐겨찾기 실패");
+            return new ResponseEntity(clothesResponse, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 //    public ArrayList<style> recommend(String userToken) {
 //        weather weather = weatherService.getWeather();
 //        return clothesRepository.recommend(userToken, weather);
