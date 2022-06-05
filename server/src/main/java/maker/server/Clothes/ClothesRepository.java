@@ -46,11 +46,12 @@ public class ClothesRepository {
     public ArrayList<Clothes> findByCategory(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
         final String[] query = {"Select * From Clothes where userIdx = " + userToken};
         if (bookmark)
-            query[0] = query[0] + " and bookmark = true ";
+            query[0] = query[0] + " and bookmark = true";
         if (season != null)
-            query[0] = query[0] + " and(season like '%"+String.join("%' OR season '%", season) + "%') ";
+            query[0] = query[0] + " and(season like '%"+String.join("%' OR season like'%", season) + "%') ";
         if(kind != null)
             query[0] = query[0] + " and(kind like '%"+String.join("%' OR kind like '%", kind) + "%') ";
+        System.out.println("query[0] = " + query[0]);
         ArrayList<Clothes> clothesList = (ArrayList<Clothes>) jdbcTemplate.query(
                 query[0],
                 clothesRowMapper
