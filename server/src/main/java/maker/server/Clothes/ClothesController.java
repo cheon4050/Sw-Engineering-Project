@@ -22,9 +22,6 @@ public class ClothesController {
                                       @RequestPart(value="clothesImage") MultipartFile clothesImage,
                                       @RequestPart(value = "clothes") String clothes
                             )throws java.io.IOException{
-        System.out.println(userToken);
-        System.out.println(clothesImage);
-        System.out.println(clothes);
         return clothesService.postClothes(userToken, clothesImage, clothes);
     }
 
@@ -34,10 +31,6 @@ public class ClothesController {
             @RequestParam(value = "season", required = false)ArrayList<String> season,
             @RequestParam(value = "kind", required = false)ArrayList<String> kind,
             @RequestParam(value = "bookmark", required = false) boolean bookmark){
-        System.out.println("userToken = " + userToken);
-        System.out.println("season = " + season);
-        System.out.println("kind = " + kind);
-        System.out.println("bookmark = " + bookmark);
         return clothesService.getClothes(userToken, season, kind, bookmark);
     }
 
@@ -54,10 +47,6 @@ public class ClothesController {
                             @RequestPart(value = "clothes") String clothes,
                             @RequestParam int clothesIdx
     )throws java.io.IOException{
-        System.out.println("userToken = " + userToken);
-        System.out.println("clothesImage = " + clothesImage);
-        System.out.println("clothes = " + clothes);
-        System.out.println("clothesIdx = " + clothesIdx);
         return clothesService.updateClothes(userToken, clothesImage,clothesIdx, clothes);
 
     }

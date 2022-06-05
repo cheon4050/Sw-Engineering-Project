@@ -9,18 +9,11 @@ import maker.server.Entity.weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.SQLErrorCodes;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.lang.reflect.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+
 
 @Repository
 public class ClothesRepository {
@@ -51,20 +44,17 @@ public class ClothesRepository {
     }
 
     public ArrayList<Clothes> findByCategory(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
-        final String[] query = {"Select * From Clothes where userIdx = " + userToken + " and "};
+        final String[] query = {"Select * From Clothes where userIdx = " + userToken};
         if (bookmark)
-            query[0] = query[0] + "bookmark = true ";
-        else
-            query[0] = query[0] + "bookmark = false ";
+            query[0] = query[0] + " and bookmark = true ";
         if (season != null)
-            query[0] = query[0] + "and(season like '%"+String.join("%' OR season '%", season) + "%') ";
+            query[0] = query[0] + " and(season like '%"+String.join("%' OR season '%", season) + "%') ";
         if(kind != null)
-            query[0] = query[0] + "and(kind like '%"+String.join("%' OR kind like '%", kind) + "%') ";
+            query[0] = query[0] + " and(kind like '%"+String.join("%' OR kind like '%", kind) + "%') ";
         ArrayList<Clothes> clothesList = (ArrayList<Clothes>) jdbcTemplate.query(
                 query[0],
                 clothesRowMapper
         );
-        System.out.println("clothesList = " + clothesList);
         return clothesList;
     }
 
