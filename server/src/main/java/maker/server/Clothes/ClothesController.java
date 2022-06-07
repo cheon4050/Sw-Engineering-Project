@@ -2,6 +2,8 @@ package maker.server.Clothes;
 
 import lombok.RequiredArgsConstructor;
 import maker.server.Dto.Clothes.ClothesDto;
+import maker.server.Dto.Clothes.ClothesPostDto;
+import maker.server.Dto.Clothes.ClothesPutDto;
 import maker.server.Entity.Clothes;
 import maker.server.Entity.style;
 import org.springframework.http.HttpStatus;
@@ -19,10 +21,10 @@ public class ClothesController {
 
     @PostMapping
     public ResponseEntity postClothes(@RequestHeader String userToken,
-                                      @RequestPart(value="clothesImage") MultipartFile clothesImage,
-                                      @RequestPart(value = "clothes") String clothes
-                            )throws java.io.IOException{
-        return clothesService.postClothes(userToken, clothesImage, clothes);
+                                      @RequestBody ClothesPostDto clothes
+                                      )throws java.io.IOException{
+        System.out.println("clothes = " + clothes);
+        return clothesService.postClothes(userToken, clothes);
     }
 
     @GetMapping
@@ -43,11 +45,10 @@ public class ClothesController {
 
     @PutMapping
     public ResponseEntity updateClothes(@RequestHeader String userToken,
-                            @RequestPart(value="clothesImage") MultipartFile clothesImage,
-                            @RequestPart(value = "clothes") String clothes,
+                                        @RequestBody ClothesPutDto clothes,
                             @RequestParam int clothesIdx
     )throws java.io.IOException{
-        return clothesService.updateClothes(userToken, clothesImage,clothesIdx, clothes);
+        return clothesService.updateClothes(userToken, clothes, clothesIdx);
 
     }
 

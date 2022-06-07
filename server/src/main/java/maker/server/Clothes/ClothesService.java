@@ -28,24 +28,11 @@ public class ClothesService {
     private final ClothesRepository clothesRepository;
     private final WeatherService weatherService;
 
-    public ResponseEntity  postClothes(String userToken, MultipartFile clothesImage, String clothes) throws IOException
+    public ResponseEntity  postClothes(String userToken, ClothesPostDto clothes) throws IOException
     {
-        LocalTime now = LocalTime.now();
-        String fileSavePath = "/Users/kodongcheon/Desktop/sw-engineering-project/Sw-Engineering-Project/server/"+now+".png";
-        File f = new File(fileSavePath);
-        clothesImage.transferTo(f);
-        JSONObject jObject = new JSONObject(clothes);
-        String date = jObject.getString("date");
-        String size = jObject.getString("size");
-        ArrayList<String> season = new ArrayList<String>();
-        jObject.getJSONArray("season").forEach(x-> season.add((String)x));
-        ArrayList<String> kind = new ArrayList<String>();
-        jObject.getJSONArray("kind").forEach(x-> kind.add((String)x));
-        ArrayList<Integer> washingMethod = new ArrayList<Integer>();
-        jObject.getJSONArray("washingMethod").forEach(x-> washingMethod.add((Integer) x));
-        ClothesPostDto clothesPostDto = new ClothesPostDto(fileSavePath,date, season, kind, washingMethod, size,false);
+        clothes.setBookmark(false);
         try{
-            clothesRepository.save(userToken, clothesPostDto);
+            clothesRepository.save(userToken, clothes);
             clothesResponse clothesResponse =  new clothesResponse(200, "등록 성공");
             return new ResponseEntity(clothesResponse,HttpStatus.OK);
         }
@@ -79,23 +66,9 @@ public class ClothesService {
         }
     }
 
-    public ResponseEntity updateClothes(String userToken,MultipartFile clothesImage, int clothesIdx, String clothes) throws IOException{
-        String clothesImageUrl = clothesRepository.findClothesImageUrlByClothesIdx(clothesIdx);
-        File f = new File(clothesImageUrl);
-        clothesImage.transferTo(f);
-        JSONObject jObject = new JSONObject(clothes);
-        String date = jObject.getString("date");
-        String size = jObject.getString("size");
-        ArrayList<String> season = new ArrayList<String>();
-        jObject.getJSONArray("season").forEach(x-> season.add((String)x));
-        ArrayList<String> kind = new ArrayList<String>();
-        jObject.getJSONArray("kind").forEach(x-> kind.add((String)x));
-        ArrayList<Integer> washingMethod = new ArrayList<Integer>();
-        jObject.getJSONArray("washingMethod").forEach(x-> washingMethod.add((Integer) x));
-        ClothesPutDto clothesPutDto = new ClothesPutDto(clothesImageUrl,date, season, kind, washingMethod, size,false);
-
+    public ResponseEntity updateClothes(String userToken, ClothesPutDto clothes,int clothesIdx) throws IOException{
         try {
-            clothesRepository.update(userToken, clothesIdx, clothesPutDto);
+            clothesRepository.update(userToken, clothesIdx, clothes);
             clothesResponse clothesResponse = new clothesResponse(200, "수정 성공");
             return new ResponseEntity(clothesResponse, HttpStatus.OK);
         }

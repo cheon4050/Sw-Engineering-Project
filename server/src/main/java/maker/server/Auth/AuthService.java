@@ -13,6 +13,7 @@ public class AuthService {
     private final AuthRepository authRepository;
 
     public void addUser(UserDto user) {
+
         authRepository.save(user);
     }
 

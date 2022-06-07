@@ -65,8 +65,7 @@ public class ClothesRepository {
 
     public void update(String userToken, int clothesIdx, ClothesPutDto clothes) {
         jdbcTemplate.execute("Update clothes set date = '" +clothes.getDate()+
-                "', bookmark = "+ clothes.isBookmark() +
-                ", size = '"+ clothes.getSize() +
+                "', size = '"+ clothes.getSize() +
                 "', clothesImageUrl = '" + clothes.getClothesImageUrl() +
                 "', kind = '" + clothes.getKind() +
                 "', season = '" + clothes.getSize() +
