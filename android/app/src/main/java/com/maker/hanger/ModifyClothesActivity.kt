@@ -42,6 +42,8 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
         binding = ActivityModifyClothesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        clothes = intent.getSerializableExtra("clothes") as Clothes
+
         setPermission()
         setActivityResultLauncher()
         closeModifyClothes()
