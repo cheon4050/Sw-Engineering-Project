@@ -3,22 +3,29 @@ package maker.server.Auth;
 import maker.server.Dto.User.UserDto;
 import maker.server.Dto.User.UserFindDto;
 import maker.server.Dto.User.UserLoginDto;
+import maker.server.Entity.Clothes;
 import maker.server.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.SqlValue;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.SQLData;
-import java.sql.SQLInput;
-import java.sql.SQLType;
+import java.sql.*;
 
 @Repository
 public class AuthRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    private final RowMapper<String> stringMapper =  (rs, count) -> {
+        return rs.getString(1);
+    };
+
+    private final RowMapper<Integer> intMapper = (rs,count) -> {
+        return rs.getInt(1);
+    };
 
     public void save(UserDto user) {
 
@@ -28,20 +35,20 @@ public class AuthRepository {
                 user.getBirth()+ "')");
     }
 
-    public String findUserToken(UserLoginDto user){
-        jdbcTemplate.execute("select userToken from user where userId = '" +
-                user.getUserId()+"' and password = '"+ user.getPassword() + "'");
-        return "";
+    public int findUserIdx(UserLoginDto user){
+        return jdbcTemplate.queryForObject("select userIdx from user where userId = '"
+                +user.getUserId()+"'"
+                , intMapper);
+
     }
 
     public String findPassword(UserFindDto user){
-        jdbcTemplate.execute("select password from user where userId = '" +
-                user.getUserId() + "' and birth = '" + user.getBirth() + "'");
-        return "";
+        return jdbcTemplate.queryForObject("select password from user where userId = '" +
+                        user.getUserId() + "' and birth = '" + user.getBirth() + "'",
+                stringMapper);
     }
     public void update(UserDto user){
         jdbcTemplate.execute("update user set userId = '" + user.getUserId() + "' and password = '" + user.getPassword() + "' and birth = '" + user.getBirth() + "'");
-
     }
     public void delete(String userToken) {
         jdbcTemplate.execute("delete from user where userToken = '" +

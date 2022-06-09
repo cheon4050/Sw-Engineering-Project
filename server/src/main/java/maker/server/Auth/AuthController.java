@@ -5,6 +5,7 @@ import maker.server.Dto.User.UserDto;
 import maker.server.Dto.User.UserFindDto;
 import maker.server.Dto.User.UserLoginDto;
 import maker.server.Entity.User;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,17 +16,17 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping
-    public void authorization(@RequestBody UserDto user){
-        authService.addUser(user);
+    public ResponseEntity authorization(@RequestBody UserDto user){
+        return authService.addUser(user);
     }
 
     @GetMapping("/login")
-    public String login(@RequestBody UserLoginDto user){
+    public ResponseEntity login(@RequestBody UserLoginDto user){
         return authService.getUserToken(user);
     }
 
     @GetMapping("/password")
-    public String password(@RequestBody UserFindDto user){
+    public ResponseEntity password(@RequestBody UserFindDto user){
         return authService.getPassword(user);
     }
 
