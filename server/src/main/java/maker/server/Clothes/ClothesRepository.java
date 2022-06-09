@@ -68,7 +68,7 @@ public class ClothesRepository {
                 "', size = '"+ clothes.getSize() +
                 "', clothesImageUrl = '" + clothes.getClothesImageUrl() +
                 "', kind = '" + clothes.getKind() +
-                "', season = '" + clothes.getSize() +
+                "', season = '" + clothes.getSeason() +
                 "', washingMethod = '"+ clothes.getWashingMethod()+
                 "' where clothesIdx = "+clothesIdx);
     }
