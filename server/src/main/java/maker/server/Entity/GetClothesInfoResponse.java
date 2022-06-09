@@ -9,9 +9,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class clothesInfoGetResponse extends clothesResponse{
+public class GetClothesInfoResponse extends Response{
     private Clothes clothes;
-    public clothesInfoGetResponse(Clothes clothes, int status, String message){
+    public GetClothesInfoResponse(Clothes clothes, int status, String message){
         super(status,message);
         this.clothes = clothes;
     }

@@ -10,7 +10,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class clothesResponse {
+public class Response {
     private int status;
     private String message;
 }

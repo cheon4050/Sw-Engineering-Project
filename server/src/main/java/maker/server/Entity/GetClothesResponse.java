@@ -11,9 +11,9 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class clothesGetResponse extends clothesResponse{
+public class GetClothesResponse extends Response{
     private ArrayList<Clothes> clothes;
-    public clothesGetResponse(ArrayList<Clothes> clothes, int status, String message){
+    public GetClothesResponse(ArrayList<Clothes> clothes, int status, String message){
         super(status,message);
         this.clothes = clothes;
     }
