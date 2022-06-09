@@ -1,9 +1,7 @@
 package maker.server.Auth;
 
 import lombok.RequiredArgsConstructor;
-import maker.server.Dto.User.UserDto;
-import maker.server.Dto.User.UserFindDto;
-import maker.server.Dto.User.UserLoginDto;
+import maker.server.Dto.User.*;
 import maker.server.Entity.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,12 +29,12 @@ public class AuthController {
     }
 
     @PutMapping("/user")
-    public void updateUser(@RequestBody UserDto user){
-        authService.updateUser(user);
+    public ResponseEntity updateUser(@RequestBody UserUpdateDto user){
+        return authService.updateUser(user);
     }
 
     @DeleteMapping("/user")
-    public void DeleteUser(@RequestBody String userToken){
-        authService.deleteUser(userToken);
+    public ResponseEntity DeleteUser(@RequestBody UserDeleteDto user){
+        return authService.deleteUser(user);
     }
 }

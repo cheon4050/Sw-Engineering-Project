@@ -3,6 +3,7 @@ package maker.server.Auth;
 import maker.server.Dto.User.UserDto;
 import maker.server.Dto.User.UserFindDto;
 import maker.server.Dto.User.UserLoginDto;
+import maker.server.Dto.User.UserUpdateDto;
 import maker.server.Entity.Clothes;
 import maker.server.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,12 +48,15 @@ public class AuthRepository {
                         user.getUserId() + "' and birth = '" + user.getBirth() + "'",
                 stringMapper);
     }
-    public void update(UserDto user){
-        jdbcTemplate.execute("update user set userId = '" + user.getUserId() + "' and password = '" + user.getPassword() + "' and birth = '" + user.getBirth() + "'");
+    public void update(Integer userIdx,UserUpdateDto user){
+        jdbcTemplate.execute("update user set userId = '" + user.getUserId() +
+                "', password = '" + user.getPassword() +
+                "', birth = '" + user.getBirth() +
+                "' where userIdx = " + userIdx);
     }
-    public void delete(String userToken) {
-        jdbcTemplate.execute("delete from user where userToken = '" +
-                userToken + "'");
+    public void delete(Integer userIdx) {
+        jdbcTemplate.execute("delete from user where userIdx = " +
+                userIdx);
 
     }
 }
