@@ -29,7 +29,6 @@ public class AuthService {
     public ResponseEntity getUserToken(UserLoginDto user) {
         int userIdx = authRepository.findUserIdx(user);
         String jwt =  jwtGenerator.createJWT(userIdx, 3*60*60);
-        System.out.println(jwt);
         return new ResponseEntity(new GetUserLoginResponse(jwt, 200,"토큰 생성 성공"), HttpStatus.OK);
     }
 
@@ -46,7 +45,6 @@ public class AuthService {
 
     public ResponseEntity deleteUser(UserDeleteDto user) {
         Integer userIdx = jwtGenerator.parseJwt(user.getUserToken()).getBody().get("userIdx",Integer.class);
-        System.out.println("userIdx = " + userIdx);
         authRepository.delete(userIdx);
         return new ResponseEntity(new Response(200, "회원 탈퇴 성공"), HttpStatus.OK);
     }
