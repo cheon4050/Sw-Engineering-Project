@@ -17,23 +17,16 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import com.maker.hanger.connection.ClothesService
 import com.maker.hanger.connection.ModifyClothesView
 import com.maker.hanger.data.Clothes
 import com.maker.hanger.data.ClothesRequest
 import com.maker.hanger.databinding.ActivityModifyClothesBinding
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 
 class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
     private lateinit var binding: ActivityModifyClothesBinding
-    private lateinit var file: File
+    private lateinit var absolutelyPath: String
     private lateinit var launcher: ActivityResultLauncher<Intent>
-    private val gson = Gson()
     private lateinit var clothes: Clothes
     private var isOriginal: Boolean = true
 
@@ -71,7 +64,7 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
                         .into(binding.modifyClothesIv)
                     // 이미지 절대 경로
                     Log.d("TEST", getAbsolutelyPath(uri, this))
-                    file = File(getAbsolutelyPath(uri, this))
+                    absolutelyPath = getAbsolutelyPath(uri, this)
                     isOriginal = false
                 }
             }
@@ -169,16 +162,13 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
 
         binding.modifyClothesModifyIv.setOnClickListener {
             if (isOriginal) {
-                file = File(clothes.clothesImageUrl)
+                absolutelyPath = clothes.clothesImageUrl
             }
-            val clothesRequest = ClothesRequest(clothes.date, clothes.season, clothes.kind, clothes.washingMethod, clothes.size)
-            val clothesRequestBody = gson.toJson(clothesRequest).toRequestBody("application/json; charset=utf-8".toMediaType())
-            val fileRequestBody = file.asRequestBody("text/x-markdown; charset=utf-8".toMediaType())
-            val multipartBodyPartFile = MultipartBody.Part.createFormData("clothesImage", file.name, fileRequestBody)
+            val clothesRequest = ClothesRequest(absolutelyPath, clothes.date, clothes.season, clothes.kind, clothes.washingMethod, clothes.size)
 
             val clothesService = ClothesService()
             clothesService.setModifyClothesView(this)
-            clothesService.update("1", multipartBodyPartFile, clothesRequestBody, clothes.clothesIdx)
+            clothesService.update("1", clothes.clothesIdx, clothesRequest)
         }
     }
 

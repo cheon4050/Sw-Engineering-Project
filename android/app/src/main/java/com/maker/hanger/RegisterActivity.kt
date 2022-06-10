@@ -17,25 +17,18 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import com.maker.hanger.connection.ClothesService
 import com.maker.hanger.connection.RegisterView
 import com.maker.hanger.data.ClothesRequest
 import com.maker.hanger.databinding.ActivityRegisterBinding
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var file: File
+    private lateinit var absolutelyPath: String
     private lateinit var launcher: ActivityResultLauncher<Intent>
-    private val gson = Gson()
     private val season: ArrayList<String> = ArrayList()
     private val kind: ArrayList<String> = ArrayList()
     private var size: Char = 'X'
@@ -79,7 +72,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
                     binding.registerClothesPhotoAddIv.visibility = View.GONE
                     // 이미지 절대 경로
                     Log.d("TEST", getAbsolutelyPath(uri, this))
-                    file = File(getAbsolutelyPath(uri, this))
+                    absolutelyPath = getAbsolutelyPath(uri, this)
                 }
             }
     }
@@ -96,15 +89,12 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun addClothes() {
         binding.registerClothesAddIv.setOnClickListener {
-            val today = SimpleDateFormat("yyyy/MM/dd").format(Date())
-            val clothesRequest = ClothesRequest(today, season, kind, washingMethod, size)
-            val clothesRequestBody = gson.toJson(clothesRequest).toRequestBody("application/json; charset=utf-8".toMediaType())
-            val fileRequestBody = file.asRequestBody("text/x-markdown; charset=utf-8".toMediaType())
-            val multipartBodyPartFile = MultipartBody.Part.createFormData("clothesImage", file.name, fileRequestBody)
+            val date = SimpleDateFormat("yyyy/MM/dd").format(Date())
+            val clothesRequest = ClothesRequest(absolutelyPath, date, season, kind, washingMethod, size)
 
             val clothesService = ClothesService()
             clothesService.setRegisterView(this)
-            clothesService.add("1", multipartBodyPartFile, clothesRequestBody)
+            clothesService.add("1", clothesRequest)
         }
     }
 

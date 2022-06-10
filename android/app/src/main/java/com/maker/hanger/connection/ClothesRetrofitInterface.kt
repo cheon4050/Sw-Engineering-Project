@@ -1,18 +1,14 @@
 package com.maker.hanger.connection
 
 import com.maker.hanger.data.*
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ClothesRetrofitInterface {
-    @Multipart
     @POST("/clothes")
     fun add(
         @Header("userToken") userToken: String?,
-        @Part clothesImage: MultipartBody.Part,
-        @Part("clothes") clothes: RequestBody
+        @Body clothes: ClothesRequest
     ): Call<ClothesResponse>
 
     @GET("/clothes")
@@ -29,13 +25,11 @@ interface ClothesRetrofitInterface {
         @Query("clothesIdx") clothesIdx: Int
     ): Call<ClothesResponse>
 
-    @Multipart
     @PUT("/clothes")
     fun update(
         @Header("userToken") userToken: String?,
-        @Part clothesImage: MultipartBody.Part,
-        @Part("clothes") clothes: RequestBody,
-        @Query("clothesIdx") clothesIdx: Int
+        @Query("clothesIdx") clothesIdx: Int,
+        @Body clothes: ClothesRequest
     ): Call<ClothesResponse>
 
     @GET("/clothes/info")

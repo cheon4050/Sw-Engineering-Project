@@ -1,11 +1,10 @@
 package com.maker.hanger.connection
 
 import android.util.Log
+import com.maker.hanger.data.ClothesRequest
 import com.maker.hanger.data.ClothesResponse
 import com.maker.hanger.data.ClothesSearchInfoResponse
 import com.maker.hanger.data.ClothesSearchResponse
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,9 +36,9 @@ class ClothesService {
         this.modifyClothesView = modifyClothesView
     }
 
-    fun add(userToken: String?, clothesImage: MultipartBody.Part, clothes: RequestBody) {
+    fun add(userToken: String?, clothes: ClothesRequest) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
-        clothesService.add(userToken, clothesImage, clothes).enqueue(object: Callback<ClothesResponse> {
+        clothesService.add(userToken, clothes).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
                 Log.d("ADD/SUCCESS", response.body()!!.message)
                 val resp: ClothesResponse = response.body()!!
@@ -127,9 +126,9 @@ class ClothesService {
         })
     }
 
-    fun update(userToken: String?, clothesImage: MultipartBody.Part, clothes: RequestBody, clothesIdx: Int) {
+    fun update(userToken: String?, clothesIdx: Int, clothes: ClothesRequest, ) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
-        clothesService.update(userToken, clothesImage, clothes, clothesIdx).enqueue(object: Callback<ClothesResponse> {
+        clothesService.update(userToken, clothesIdx, clothes).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
                 Log.d("UPDATE/SUCCESS", response.body()!!.message)
                 val resp: ClothesResponse = response.body()!!

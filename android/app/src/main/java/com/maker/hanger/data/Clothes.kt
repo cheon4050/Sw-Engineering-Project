@@ -15,6 +15,7 @@ data class Clothes(
 ) : Serializable
 
 data class ClothesRequest(
+    @SerializedName(value = "clothesImageUrl") var clothesImageUrl: String,
     @SerializedName(value = "date") var date: String,
     @SerializedName(value = "season") var season: ArrayList<String>,
     @SerializedName(value = "kind") var kind: ArrayList<String>,
