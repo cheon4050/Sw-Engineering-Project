@@ -41,7 +41,7 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
         setActivityResultLauncher()
         closeModifyClothes()
 
-        initClothesInfo()
+        setClothesInfo()
         updateClothes()
     }
 
@@ -80,7 +80,7 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
         return result!!
     }
 
-    private fun initClothesInfo() {
+    private fun setClothesInfo() {
         Glide.with(applicationContext).load(clothes.clothesImageUrl).override(350, 480)
             .into(binding.modifyClothesIv)
         setSeason()
@@ -127,16 +127,16 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
         for (washingMethod in clothes.washingMethod) {
             when (washingMethod) {
                 40 -> {
-                    binding.modifyClothesWashing40Iv.visibility = View.VISIBLE
+                    binding.modifyClothesWashing40Iv.setImageResource(R.drawable.washing_select)
                 }
                 60 -> {
-                    binding.modifyClothesWashing60Iv.visibility = View.VISIBLE
+                    binding.modifyClothesWashing60Iv.setImageResource(R.drawable.washing_select)
                 }
                 95 -> {
-                    binding.modifyClothesWashing95Iv.visibility = View.VISIBLE
+                    binding.modifyClothesWashing95Iv.setImageResource(R.drawable.washing_select)
                 }
                 else -> {
-                    binding.modifyClothesWashingNoIv.visibility = View.VISIBLE
+                    binding.modifyClothesWashingNoIv.setImageResource(R.drawable.washing_select)
                 }
             }
         }
@@ -168,6 +168,7 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
 
             val clothesService = ClothesService()
             clothesService.setModifyClothesView(this)
+            Log.d("UPDATE/CLOTHES", clothesRequest.toString())
             clothesService.update("1", clothes.clothesIdx, clothesRequest)
         }
     }
