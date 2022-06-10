@@ -61,8 +61,6 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
         fun bind(clothes: Clothes) {
             Glide.with(itemView).load(clothes.clothesImageUrl).override(150, 150)
                 .into(binding.clothesIv)
-            binding.clothesKindTv.text = clothes.kind.toString()
-            binding.clothesSizeTv.text = clothes.size.toString()
             if (clothes.bookmark) {
                 binding.clothesBookmarkIv.setImageResource(R.drawable.bookmark_on_search)
             } else {
