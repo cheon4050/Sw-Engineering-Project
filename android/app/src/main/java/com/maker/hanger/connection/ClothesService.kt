@@ -36,7 +36,7 @@ class ClothesService {
         this.modifyClothesView = modifyClothesView
     }
 
-    fun add(userToken: String?, clothes: ClothesRequest) {
+    fun add(userToken: String, clothes: ClothesRequest) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.add(userToken, clothes).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
@@ -54,7 +54,7 @@ class ClothesService {
         })
     }
 
-    fun search(userToken: String?, season: ArrayList<String>, kind: ArrayList<String>, bookmark: Boolean) {
+    fun search(userToken: String, season: ArrayList<String>, kind: ArrayList<String>, bookmark: Boolean) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.search(userToken, season, kind, bookmark).enqueue(object: Callback<ClothesSearchResponse> {
             override fun onResponse(call: Call<ClothesSearchResponse>, response: Response<ClothesSearchResponse>) {
@@ -72,7 +72,7 @@ class ClothesService {
         })
     }
 
-    fun bookmark(userToken: String?, clothesIdx: Int, bookmark: Boolean) {
+    fun bookmark(userToken: String, clothesIdx: Int, bookmark: Boolean) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.bookmark(userToken, clothesIdx, bookmark).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
@@ -90,7 +90,7 @@ class ClothesService {
         })
     }
 
-    fun searchInfo(userToken: String?, clothesIdx: Int) {
+    fun searchInfo(userToken: String, clothesIdx: Int) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.searchInfo(userToken, clothesIdx).enqueue(object: Callback<ClothesSearchInfoResponse> {
             override fun onResponse(call: Call<ClothesSearchInfoResponse>, response: Response<ClothesSearchInfoResponse>) {
@@ -108,7 +108,7 @@ class ClothesService {
         })
     }
 
-    fun delete(userToken: String?, clothesIdx: Int) {
+    fun delete(userToken: String, clothesIdx: Int) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.delete(userToken, clothesIdx).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
@@ -126,7 +126,7 @@ class ClothesService {
         })
     }
 
-    fun update(userToken: String?, clothesIdx: Int, clothes: ClothesRequest, ) {
+    fun update(userToken: String, clothesIdx: Int, clothes: ClothesRequest, ) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.update(userToken, clothesIdx, clothes).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
