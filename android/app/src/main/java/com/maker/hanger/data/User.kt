@@ -25,10 +25,6 @@ data class UserFindPasswordRequest(
     @SerializedName(value = "birth") var birth: Int
 )
 
-data class UserDeleteRequest(
-    @SerializedName(value = "userToken") var userToken: String
-)
-
 data class UserResponse(
     @SerializedName(value = "status") var status: Int,
     @SerializedName(value = "message") var message: String,

@@ -1,22 +1,32 @@
 package com.maker.hanger.connection
 
-import com.maker.hanger.data.User
+import com.maker.hanger.data.*
 import retrofit2.Call
 import retrofit2.http.*
 
 interface AuthRetrofitInterface {
     @POST("/auth")
-    fun signUp(@Body user: User)
+    fun signUp(
+        @Body userSignUpRequest: UserSignUpRequest
+    ): Call<UserResponse>
 
     @GET("/auth/login")
-    fun login(@Body user: User): Call<User>
+    fun login(
+        @Body userLoginRequest: UserLoginRequest
+    ): Call<UserLoginResponse>
 
     @GET("/auth/password")
-    fun find(@Body user: User): Call<User>
+    fun find(
+        @Body userFindPasswordRequest: UserFindPasswordRequest
+    ): Call<UserFindPasswordResponse>
 
     @PUT("/auth/user")
-    fun modify(@Body user: User)
+    fun update(
+        @Body user: User
+    ): Call<UserResponse>
 
     @DELETE("/auth/user")
-    fun delete(@Body userToken: String?)
+    fun delete(
+        @Body userToken: String
+    ): Call<UserResponse>
 }

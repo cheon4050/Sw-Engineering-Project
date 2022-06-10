@@ -201,8 +201,8 @@ class SearchFragment : Fragment(), SearchView {
     }
 
     override fun onSearchSuccess(clothes: ArrayList<Clothes>) {
-        initRecyclerView(clothes)
         Log.d("SEARCH/SUCCESS", "의류 조회를 성공했습니다.")
+        initRecyclerView(clothes)
     }
 
     override fun onSearchFailure() {
