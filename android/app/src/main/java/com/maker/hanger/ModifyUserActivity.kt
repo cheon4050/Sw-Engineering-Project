@@ -34,6 +34,6 @@ class ModifyUserActivity : AppCompatActivity() {
         val userId : String = binding.modifyIdEt.text.toString()
         val password: String = binding.modifyPasswordEt.text.toString()
         val birth : Int = Integer.parseInt(binding.modifyBirthEt.text.toString())
-        return User(null, userId, password, birth)
+        return User("1", userId, password, birth)
     }
 }

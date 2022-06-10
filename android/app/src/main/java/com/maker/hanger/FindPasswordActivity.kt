@@ -26,6 +26,6 @@ class FindPasswordActivity : AppCompatActivity() {
     private fun getUser(): User {
         val userId : String = binding.findIdEt.text.toString()
         val password: String = binding.findPasswordEt.text.toString()
-        return User(null, userId, password, 0)
+        return User("1", userId, password, 0)
     }
 }

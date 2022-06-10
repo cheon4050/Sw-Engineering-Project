@@ -45,6 +45,6 @@ class LoginActivity : AppCompatActivity() {
     private fun getUser(): User {
         val userId : String = binding.loginIdEt.text.toString()
         val password: String = binding.loginPasswordEt.text.toString()
-        return User(null, userId, password, 0)
+        return User("1", userId, password, 0)
     }
 }

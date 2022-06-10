@@ -32,7 +32,7 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     }
 
     private fun searchInfoClothes() {
-        val userToken = intent.getStringExtra("userToken")
+        val userToken = intent.getStringExtra("userToken")!!
         val clothesIdx = intent.getStringExtra("clothesIdx")!!.toInt()
         val clothesService = ClothesService()
         clothesService.setDetailedInfoView(this)
@@ -67,7 +67,7 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
 
     private fun deleteClothes() {
         binding.detailInfoClothesDeleteIv.setOnClickListener {
-            val userToken = intent.getStringExtra("userToken")
+            val userToken = intent.getStringExtra("userToken")!!
             val clothesIdx = intent.getStringExtra("clothesIdx")!!.toInt()
             val clothesService = ClothesService()
             clothesService.setDetailedInfoView(this)
