@@ -27,6 +27,7 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     override fun onStart() {
         super.onStart()
 
+        initClothesInfo()
         searchInfoClothes()
     }
 
@@ -56,6 +57,14 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         }
     }
 
+    private fun updateClothes() {
+        binding.detailInfoClothesModifyIv.setOnClickListener {
+            val intent = Intent(this, ModifyClothesActivity::class.java)
+            intent.putExtra("clothes", clothes)
+            startActivity(intent)
+        }
+    }
+
     private fun deleteClothes() {
         binding.detailInfoClothesDeleteIv.setOnClickListener {
             val userToken = intent.getStringExtra("userToken")
@@ -66,23 +75,84 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         }
     }
 
-    private fun updateClothes() {
-        binding.detailInfoClothesModifyIv.setOnClickListener {
-            val intent = Intent(this, ModifyClothesActivity::class.java)
-            intent.putExtra("clothes", clothes)
-            startActivity(intent)
+    private fun initClothesInfo() {
+        initSeason()
+        initKind()
+        initWashingMethod()
+        initSize()
+    }
+
+    private fun initSeason() {
+        with (binding) {
+            detailInfoClothesSpringTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            binding.detailInfoClothesSummerTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            detailInfoClothesAutumnTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            detailInfoClothesWinterTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
         }
     }
 
-    private fun initClothesInfo() {
+    private fun initKind() {
+        with(binding) {
+            detailInfoClothesTopTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            detailInfoClothesOuterTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            detailInfoClothesBottomsTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            detailInfoClothesOnepieceTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            detailInfoClothesShoesTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            detailInfoClothesAccessoriesTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+        }
+    }
+
+    private fun initWashingMethod() {
+        with (binding) {
+            detailInfoClothesWashing40Iv.visibility = View.GONE
+            detailInfoClothesWashing60Iv.visibility = View.GONE
+            detailInfoClothesWashing95Iv.visibility = View.GONE
+            detailInfoClothesWashingNoIv.visibility = View.GONE
+        }
+    }
+
+    private fun initSize() {
+        with (binding) {
+            detailInfoClothesSmallTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            detailInfoClothesMediumTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+            detailInfoClothesLargeTv
+                .setBackgroundResource(R.drawable.clothes_search_select_off_background)
+        }
+    }
+
+    private fun setClothesInfo() {
         setBookmark(clothes.bookmark)
-        Glide.with(applicationContext).load(clothes.clothesImageUrl).override(350, 480)
-            .into(binding.detailInfoClothesIv)
+        setPhoto()
         setDate()
         setSeason()
         setKind()
-        setSize()
         setWashingMethod()
+        setSize()
+    }
+
+    private fun setBookmark(isLike: Boolean) {
+        if (isLike) {
+            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_on_search)
+        } else {
+            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_off_search)
+        }
+    }
+
+    private fun setPhoto() {
+        Glide.with(applicationContext).load(clothes.clothesImageUrl).override(350, 480)
+            .into(binding.detailInfoClothesIv)
     }
 
     private fun setDate() {
@@ -120,14 +190,6 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
                 "accessories" -> binding.detailInfoClothesAccessoriesTv
                     .setBackgroundResource(R.drawable.clothes_search_select_on_background)
             }
-        }
-    }
-
-    private fun setBookmark(isLike: Boolean) {
-        if (isLike) {
-            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_on_search)
-        } else {
-            binding.detailInfoClothesBookmarkIv.setImageResource(R.drawable.bookmark_off_search)
         }
     }
 
@@ -170,8 +232,9 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     override fun onSearchInfoSuccess(clothes: Clothes) {
         Log.d("SEARCHINFO/SUCCESS", "의류 상세정보 조회를 성공했습니다.")
         this.clothes = clothes
+        Log.d("SEARCH/CLOTHES", this.clothes.toString())
         searchWashingMethod()
-        initClothesInfo()
+        setClothesInfo()
         deleteClothes()
         updateClothes()
     }
