@@ -35,25 +35,4 @@
         app:layout_constraintBottom_toBottomOf="@id/clothes_cardView"
         app:layout_constraintEnd_toEndOf="@id/clothes_cardView"/>
 
-    <TextView
-        android:id="@+id/clothes_kind_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:maxLines="1"
-        android:ellipsize="end"
-        app:layout_constraintStart_toStartOf="@id/clothes_cardView"
-        app:layout_constraintTop_toBottomOf="@id/clothes_cardView"/>
-
-    <TextView
-        android:id="@+id/clothes_size_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/clothes_cardView"
-        app:layout_constraintTop_toBottomOf="@id/clothes_kind_tv"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
