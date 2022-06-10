@@ -89,12 +89,16 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private fun addClothes() {
         binding.registerClothesAddIv.setOnClickListener {
-            val date = SimpleDateFormat("yyyy/MM/dd").format(Date())
-            val clothesRequest = ClothesRequest(absolutelyPath, date, season, kind, washingMethod, size)
+            if (::absolutelyPath.isInitialized) {
+                val date = SimpleDateFormat("yyyy/MM/dd").format(Date())
+                val clothesRequest = ClothesRequest(absolutelyPath, date, season, kind, washingMethod, size)
 
-            val clothesService = ClothesService()
-            clothesService.setRegisterView(this)
-            clothesService.add("1", clothesRequest)
+                val clothesService = ClothesService()
+                clothesService.setRegisterView(this)
+                clothesService.add("1", clothesRequest)
+            } else {
+                Toast.makeText(this, "의류 사진을 첨부해 주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
