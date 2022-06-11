@@ -124,4 +124,23 @@ class AuthService {
             }
         })
     }
+
+    fun delete(userToken: String?) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        authService.delete(userToken).enqueue(object: Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                Log.d("DELETE/SUCCESS", response.toString())
+                val resp: UserResponse = response.body()!!
+                when (resp.status) {
+                    200 -> modifyUserView.onWithdrawalSuccess()
+                    else -> modifyUserView.onWithdrawalFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.d("DELETE/FAILURE", t.message.toString())
+            }
+
+        })
+    }
 }

@@ -63,7 +63,9 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
 
     private fun withdrawalUser() {
         binding.modifyWithdrawalBtn.setOnClickListener {
-            finish()
+            val authService = AuthService()
+            authService.setModifyUserView(this)
+            authService.delete(getJwt())
         }
     }
 
