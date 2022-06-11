@@ -95,7 +95,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
                 val clothesService = ClothesService()
                 clothesService.setRegisterView(this)
-                clothesService.add("1", clothesRequest)
+                clothesService.add(getJwt(), clothesRequest)
             } else {
                 Toast.makeText(this, "의류 사진을 첨부해 주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -294,6 +294,11 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         binding.registerClothesCloseIv.setOnClickListener {
             finish()
         }
+    }
+
+    private fun getJwt(): String? {
+        val sharedPreferences = getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        return sharedPreferences.getString("jwt", null)
     }
 
     override fun onRegisterSuccess() {
