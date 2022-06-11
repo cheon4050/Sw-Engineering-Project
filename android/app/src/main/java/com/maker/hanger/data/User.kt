@@ -3,7 +3,6 @@ package com.maker.hanger.data
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName(value = "userToken") var userToken: String?,
     @SerializedName(value = "userId") var userId: String,
     @SerializedName(value = "password") var password: String,
 )
@@ -12,11 +11,6 @@ data class UserSignUpRequest(
     @SerializedName(value = "userId") var userId: String,
     @SerializedName(value = "password") var password: String,
     @SerializedName(value = "answer") var answer: String
-)
-
-data class UserLoginRequest(
-    @SerializedName(value = "userId") var userId: String,
-    @SerializedName(value = "password") var password: String
 )
 
 data class UserFindPasswordRequest(

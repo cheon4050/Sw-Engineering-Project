@@ -71,9 +71,9 @@ class AuthService {
         })
     }
 
-    fun login(userLoginRequest: UserLoginRequest) {
+    fun login(user: User) {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
-        authService.login(userLoginRequest).enqueue(object: Callback<UserLoginResponse> {
+        authService.login(user).enqueue(object: Callback<UserLoginResponse> {
             override fun onResponse(call: Call<UserLoginResponse>, response: Response<UserLoginResponse>) {
                 Log.d("LOGIN/SUCCESS", response.toString())
                 val resp: UserLoginResponse = response.body()!!
@@ -107,9 +107,9 @@ class AuthService {
         })
     }
 
-    fun update(user: User) {
+    fun update(userToken: String?, user: User) {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
-        authService.update(user).enqueue(object: Callback<UserResponse> {
+        authService.update(userToken, user).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("UPDATE/SUCCESS", response.toString())
                 val resp: UserResponse = response.body()!!
@@ -140,7 +140,6 @@ class AuthService {
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 Log.d("DELETE/FAILURE", t.message.toString())
             }
-
         })
     }
 }
