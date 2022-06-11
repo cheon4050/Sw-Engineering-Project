@@ -58,14 +58,14 @@ class LoginActivity : AppCompatActivity(), LoginView {
         return UserLoginRequest(userId, password)
     }
 
-    private fun saveJwt(jwt: String) {
+    private fun saveJwt(jwt: String?) {
         val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("jwt", jwt)
         editor.apply()
     }
 
-    override fun onLoginSuccess(userToken: String) {
+    override fun onLoginSuccess(userToken: String?) {
         Log.d("LOGIN/SUCCESS", "로그인을 성공했습니다.")
         saveJwt(userToken)
         startActivity(Intent(this, MainActivity::class.java))

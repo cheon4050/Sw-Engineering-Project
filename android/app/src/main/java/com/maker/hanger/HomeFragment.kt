@@ -27,7 +27,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         initViewPager()
-        modifyUser()
+        updateUser()
 
         handler = Handler(Looper.getMainLooper())
         val autoViewPager = AutoViewPager(recommendVPAdapter)
@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
         binding.homeRecommendVp.setCurrentItem(position, true)
     }
 
-    private fun modifyUser() {
+    private fun updateUser() {
         binding.homeUserInfoModifyIv.setOnClickListener {
             val intent = Intent(requireContext(), ModifyUserActivity::class.java)
             startActivity(intent)

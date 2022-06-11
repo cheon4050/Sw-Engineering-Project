@@ -10,6 +10,7 @@ class AuthService {
     private lateinit var signUpView: SignUpView
     private lateinit var loginView: LoginView
     private lateinit var findPasswordView: FindPasswordView
+    private lateinit var modifyUserView: ModifyUserView
 
     fun setSignUpView(signUpView: SignUpView) {
         this.signUpView = signUpView
@@ -21,6 +22,10 @@ class AuthService {
 
     fun setFindPasswordView(findPasswordView: FindPasswordView) {
         this.findPasswordView = findPasswordView
+    }
+
+    fun setModifyUserView(modifyUserView: ModifyUserView) {
+        this.modifyUserView = modifyUserView
     }
 
     fun signUp(userSignUpRequest: UserSignUpRequest) {
@@ -41,15 +46,22 @@ class AuthService {
         })
     }
 
-    fun idCheck(userId: String) {
+    fun idCheck(userId: String, view: String) {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         authService.idCheck(userId).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("IDCHECK/SUCCESS", response.toString())
                 val resp: UserResponse = response.body()!!
-                when (resp.status) {
-                    200 -> signUpView.onIdCheckSuccess()
-                    else -> signUpView.onIdCheckFailure()
+                if (view == "signUp") {
+                    when (resp.status) {
+                        200 -> signUpView.onIdCheckSuccess()
+                        else -> signUpView.onIdCheckFailure()
+                    }
+                } else {
+                    when (resp.status) {
+                        200 -> modifyUserView.onIdCheckSuccess()
+                        else -> modifyUserView.onIdCheckFailure()
+                    }
                 }
             }
 
@@ -91,6 +103,24 @@ class AuthService {
 
             override fun onFailure(call: Call<UserFindPasswordResponse>, t: Throwable) {
                 Log.d("FIND/FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    fun update(user: User) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        authService.update(user).enqueue(object: Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                Log.d("UPDATE/SUCCESS", response.toString())
+                val resp: UserResponse = response.body()!!
+                when (resp.status) {
+                    200 -> modifyUserView.onUpdateSuccess()
+                    else -> modifyUserView.onUpdateFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.d("UPDATE/FAILURE", t.message.toString())
             }
         })
     }
