@@ -1,11 +1,8 @@
 package maker.server.Clothes;
 
-import maker.server.Dto.Clothes.ClothesDto;
 import maker.server.Dto.Clothes.ClothesPostDto;
 import maker.server.Dto.Clothes.ClothesPutDto;
 import maker.server.Entity.Clothes;
-import maker.server.Entity.style;
-import maker.server.Entity.weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
