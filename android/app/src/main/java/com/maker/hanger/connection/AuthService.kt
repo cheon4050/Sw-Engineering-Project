@@ -1,10 +1,7 @@
 package com.maker.hanger.connection
 
 import android.util.Log
-import com.maker.hanger.data.UserLoginRequest
-import com.maker.hanger.data.UserLoginResponse
-import com.maker.hanger.data.UserResponse
-import com.maker.hanger.data.UserSignUpRequest
+import com.maker.hanger.data.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,6 +9,7 @@ import retrofit2.Response
 class AuthService {
     private lateinit var signUpView: SignUpView
     private lateinit var loginView: LoginView
+    private lateinit var findPasswordView: FindPasswordView
 
     fun setSignUpView(signUpView: SignUpView) {
         this.signUpView = signUpView
@@ -19,6 +17,10 @@ class AuthService {
 
     fun setLoginView(loginView: LoginView) {
         this.loginView = loginView
+    }
+
+    fun setFindPasswordView(findPasswordView: FindPasswordView) {
+        this.findPasswordView = findPasswordView
     }
 
     fun signUp(userSignUpRequest: UserSignUpRequest) {
@@ -71,6 +73,24 @@ class AuthService {
 
             override fun onFailure(call: Call<UserLoginResponse>, t: Throwable) {
                 Log.d("LOGIN/FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    fun find(userFindPasswordRequest: UserFindPasswordRequest) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        authService.find(userFindPasswordRequest).enqueue(object: Callback<UserFindPasswordResponse>{
+            override fun onResponse(call: Call<UserFindPasswordResponse>, response: Response<UserFindPasswordResponse>) {
+                Log.d("FIND/SUCCESS", response.toString())
+                val resp: UserFindPasswordResponse = response.body()!!
+                when (resp.status) {
+                    200 -> findPasswordView.onFindPasswordSuccess(resp.password)
+                    else -> findPasswordView.onFindPasswordFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<UserFindPasswordResponse>, t: Throwable) {
+                Log.d("FIND/FAILURE", t.message.toString())
             }
         })
     }
