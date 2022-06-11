@@ -33,7 +33,6 @@ class ModifyUserActivity : AppCompatActivity() {
     private fun getUser(): User {
         val userId : String = binding.modifyIdEt.text.toString()
         val password: String = binding.modifyPasswordEt.text.toString()
-        val birth : Int = Integer.parseInt(binding.modifyBirthEt.text.toString())
-        return User("1", userId, password, birth)
+        return User("1", userId, password)
     }
 }
