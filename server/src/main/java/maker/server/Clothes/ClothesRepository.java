@@ -51,7 +51,6 @@ public class ClothesRepository {
             query[0] = query[0] + " and(season like '%"+String.join("%' OR season like'%", season) + "%') ";
         if(kind != null)
             query[0] = query[0] + " and(kind like '%"+String.join("%' OR kind like '%", kind) + "%') ";
-        System.out.println("query[0] = " + query[0]);
         ArrayList<Clothes> clothesList = (ArrayList<Clothes>) jdbcTemplate.query(
                 query[0],
                 clothesRowMapper

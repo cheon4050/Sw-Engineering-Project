@@ -71,7 +71,7 @@ public class ClothesService {
             return new ResponseEntity(Response,HttpStatus.BAD_REQUEST);
         }
     }
-//
+
     public ResponseEntity getClothesInfo(String userToken, int clothesIdx) {
         try {
             Clothes clothes = clothesRepository.findByClothesIdx(userToken, clothesIdx);

@@ -23,7 +23,6 @@ public class ClothesController {
     public ResponseEntity postClothes(@RequestHeader String userToken,
                                       @RequestBody ClothesPostDto clothes
                                       )throws java.io.IOException{
-        System.out.println("clothes = " + clothes);
         return clothesService.postClothes(userToken, clothes);
     }
 
