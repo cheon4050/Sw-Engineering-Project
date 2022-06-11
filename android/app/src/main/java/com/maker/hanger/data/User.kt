@@ -6,13 +6,12 @@ data class User(
     @SerializedName(value = "userToken") var userToken: String,
     @SerializedName(value = "userId") var userId: String,
     @SerializedName(value = "password") var password: String,
-    @SerializedName(value = "birth") var birth: Int
 )
 
 data class UserSignUpRequest(
     @SerializedName(value = "userId") var userId: String,
     @SerializedName(value = "password") var password: String,
-    @SerializedName(value = "birth") var birth: Int
+    @SerializedName(value = "answer") var answer: String
 )
 
 data class UserLoginRequest(
@@ -22,7 +21,7 @@ data class UserLoginRequest(
 
 data class UserFindPasswordRequest(
     @SerializedName(value = "userId") var userId: String,
-    @SerializedName(value = "birth") var birth: Int
+    @SerializedName(value = "answer") var answer: String
 )
 
 data class UserResponse(

@@ -10,12 +10,17 @@ interface AuthRetrofitInterface {
         @Body userSignUpRequest: UserSignUpRequest
     ): Call<UserResponse>
 
-    @GET("/auth/login")
+    @GET("/auth/check")
+    fun idCheck(
+        @Query("userId") userId: String
+    ): Call<UserResponse>
+
+    @POST("/auth/login")
     fun login(
         @Body userLoginRequest: UserLoginRequest
     ): Call<UserLoginResponse>
 
-    @GET("/auth/password")
+    @POST("/auth/password")
     fun find(
         @Body userFindPasswordRequest: UserFindPasswordRequest
     ): Call<UserFindPasswordResponse>
