@@ -1,12 +1,14 @@
 package com.maker.hanger
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.maker.hanger.connection.SignUpView
 import com.maker.hanger.data.User
 import com.maker.hanger.databinding.ActivitySignupBinding
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity(), SignUpView {
     private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,5 +43,15 @@ class SignUpActivity : AppCompatActivity() {
         val userId : String = binding.signupIdEt.text.toString()
         val password: String = binding.signupPasswordEt.text.toString()
         return User("1", userId, password)
+    }
+
+    override fun onSignUpSuccess() {
+        Log.d("SIGNUP/SUCCESS", "회원가입을 성공했습니다.")
+        finish()
+    }
+
+    override fun onSignUpFailure() {
+        Log.d("SIGNUP/FAILURE", "회원가입을 실패했습니다.")
+        finish()
     }
 }
