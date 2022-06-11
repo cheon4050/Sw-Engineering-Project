@@ -1,24 +1,22 @@
-package maker.server.Auth;
+package maker.server.Util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 @Component
-public class JwtGenerator {
-
-    String apikey = "abaakjahsdfjkhsoaiasudaasdaaaasdasdasdsdsdsfa";
+public class JwtUtil {
+    @Value("${jwt.secret-key}")
+    private String apikey;
 
     /**
      * 토큰생성
