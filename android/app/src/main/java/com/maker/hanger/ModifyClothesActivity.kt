@@ -11,7 +11,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -169,7 +168,7 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
             val clothesService = ClothesService()
             clothesService.setModifyClothesView(this)
             Log.d("UPDATE/CLOTHES", clothesRequest.toString())
-            clothesService.update("1", clothes.clothesIdx, clothesRequest)
+            clothesService.update(getJwt(), clothes.clothesIdx, clothesRequest)
         }
     }
 
@@ -365,6 +364,11 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
         binding.modifyClothesCloseIv.setOnClickListener {
             finish()
         }
+    }
+
+    private fun getJwt(): String? {
+        val sharedPreferences = getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        return sharedPreferences.getString("jwt", null)
     }
 
     override fun onUpdateSuccess() {

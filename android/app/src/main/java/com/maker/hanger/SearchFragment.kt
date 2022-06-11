@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maker.hanger.adapter.SearchRVAdapter
@@ -53,7 +54,7 @@ class SearchFragment : Fragment(), SearchView {
         searchRVAdapter.setOnItemClickListener(object: SearchRVAdapter.OnItemClickListener {
             override fun onDetailedInfoItem(clothes: Clothes) {
                 val intent = Intent(requireContext(), DetailedInfoActivity::class.java)
-                intent.putExtra("userToken", "1")
+                intent.putExtra("userToken", getJwt())
                 intent.putExtra("clothesIdx", clothes.clothesIdx.toString())
                 startActivity(intent)
             }
@@ -74,7 +75,7 @@ class SearchFragment : Fragment(), SearchView {
     private fun searchClothes() {
         val clothesService = ClothesService()
         clothesService.setSearchView(this)
-        clothesService.search("1", season, kind, isBookmark)
+        clothesService.search(getJwt(), season, kind, isBookmark)
     }
 
     private fun selectSeason() {
@@ -198,6 +199,11 @@ class SearchFragment : Fragment(), SearchView {
             }
             searchClothes()
         }
+    }
+
+    private fun getJwt(): String? {
+        val sharedPreferences = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        return sharedPreferences!!.getString("jwt", null)
     }
 
     override fun onSearchSuccess(clothes: ArrayList<Clothes>) {
