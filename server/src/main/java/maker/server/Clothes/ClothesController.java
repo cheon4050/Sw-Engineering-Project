@@ -66,8 +66,8 @@ public class ClothesController {
         return clothesService.bookmark(userToken, clothesIdx, bookmark);
     }
 
-//    @GetMapping("/Recommend")
-//    public ArrayList<style> recommend(@RequestHeader String userToken){
-//        return clothesService.recommend(userToken);
-//    }
+    @GetMapping("/recommend")
+    public ResponseEntity recommend(@RequestHeader String userToken) throws Exception {
+        return clothesService.recommend(userToken);
+    }
 }

@@ -1,12 +1,11 @@
 package maker.server.Clothes;
 
 import lombok.RequiredArgsConstructor;
+import maker.server.Auth.JwtGenerator;
 import maker.server.Dto.Clothes.ClothesPostDto;
 import maker.server.Dto.Clothes.ClothesPutDto;
-import maker.server.Entity.Clothes;
-import maker.server.Entity.GetClothesResponse;
-import maker.server.Entity.GetClothesInfoResponse;
-import maker.server.Entity.Response;
+import maker.server.Entity.*;
+import maker.server.Weather.WeatherRepository;
 import maker.server.Weather.WeatherService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,8 @@ import java.util.ArrayList;
 public class ClothesService {
 
     private final ClothesRepository clothesRepository;
-    private final WeatherService weatherService;
+    private final WeatherRepository weatherRepository;
+    private final JwtGenerator jwtGenerator;
 
     public ResponseEntity  postClothes(String userToken, ClothesPostDto clothes) throws IOException
     {
@@ -96,8 +96,30 @@ public class ClothesService {
         }
     }
 
-//    public ArrayList<style> recommend(String userToken) {
-//        weather weather = weatherService.getWeather();
-//        return clothesRepository.recommend(userToken, weather);
-//    }
+    public ResponseEntity recommend(String userToken) throws Exception {
+        Integer userIdx = jwtGenerator.parseJwt(userToken).getBody().get("userIdx",Integer.class);
+        Weather weather = weatherRepository.getWeather();
+        String season = getSeason(weather.getPresent());
+        ArrayList<String> urlList =  clothesRepository.recommend(userIdx, season);
+        System.out.println("urlList = " + urlList);
+        System.out.println("season = " + season);
+        System.out.println("weather = " + weather);
+        System.out.println("userIdx = " + userIdx);
+        System.out.println("userToken = " + userToken);
+        GetRecommendResponse getRecommendResponse = new GetRecommendResponse(urlList, 200, "의류 추천 성공");
+        return new ResponseEntity(getRecommendResponse,HttpStatus.OK);
+    }
+
+    private String getSeason(double present){
+        String season;
+        if (present <8.0)
+            season = "winter";
+        else if(present < 16.0)
+            season = "autumn";
+        else if(present < 22)
+            season = "spring";
+        else
+            season = "summer";
+        return season;
+    }
 }

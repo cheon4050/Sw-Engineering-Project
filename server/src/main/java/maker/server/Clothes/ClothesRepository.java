@@ -27,6 +27,10 @@ public class ClothesRepository {
             clothes.setSize(rs.getString("size"));
             clothes.setBookmark(rs.getBoolean("bookmark"));
             return clothes;
+
+    };
+    private final RowMapper<String> stringMapper =  (rs, count) -> {
+        return rs.getString(1);
     };
     public void save(String userToken, ClothesPostDto clothes) {
         jdbcTemplate.execute("INSERT INTO clothes(userIdx,date,bookmark,size,clothesImageUrl,kind,season,washingMethod) VALUES ("+
@@ -92,7 +96,9 @@ public class ClothesRepository {
         jdbcTemplate.execute("Update clothes set bookmark = "+bookmark + " where clothesIdx = " + clothesIdx);
     }
 
-//    public ArrayList<style> recommend(String userToken, weather weather) {
-//        return
-//    }
+    public ArrayList<String> recommend(Integer userIdx, String season) {
+        ArrayList<String> urlList = (ArrayList<String>) jdbcTemplate.query("select clothesImageUrl from clothes where userIdx = " + userIdx
+                + " and season like '%" + season + "%' order by rand() limit 6" , stringMapper);
+        return urlList;
+    }
 }
