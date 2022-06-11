@@ -25,15 +25,27 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         android:background="@null"
-        android:hint="아이디"
+        android:hint="변경할 아이디"
         android:inputType="text"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/modify_id_check_tv"
         app:layout_constraintTop_toBottomOf="@id/modify_modify_tv"/>
 
+    <TextView
+        android:id="@+id/modify_id_check_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="중복 확인"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/modify_id_et"
+        app:layout_constraintBottom_toBottomOf="@id/modify_id_et"/>
+
     <View
-        android:id="@+id/modify_underscore_view"
+        android:id="@+id/modify_id_underscore_view"
         android:layout_width="0dp"
         android:layout_height="2px"
         android:layout_marginTop="15dp"
@@ -43,29 +55,6 @@
         app:layout_constraintTop_toBottomOf="@id/modify_id_et"/>
 
     <EditText
-        android:id="@+id/modify_birth_et"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:background="@null"
-        android:hint="생년월일"
-        android:inputType="textPersonName"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/modify_underscore_view"/>
-
-    <View
-        android:id="@+id/modify_name_underscore_view"
-        android:layout_width="150dp"
-        android:layout_height="2px"
-        android:layout_marginTop="15dp"
-        android:background="#a8a8a8"
-        app:layout_constraintStart_toStartOf="@id/modify_password_et"
-        app:layout_constraintTop_toBottomOf="@id/modify_birth_et"/>
-
-    <EditText
         android:id="@+id/modify_password_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -73,12 +62,12 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:background="@null"
-        android:hint="비밀번호"
+        android:hint="변경할 비밀번호"
         android:inputType="textPassword"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/modify_name_underscore_view"/>
+        app:layout_constraintTop_toBottomOf="@id/modify_id_underscore_view"/>
 
     <View
         android:id="@+id/modify_password_underscore_view"
@@ -98,7 +87,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:background="@null"
-        android:hint="비밀번호 확인"
+        android:hint="변경할 비밀번호 확인"
         android:inputType="textPassword"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +108,7 @@
         android:id="@+id/modify_withdrawal_btn"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="330dp"
         android:background="@color/orange"
         android:text="탈퇴하기"
         android:textColor="@color/white"

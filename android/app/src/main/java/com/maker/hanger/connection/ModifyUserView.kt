@@ -5,4 +5,6 @@ interface ModifyUserView {
     fun onUpdateFailure()
     fun onWithdrawalSuccess()
     fun onWithdrawalFailure()
+    fun onIdCheckSuccess()
+    fun onIdCheckFailure()
 }
