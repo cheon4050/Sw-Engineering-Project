@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="@id/signup_underscore_view"/>
 
     <EditText
-        android:id="@+id/signup_birth_et"
+        android:id="@+id/signup_nickname_et"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -82,13 +82,13 @@
         app:layout_constraintTop_toBottomOf="@id/signup_email_error_tv"/>
 
     <View
-        android:id="@+id/signup_name_underscore_view"
+        android:id="@+id/signup_nickname_underscore_view"
         android:layout_width="150dp"
         android:layout_height="2px"
         android:layout_marginTop="15dp"
         android:background="#a8a8a8"
         app:layout_constraintStart_toStartOf="@id/signup_password_et"
-        app:layout_constraintTop_toBottomOf="@id/signup_birth_et"/>
+        app:layout_constraintTop_toBottomOf="@id/signup_nickname_et"/>
 
     <EditText
         android:id="@+id/signup_password_et"
@@ -103,7 +103,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup_name_underscore_view"/>
+        app:layout_constraintTop_toBottomOf="@id/signup_nickname_underscore_view"/>
 
     <View
         android:id="@+id/signup_password_underscore_view"
