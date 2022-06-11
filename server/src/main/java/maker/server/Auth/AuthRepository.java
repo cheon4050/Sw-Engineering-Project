@@ -30,7 +30,7 @@ public class AuthRepository {
 
     public void save(UserDto user) {
 
-        jdbcTemplate.execute("INSERT INTO user(userId,password,birth) VALUES ('"+
+        jdbcTemplate.execute("INSERT INTO user(userId,password,answer) VALUES ('"+
                 user.getUserId()+ "','"+
                 user.getPassword()+ "','"+
                 user.getAnswer()+ "')");
