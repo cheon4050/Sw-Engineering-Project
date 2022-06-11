@@ -47,4 +47,13 @@ public class AuthService {
         authRepository.delete(userIdx);
         return new ResponseEntity(new Response(200, "회원 탈퇴 성공"), HttpStatus.OK);
     }
+
+    public ResponseEntity userIdCheck(String userId) {
+        try{
+            authRepository.userIdCheck(userId);
+            return new ResponseEntity(new Response(400, "이미 사용중인 아이디입니다."), HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity(new Response(200, "사용 가능한 아이디입니다."), HttpStatus.OK);
+        }
+    }
 }

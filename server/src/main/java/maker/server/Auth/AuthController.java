@@ -18,6 +18,10 @@ public class AuthController {
         return authService.addUser(user);
     }
 
+    @GetMapping("/check")
+    public ResponseEntity check(@RequestParam String userId){return authService.userIdCheck(userId);}
+
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody UserLoginDto user){
         return authService.getUserToken(user);

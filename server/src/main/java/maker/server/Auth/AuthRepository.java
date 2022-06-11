@@ -59,4 +59,8 @@ public class AuthRepository {
                 userIdx);
 
     }
+
+    public String userIdCheck(String userId) {
+        return jdbcTemplate.queryForObject("select userId from user where userId = '" + userId + "'", stringMapper);
+    }
 }
