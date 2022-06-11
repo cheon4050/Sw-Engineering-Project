@@ -34,7 +34,7 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
             } else {
                 val authService = AuthService()
                 authService.setSignUpView(this)
-                authService.idCheck(binding.signupIdEt.text.toString())
+                authService.idCheck(binding.signupIdEt.text.toString(), "signUp")
             }
         }
     }
