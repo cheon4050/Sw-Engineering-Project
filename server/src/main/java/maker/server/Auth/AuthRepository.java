@@ -51,7 +51,6 @@ public class AuthRepository {
     public void update(Integer userIdx,UserUpdateDto user){
         jdbcTemplate.execute("update user set userId = '" + user.getUserId() +
                 "', password = '" + user.getPassword() +
-                "', birth = '" + user.getBirth() +
                 "' where userIdx = " + userIdx);
     }
     public void delete(Integer userIdx) {

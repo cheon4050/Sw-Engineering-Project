@@ -11,5 +11,4 @@ public class UserUpdateDto {
     private String userToken;
     private String userId;
     private String password;
-    private int birth;
 }
