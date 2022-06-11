@@ -3,6 +3,7 @@ package com.maker.hanger
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.maker.hanger.connection.AuthService
 import com.maker.hanger.connection.LoginView
@@ -24,6 +25,15 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     private fun login() {
         binding.loginSignUpBtn.setOnClickListener {
+            if (binding.loginIdEt.text.toString().isEmpty()) {
+                Toast.makeText(this, "아이디가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (binding.loginPasswordEt.text.toString().isEmpty()) {
+                Toast.makeText(this, "비밀번호가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val authService = AuthService()
             authService.setLoginView(this)
             authService.login(getUser())
