@@ -57,7 +57,7 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
 
             val authService = AuthService()
             authService.setModifyUserView(this)
-            authService.update(getUser())
+            authService.update(getJwt(), getUser())
         }
     }
 
@@ -72,7 +72,7 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
     private fun getUser(): User {
         val userId : String = binding.modifyIdEt.text.toString()
         val password: String = binding.modifyPasswordEt.text.toString()
-        return User(getJwt(), userId, password)
+        return User(userId, password)
     }
 
     private fun getJwt(): String? {
