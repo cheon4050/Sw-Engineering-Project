@@ -33,12 +33,12 @@ public class AuthController {
     }
 
     @PutMapping("/user")
-    public ResponseEntity updateUser(@RequestBody UserUpdateDto user){
-        return authService.updateUser(user);
+    public ResponseEntity updateUser(@RequestHeader String userToken, @RequestBody UserUpdateDto user){
+        return authService.updateUser(userToken, user);
     }
 
     @DeleteMapping("/user")
-    public ResponseEntity DeleteUser(@RequestBody UserDeleteDto user){
-        return authService.deleteUser(user);
+    public ResponseEntity DeleteUser(@RequestHeader String userToken){
+        return authService.deleteUser(userToken);
     }
 }

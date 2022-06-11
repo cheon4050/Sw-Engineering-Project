@@ -36,14 +36,14 @@ public class AuthService {
         return new ResponseEntity(new GetUserPasswordResponse(password, 200, "비밀번호 찾기 성공"),HttpStatus.OK);
     }
 
-    public ResponseEntity updateUser(UserUpdateDto user) {
-        Integer userIdx = jwtUtil.parseJwt(user.getUserToken()).getBody().get("userIdx",Integer.class);
+    public ResponseEntity updateUser(String userToken, UserUpdateDto user) {
+        Integer userIdx = jwtUtil.parseJwt(userToken).getBody().get("userIdx",Integer.class);
         authRepository.update(userIdx, user);
         return new ResponseEntity(new Response(200, "회원 정보 수정 성공"), HttpStatus.OK);
     }
 
-    public ResponseEntity deleteUser(UserDeleteDto user) {
-        Integer userIdx = jwtUtil.parseJwt(user.getUserToken()).getBody().get("userIdx",Integer.class);
+    public ResponseEntity deleteUser(String userToken) {
+        Integer userIdx = jwtUtil.parseJwt(userToken).getBody().get("userIdx",Integer.class);
         authRepository.delete(userIdx);
         return new ResponseEntity(new Response(200, "회원 탈퇴 성공"), HttpStatus.OK);
     }
