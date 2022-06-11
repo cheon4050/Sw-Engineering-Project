@@ -8,11 +8,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class weather {
-    private int precipitationProbability;
-    private int humidity;
+public class Weather {
+    private double Probability;
+    private double humidity;
     private String state;
-    private Float presentTemperature;
-    private Float highestTemperature;
-    private Float lowestTemperature;
+    private double present;
+
 }
