@@ -39,6 +39,24 @@ class AuthService {
         })
     }
 
+    fun idCheck(userId: String) {
+        val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        authService.idCheck(userId).enqueue(object: Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                Log.d("IDCHECK/SUCCESS", response.toString())
+                val resp: UserResponse = response.body()!!
+                when (resp.status) {
+                    200 -> signUpView.onIdCheckSuccess()
+                    else -> signUpView.onIdCheckFailure()
+                }
+            }
+
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.d("IDCHECK/FAILURE", t.message.toString())
+            }
+        })
+    }
+
     fun login(userLoginRequest: UserLoginRequest) {
         val authService = getRetrofit().create(AuthRetrofitInterface::class.java)
         authService.login(userLoginRequest).enqueue(object: Callback<UserLoginResponse> {
