@@ -18,12 +18,12 @@ public class AuthController {
         return authService.addUser(user);
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity login(@RequestBody UserLoginDto user){
         return authService.getUserToken(user);
     }
 
-    @GetMapping("/password")
+    @PostMapping("/password")
     public ResponseEntity password(@RequestBody UserFindDto user){
         return authService.getPassword(user);
     }
