@@ -13,5 +13,5 @@ import lombok.ToString;
 public class UserDto {
     private String userId;
     private String password;
-    private int birth;
+    private String answer;
 }

@@ -11,5 +11,5 @@ import lombok.ToString;
 @ToString
 public class UserFindDto {
     private String userId;
-    private int birth;
+    private String answer;
 }
