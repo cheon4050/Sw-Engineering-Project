@@ -32,6 +32,6 @@ interface AuthRetrofitInterface {
 
     @DELETE("/auth/user")
     fun delete(
-        @Body userToken: String
+        @Body userToken: String?
     ): Call<UserResponse>
 }
