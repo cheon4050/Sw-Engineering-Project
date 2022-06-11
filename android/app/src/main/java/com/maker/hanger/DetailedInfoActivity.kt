@@ -32,11 +32,10 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     }
 
     private fun searchInfoClothes() {
-        val userToken = intent.getStringExtra("userToken")!!
         val clothesIdx = intent.getStringExtra("clothesIdx")!!.toInt()
         val clothesService = ClothesService()
         clothesService.setDetailedInfoView(this)
-        clothesService.searchInfo(userToken, clothesIdx)
+        clothesService.searchInfo(getJwt(), clothesIdx)
     }
 
     private fun searchWashingMethod() {
@@ -67,11 +66,10 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
 
     private fun deleteClothes() {
         binding.detailInfoClothesDeleteIv.setOnClickListener {
-            val userToken = intent.getStringExtra("userToken")!!
             val clothesIdx = intent.getStringExtra("clothesIdx")!!.toInt()
             val clothesService = ClothesService()
             clothesService.setDetailedInfoView(this)
-            clothesService.delete(userToken, clothesIdx)
+            clothesService.delete(getJwt(), clothesIdx)
         }
     }
 
@@ -227,6 +225,11 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         binding.detailInfoClothesCloseIv.setOnClickListener {
             finish()
         }
+    }
+
+    private fun getJwt(): String? {
+        val sharedPreferences = getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        return sharedPreferences.getString("jwt", null)
     }
 
     override fun onSearchInfoSuccess(clothes: Clothes) {
