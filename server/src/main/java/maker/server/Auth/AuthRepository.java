@@ -33,7 +33,7 @@ public class AuthRepository {
         jdbcTemplate.execute("INSERT INTO user(userId,password,birth) VALUES ('"+
                 user.getUserId()+ "','"+
                 user.getPassword()+ "','"+
-                user.getBirth()+ "')");
+                user.getAnswer()+ "')");
     }
 
     public int findUserIdx(UserLoginDto user){
@@ -45,7 +45,7 @@ public class AuthRepository {
 
     public String findPassword(UserFindDto user){
         return jdbcTemplate.queryForObject("select password from user where userId = '" +
-                        user.getUserId() + "' and birth = '" + user.getBirth() + "'",
+                        user.getUserId() + "' and answer = '" + user.getAnswer() + "'",
                 stringMapper);
     }
     public void update(Integer userIdx,UserUpdateDto user){
