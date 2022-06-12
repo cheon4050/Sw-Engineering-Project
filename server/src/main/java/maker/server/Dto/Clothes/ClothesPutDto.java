@@ -3,14 +3,12 @@ package maker.server.Dto.Clothes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class ClothesPutDto {
 
     private String clothesImageUrl;

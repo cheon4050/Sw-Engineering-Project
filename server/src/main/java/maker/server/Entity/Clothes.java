@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Clothes {
     private int clothesIdx;
     private String clothesImageUrl;
