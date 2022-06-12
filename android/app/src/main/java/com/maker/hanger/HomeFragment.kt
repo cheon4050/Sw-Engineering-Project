@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.maker.hanger.adapter.RecommendVPAdapter
@@ -28,6 +29,7 @@ class HomeFragment : Fragment() {
 
         initViewPager()
         updateUser()
+        logout()
 
         handler = Handler(Looper.getMainLooper())
         val autoViewPager = AutoViewPager(recommendVPAdapter)
@@ -61,6 +63,21 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), ModifyUserActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun logout() {
+        binding.homeLogoutIv.setOnClickListener {
+            removeJwt()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            activity?.finish()
+        }
+    }
+
+    private fun removeJwt() {
+        val sharedPreferences = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        val editor = sharedPreferences!!.edit()
+        editor.remove("jwt")
+        editor.apply()
     }
 
     inner class AutoViewPager(private val recommendAdapter: RecommendVPAdapter) : Thread() {
