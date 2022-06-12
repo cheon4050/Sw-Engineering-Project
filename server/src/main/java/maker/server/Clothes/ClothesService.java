@@ -21,82 +21,54 @@ public class ClothesService {
     private final WeatherRepository weatherRepository;
     private final JwtUtil jwtUtil;
 
-    public ResponseEntity  postClothes(String userToken, ClothesPostDto clothes) throws IOException
+    public ResponseEntity  postClothes(String userToken, ClothesPostDto clothes)
     {
         clothes.setBookmark(false);
-        try{
-            clothesRepository.save(userToken, clothes);
-            Response Response =  new Response(200, "등록 성공");
-            return new ResponseEntity(Response,HttpStatus.OK);
-        }
-        catch (Exception e){
-            Response Response =  new Response(404, "등록 실패");
-            return new ResponseEntity(Response,HttpStatus.BAD_REQUEST);
-        }
+        Integer userIdx = jwtUtil.parseJwt(userToken);
+        clothesRepository.save(userIdx, clothes);
+        Response Response =  new Response(200, "등록 성공");
+        return new ResponseEntity(Response,HttpStatus.OK);
     }
 
     public ResponseEntity getClothes(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
-        try {
-            ArrayList<Clothes> clothesArrayList = clothesRepository.findByCategory(userToken, season, kind, bookmark);
-            GetClothesResponse GetClothesResponse = new GetClothesResponse(clothesArrayList, 200, "조회 성공");
-            return new ResponseEntity(GetClothesResponse, HttpStatus.OK);
-        }
-        catch (Exception e){
-            Response Response =  new Response(404, "조회 실패");
-            return new ResponseEntity(Response,HttpStatus.BAD_REQUEST);
-        }
+        Integer userIdx = jwtUtil.parseJwt(userToken);
+        ArrayList<Clothes> clothesArrayList = clothesRepository.findByCategory(userIdx, season, kind, bookmark);
+        GetClothesResponse GetClothesResponse = new GetClothesResponse(clothesArrayList, 200, "조회 성공");
+        return new ResponseEntity(GetClothesResponse, HttpStatus.OK);
     }
 
     public ResponseEntity deleteClothes(String userToken, int clothesIdx) {
-        try {
-            clothesRepository.delete(userToken, clothesIdx);
-            Response Response = new Response(200, "삭제 성공");
-            return new ResponseEntity(Response, HttpStatus.OK);
-        }
-        catch (Exception e){
-            Response Response = new Response(404, "삭제 실패");
-            return new ResponseEntity(Response, HttpStatus.OK);
-        }
+        Integer userIdx = jwtUtil.parseJwt(userToken);
+        clothesRepository.delete(clothesIdx);
+        Response Response = new Response(200, "삭제 성공");
+        return new ResponseEntity(Response, HttpStatus.OK);
+
     }
 
-    public ResponseEntity updateClothes(String userToken, ClothesPutDto clothes,int clothesIdx) throws IOException{
-        try {
-            clothesRepository.update(userToken, clothesIdx, clothes);
-            Response Response = new Response(200, "수정 성공");
-            return new ResponseEntity(Response, HttpStatus.OK);
-        }
-        catch (Exception e){
-            Response Response =  new Response(404, "수정 실패");
-            return new ResponseEntity(Response,HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity updateClothes(String userToken, ClothesPutDto clothes,int clothesIdx){
+        Integer userIdx = jwtUtil.parseJwt(userToken);
+        clothesRepository.update(clothesIdx, clothes);
+        Response Response = new Response(200, "수정 성공");
+        return new ResponseEntity(Response, HttpStatus.OK);
     }
 
     public ResponseEntity getClothesInfo(String userToken, int clothesIdx) {
-        try {
-            Clothes clothes = clothesRepository.findByClothesIdx(userToken, clothesIdx);
-            GetClothesInfoResponse GetClothesInfoResponse = new GetClothesInfoResponse(clothes, 200, "상세 조회 성공");
-            return new ResponseEntity(GetClothesInfoResponse, HttpStatus.OK);
-        }
-        catch (Exception e){
-            Response Response = new Response(404, "상세 조회 실패");
-            return new ResponseEntity(Response, HttpStatus.BAD_REQUEST);
-        }
+        Integer userIdx = jwtUtil.parseJwt(userToken);
+        Clothes clothes = clothesRepository.findByClothesIdx(clothesIdx);
+        GetClothesInfoResponse GetClothesInfoResponse = new GetClothesInfoResponse(clothes, 200, "상세 조회 성공");
+        return new ResponseEntity(GetClothesInfoResponse, HttpStatus.OK);
     }
 
     public ResponseEntity bookmark(String userToken, int clothesIdx, boolean bookmark) {
-        try {
-            clothesRepository.bookmarkByClothesIdx(userToken, clothesIdx, bookmark);
-            Response Response = new Response(200, "즐겨찾기 성공");
-            return new ResponseEntity(Response, HttpStatus.OK);
-        }
-        catch (Exception e){
-            Response Response = new Response(404,"즐겨찾기 실패");
-            return new ResponseEntity(Response, HttpStatus.BAD_REQUEST);
-        }
+        Integer userIdx = jwtUtil.parseJwt(userToken);
+        clothesRepository.bookmarkByClothesIdx(clothesIdx, bookmark);
+        Response Response = new Response(200, "즐겨찾기 성공");
+        return new ResponseEntity(Response, HttpStatus.OK);
+
     }
 
     public ResponseEntity recommend(String userToken) throws Exception {
-        Integer userIdx = jwtUtil.parseJwt(userToken).getBody().get("userIdx",Integer.class);
+        Integer userIdx = jwtUtil.parseJwt(userToken);
         Weather weather = weatherRepository.getWeather();
         String season = getSeason(weather.getPresent());
         ArrayList<String> urlList =  clothesRepository.recommend(userIdx, season);

@@ -22,7 +22,7 @@ public class ClothesController {
     @PostMapping
     public ResponseEntity postClothes(@RequestHeader String userToken,
                                       @RequestBody ClothesPostDto clothes
-                                      )throws java.io.IOException{
+                                      ){
         return clothesService.postClothes(userToken, clothes);
     }
 

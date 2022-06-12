@@ -4,12 +4,9 @@ import maker.server.Dto.User.UserDto;
 import maker.server.Dto.User.UserFindDto;
 import maker.server.Dto.User.UserLoginDto;
 import maker.server.Dto.User.UserUpdateDto;
-import maker.server.Entity.Clothes;
-import maker.server.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.SqlValue;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -36,7 +33,7 @@ public class AuthRepository {
                 user.getAnswer()+ "')");
     }
 
-    public int findUserIdx(UserLoginDto user){
+    public int findUserIdx(UserLoginDto user) {
         return jdbcTemplate.queryForObject("select userIdx from user where userId = '"
                 +user.getUserId()+"'"
                 , intMapper);

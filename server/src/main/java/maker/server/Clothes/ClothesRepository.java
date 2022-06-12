@@ -32,9 +32,9 @@ public class ClothesRepository {
     private final RowMapper<String> stringMapper =  (rs, count) -> {
         return rs.getString(1);
     };
-    public void save(String userToken, ClothesPostDto clothes) {
+    public void save(Integer userIdx, ClothesPostDto clothes) {
         jdbcTemplate.execute("INSERT INTO clothes(userIdx,date,bookmark,size,clothesImageUrl,kind,season,washingMethod) VALUES ("+
-                userToken + ",'"+
+                userIdx + ",'"+
                 clothes.getDate()+ "',"+
                 clothes.isBookmark()+ ",'"+
                 clothes.getSize()+ "','" +
@@ -44,8 +44,8 @@ public class ClothesRepository {
                 clothes.getWashingMethod() + "')");
     }
 
-    public ArrayList<Clothes> findByCategory(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
-        final String[] query = {"Select * From Clothes where userIdx = " + userToken};
+    public ArrayList<Clothes> findByCategory(Integer userIdx, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
+        final String[] query = {"Select * From Clothes where userIdx = " + userIdx};
         if (bookmark)
             query[0] = query[0] + " and bookmark = true";
         if (season != null)
@@ -59,11 +59,11 @@ public class ClothesRepository {
         return clothesList;
     }
 
-    public void delete(String userToken, int clothesIdx) {
+    public void delete(int clothesIdx) {
         jdbcTemplate.execute("Delete From clothes where clothesIdx = " + clothesIdx);
     }
 
-    public void update(String userToken, int clothesIdx, ClothesPutDto clothes) {
+    public void update( int clothesIdx, ClothesPutDto clothes) {
         jdbcTemplate.execute("Update clothes set date = '" +clothes.getDate()+
                 "', size = '"+ clothes.getSize() +
                 "', clothesImageUrl = '" + clothes.getClothesImageUrl() +
@@ -85,14 +85,14 @@ public class ClothesRepository {
         );
 
     }
-    public Clothes findByClothesIdx(String userToken, int clothesIdx) {
+    public Clothes findByClothesIdx(int clothesIdx) {
         return jdbcTemplate.queryForObject(
                 "select * from clothes where clothesIdx = "+clothesIdx,
                 clothesRowMapper
         );
     }
 
-    public void bookmarkByClothesIdx(String userToken, int clothesIdx, boolean bookmark) {
+    public void bookmarkByClothesIdx(int clothesIdx, boolean bookmark) {
         jdbcTemplate.execute("Update clothes set bookmark = "+bookmark + " where clothesIdx = " + clothesIdx);
     }
 

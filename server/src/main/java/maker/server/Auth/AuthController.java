@@ -1,8 +1,10 @@
 package maker.server.Auth;
 
 import lombok.RequiredArgsConstructor;
-import maker.server.Dto.User.*;
-import maker.server.Entity.User;
+import maker.server.Dto.User.UserDto;
+import maker.server.Dto.User.UserFindDto;
+import maker.server.Dto.User.UserLoginDto;
+import maker.server.Dto.User.UserUpdateDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

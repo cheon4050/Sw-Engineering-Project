@@ -17,12 +17,9 @@ public class AuthService {
     private final JwtUtil jwtUtil;
 
     public ResponseEntity addUser(UserDto user) {
-        try {
-            authRepository.save(user);
-            return new ResponseEntity(new Response(200, "회원가입 성공"), HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity(new Response(404, "회원가입 실패"), HttpStatus.BAD_REQUEST);
-        }
+        authRepository.save(user);
+        return new ResponseEntity(new Response(200, "회원가입 성공"), HttpStatus.OK);
+
     }
 
     public ResponseEntity getUserToken(UserLoginDto user) {
@@ -37,23 +34,19 @@ public class AuthService {
     }
 
     public ResponseEntity updateUser(String userToken, UserUpdateDto user) {
-        Integer userIdx = jwtUtil.parseJwt(userToken).getBody().get("userIdx",Integer.class);
+        Integer userIdx = jwtUtil.parseJwt(userToken);
         authRepository.update(userIdx, user);
         return new ResponseEntity(new Response(200, "회원 정보 수정 성공"), HttpStatus.OK);
     }
 
     public ResponseEntity deleteUser(String userToken) {
-        Integer userIdx = jwtUtil.parseJwt(userToken).getBody().get("userIdx",Integer.class);
+        Integer userIdx = jwtUtil.parseJwt(userToken);
         authRepository.delete(userIdx);
         return new ResponseEntity(new Response(200, "회원 탈퇴 성공"), HttpStatus.OK);
     }
 
     public ResponseEntity userIdCheck(String userId) {
-        try{
-            authRepository.userIdCheck(userId);
-            return new ResponseEntity(new Response(400, "이미 사용중인 아이디입니다."), HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity(new Response(200, "사용 가능한 아이디입니다."), HttpStatus.OK);
-        }
+        authRepository.userIdCheck(userId);
+        return new ResponseEntity(new Response(200, "이미 사용중인 아이디입니다."), HttpStatus.OK);
     }
 }
