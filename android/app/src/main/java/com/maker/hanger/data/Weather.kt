@@ -3,10 +3,14 @@ package com.maker.hanger.data
 import com.google.gson.annotations.SerializedName
 
 data class Weather(
-    @SerializedName("precipitationProbability") var precipitationProbability: Int,
-    @SerializedName("humidity") var humidity: Int,
+    @SerializedName("probability") var probability: Double,
+    @SerializedName("humidity") var humidity: Double,
     @SerializedName("state") var state: String,
-    @SerializedName("presentTemperature") var presentTemperature: Float,
-    @SerializedName("highestTemperature") var highestTemperature: Float,
-    @SerializedName("lowestTemperature") var lowestTemperature: Float
+    @SerializedName("present") var present: Double,
+)
+
+data class WeatherResponse(
+    @SerializedName("status") var status: Int,
+    @SerializedName("message") var message: String,
+    @SerializedName("weather") var weather: Weather
 )
