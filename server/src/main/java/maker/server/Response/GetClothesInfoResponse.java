@@ -1,14 +1,13 @@
-package maker.server.Entity;
+package maker.server.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import maker.server.Entity.Clothes;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class GetClothesInfoResponse extends Response{
     private Clothes clothes;
     public GetClothesInfoResponse(Clothes clothes, int status, String message){

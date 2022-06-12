@@ -1,4 +1,4 @@
-package maker.server.Entity;
+package maker.server.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

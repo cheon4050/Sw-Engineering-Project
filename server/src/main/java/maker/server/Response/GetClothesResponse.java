@@ -1,16 +1,15 @@
-package maker.server.Entity;
+package maker.server.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import maker.server.Entity.Clothes;
 
 import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class GetClothesResponse extends Response{
     private ArrayList<Clothes> clothes;
     public GetClothesResponse(ArrayList<Clothes> clothes, int status, String message){
