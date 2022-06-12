@@ -2,9 +2,9 @@ package maker.server.Auth;
 
 import lombok.RequiredArgsConstructor;
 import maker.server.Dto.User.*;
-import maker.server.Entity.GetUserPasswordResponse;
-import maker.server.Entity.Response;
-import maker.server.Entity.GetUserLoginResponse;
+import maker.server.Response.GetUserPasswordResponse;
+import maker.server.Response.Response;
+import maker.server.Response.GetUserLoginResponse;
 import maker.server.Util.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package maker.server.Error.Handler;
 
 import lombok.extern.slf4j.Slf4j;
-import maker.server.Entity.Response;
+import maker.server.Response.Response;
 import maker.server.Error.Exception.UserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

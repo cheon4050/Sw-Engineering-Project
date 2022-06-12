@@ -1,15 +1,10 @@
 package maker.server.Clothes;
 
 import lombok.RequiredArgsConstructor;
-import maker.server.Dto.Clothes.ClothesDto;
 import maker.server.Dto.Clothes.ClothesPostDto;
 import maker.server.Dto.Clothes.ClothesPutDto;
-import maker.server.Entity.Clothes;
-import maker.server.Entity.style;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 

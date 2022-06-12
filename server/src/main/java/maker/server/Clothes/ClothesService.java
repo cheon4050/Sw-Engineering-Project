@@ -1,6 +1,10 @@
 package maker.server.Clothes;
 
 import lombok.RequiredArgsConstructor;
+import maker.server.Response.GetClothesInfoResponse;
+import maker.server.Response.GetClothesResponse;
+import maker.server.Response.GetRecommendResponse;
+import maker.server.Response.Response;
 import maker.server.Util.JwtUtil;
 import maker.server.Dto.Clothes.ClothesPostDto;
 import maker.server.Dto.Clothes.ClothesPutDto;
@@ -10,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 @Service
