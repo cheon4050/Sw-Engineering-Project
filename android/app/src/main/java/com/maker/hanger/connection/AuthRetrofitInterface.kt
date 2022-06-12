@@ -17,7 +17,7 @@ interface AuthRetrofitInterface {
 
     @POST("/auth/login")
     fun login(
-        @Body userLoginRequest: UserLoginRequest
+        @Body user: User
     ): Call<UserLoginResponse>
 
     @POST("/auth/password")
@@ -27,11 +27,12 @@ interface AuthRetrofitInterface {
 
     @PUT("/auth/user")
     fun update(
+        @Header("userToken") userToken: String?,
         @Body user: User
     ): Call<UserResponse>
 
     @DELETE("/auth/user")
     fun delete(
-        @Body userToken: String?
+        @Header("userToken") userToken: String?
     ): Call<UserResponse>
 }

@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.maker.hanger.connection.AuthService
 import com.maker.hanger.connection.LoginView
-import com.maker.hanger.data.UserLoginRequest
+import com.maker.hanger.data.User
 import com.maker.hanger.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity(), LoginView {
@@ -52,10 +52,10 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
     }
 
-    private fun getUser(): UserLoginRequest {
+    private fun getUser(): User {
         val userId : String = binding.loginIdEt.text.toString()
         val password: String = binding.loginPasswordEt.text.toString()
-        return UserLoginRequest(userId, password)
+        return User(userId, password)
     }
 
     private fun saveJwt(jwt: String?) {
