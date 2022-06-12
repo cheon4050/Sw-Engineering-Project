@@ -81,6 +81,13 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
         return sharedPreferences.getString("jwt", null)
     }
 
+    private fun removeJwt() {
+        val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("jwt")
+        editor.apply()
+    }
+
     override fun onUpdateSuccess() {
         Log.d("UPDATE/SUCCESS", "회원 정보 수정을 성공했습니다.")
         finish()
@@ -93,10 +100,7 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
 
     override fun onWithdrawalSuccess() {
         Log.d("DELETE/SUCCESS", "회원 탈퇴를 성공했습니다.")
-        val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.remove("jwt")
-        editor.apply()
+        removeJwt()
         startActivity(Intent(this, LoginActivity::class.java))
         finishAffinity()
     }
