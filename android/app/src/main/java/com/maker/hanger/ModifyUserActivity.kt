@@ -1,6 +1,7 @@
 package com.maker.hanger
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -92,7 +93,12 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
 
     override fun onWithdrawalSuccess() {
         Log.d("DELETE/SUCCESS", "회원 탈퇴를 성공했습니다.")
-        finish()
+        val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("jwt")
+        editor.apply()
+        startActivity(Intent(this, LoginActivity::class.java))
+        finishAffinity()
     }
 
     override fun onWithdrawalFailure() {
