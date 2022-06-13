@@ -47,7 +47,7 @@ class SearchFragment : Fragment(), SearchView {
     }
 
     private fun initRecyclerView(clothes: ArrayList<Clothes>) {
-        searchRVAdapter = SearchRVAdapter(clothes)
+        searchRVAdapter = SearchRVAdapter(getJwt(), clothes)
         binding.searchClothesRv.adapter = searchRVAdapter
         binding.searchClothesRv.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 
