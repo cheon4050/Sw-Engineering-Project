@@ -12,9 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.maker.hanger.adapter.RecommendVPAdapter
+import com.maker.hanger.connection.WeatherService
+import com.maker.hanger.connection.WeatherView
+import com.maker.hanger.data.Weather
 import com.maker.hanger.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), WeatherView {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var handler: Handler
     private lateinit var recommendVPAdapter: RecommendVPAdapter
@@ -35,8 +38,7 @@ class HomeFragment : Fragment() {
         val autoViewPager = AutoViewPager(recommendVPAdapter)
         autoViewPager.start()
 
-        // weather image test
-        Glide.with(this).load(R.raw.weather_hot).into(binding.homeWeatherIv)
+        searchWeather()
 
         return binding.root
     }
@@ -56,6 +58,12 @@ class HomeFragment : Fragment() {
     private fun recommendClothes(recommendAdapter: RecommendVPAdapter) {
         position = (position + 1) % recommendAdapter.itemCount
         binding.homeRecommendVp.setCurrentItem(position, true)
+    }
+
+    private fun searchWeather() {
+        val weatherService = WeatherService()
+        weatherService.setWeatherView(this)
+        weatherService.getWeather()
     }
 
     private fun updateUser() {
@@ -94,5 +102,29 @@ class HomeFragment : Fragment() {
                 Log.d("Recommend", "Home Recommend Thread is dead.")
             }
         }
+    }
+
+    override fun onGetWeatherSuccess(weather: Weather) {
+        Log.d("WEATHER/SUCCESS", "날씨 조회를 성공했습니다.")
+        with (binding) {
+            when (weather.state) {
+                "맑음" -> {
+                    Glide.with(requireContext()).load(R.raw.weather_sun).into(binding.homeWeatherIv)
+                }
+                "구름 많음" -> {
+                    Glide.with(requireContext()).load(R.raw.weather_cloudy).into(binding.homeWeatherIv)
+                }
+                else -> {
+                    Glide.with(requireContext()).load(R.raw.weather_rain).into(binding.homeWeatherIv)
+                }
+            }
+            homeWeatherPresentTemperatureTv.text = weather.present.toString()
+            homeWeatherProbabilityInputTv.text = weather.probability.toString() + "%"
+            homeWeatherHumidityInputTv.text = weather.humidity.toString() + "%"
+        }
+    }
+
+    override fun onGetWeatherFailure() {
+        Log.d("WEATHER/FAILURE", "날씨 조회를 실패했습니다.")
     }
 }
