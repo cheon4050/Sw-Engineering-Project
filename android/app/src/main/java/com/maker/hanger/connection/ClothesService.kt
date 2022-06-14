@@ -128,7 +128,7 @@ class ClothesService {
         })
     }
 
-    fun update(userToken: String?, clothesIdx: Int, clothes: ClothesRequest, ) {
+    fun update(userToken: String?, clothesIdx: Int, clothes: ClothesRequest) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.update(userToken, clothesIdx, clothes).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
