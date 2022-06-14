@@ -10,9 +10,9 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetRecommendResponse extends Response{
-    private ArrayList<String> urlList;
-    public GetRecommendResponse(ArrayList<String> urlList, int status, String message){
+    private ArrayList<String> clothesImageUrl;
+    public GetRecommendResponse(ArrayList<String> clothesImageUrl, int status, String message){
         super(status, message);
-        this.urlList = urlList;
+        this.clothesImageUrl = clothesImageUrl;
     }
 }
