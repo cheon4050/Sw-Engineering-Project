@@ -1,10 +1,7 @@
 package com.maker.hanger.connection
 
 import android.util.Log
-import com.maker.hanger.data.ClothesRequest
-import com.maker.hanger.data.ClothesResponse
-import com.maker.hanger.data.ClothesSearchInfoResponse
-import com.maker.hanger.data.ClothesSearchResponse
+import com.maker.hanger.data.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,6 +12,7 @@ class ClothesService {
     private lateinit var bookmarkView: BookmarkView
     private lateinit var detailedInfoView: DetailedInfoView
     private lateinit var modifyClothesView: ModifyClothesView
+    private lateinit var recommendView: RecommendView
 
     fun setRegisterView(registerView: RegisterView) {
         this.registerView = registerView
@@ -34,6 +32,10 @@ class ClothesService {
 
     fun setModifyClothesView(modifyClothesView: ModifyClothesView) {
         this.modifyClothesView = modifyClothesView
+    }
+
+    fun setRecommendView(recommendView: RecommendView) {
+        this.recommendView = recommendView
     }
 
     fun add(userToken: String?, clothes: ClothesRequest) {
@@ -132,7 +134,7 @@ class ClothesService {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.update(userToken, clothesIdx, clothes).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
-                Log.d("UPDATE/SUCCESS", response.body()!!.message)
+                Log.d("UPDATE/SUCCESS", response.toString())
                 if (response.code() == 400) {
                     modifyClothesView.onUpdateFailure()
                 } else {
@@ -142,6 +144,26 @@ class ClothesService {
 
             override fun onFailure(call: Call<ClothesResponse>, t: Throwable) {
                 Log.d("UPDATE/FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    fun recommend(userToken: String?) {
+        val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
+        clothesService.recommend(userToken).enqueue(object: Callback<ClothesRecommendResponse> {
+            override fun onResponse(call: Call<ClothesRecommendResponse>, response: Response<ClothesRecommendResponse>) {
+                Log.d("RECOMMEND/SUCCESS", response.toString())
+                if (response.code() == 400) {
+                    recommendView.onRecommendFailure()
+                } else {
+                    val resp: ClothesRecommendResponse = response.body()!!
+                    Log.d("TTT", resp.toString())
+                    recommendView.onRecommendSuccess(resp.clothesImageUrl)
+                }
+            }
+
+            override fun onFailure(call: Call<ClothesRecommendResponse>, t: Throwable) {
+                Log.d("RECOMMEND/FAILURE", t.message.toString())
             }
         })
     }

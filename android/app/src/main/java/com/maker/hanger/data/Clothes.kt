@@ -43,5 +43,5 @@ data class ClothesSearchInfoResponse(
 data class ClothesRecommendResponse(
     @SerializedName(value = "status") var status: Int,
     @SerializedName(value = "message") var message: String,
-    @SerializedName(value = "style") var clothesImageUrl: ArrayList<String>
+    @SerializedName(value = "clothesImageUrl") var clothesImageUrl: ArrayList<String>
 )

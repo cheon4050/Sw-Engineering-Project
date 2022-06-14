@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.maker.hanger.databinding.FragmentRecommendBinding
 
-class RecommendFragment(private val imageResource: Int = -1) : Fragment() {
+class RecommendFragment(private val clothesImageUrl: String) : Fragment() {
     private lateinit var binding: FragmentRecommendBinding
 
     override fun onCreateView(
@@ -16,10 +17,14 @@ class RecommendFragment(private val imageResource: Int = -1) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRecommendBinding.inflate(inflater, container, false)
-        if (imageResource != -1) {
-            binding.homeRecommendBackgroundIv.setImageResource(imageResource)
-        }
+
+        setRecommendClothes()
 
         return binding.root
+    }
+
+    private fun setRecommendClothes() {
+        Glide.with(this).load(clothesImageUrl).override(360, 360)
+            .into(binding.homeRecommendBackgroundIv)
     }
 }
