@@ -11,7 +11,7 @@ import com.maker.hanger.connection.ClothesService
 import com.maker.hanger.data.Clothes
 import com.maker.hanger.databinding.ItemClothesBinding
 
-class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Adapter<SearchRVAdapter.ViewHolder>(), BookmarkView {
+class SearchRVAdapter(private val userToken: String?, private val clothes: ArrayList<Clothes>) : RecyclerView.Adapter<SearchRVAdapter.ViewHolder>(), BookmarkView {
     interface OnItemClickListener {
         fun onDetailedInfoItem(clothes: Clothes)
         fun onBookmarkItem(position: Int, binding: ItemClothesBinding)
@@ -27,7 +27,7 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
         clothes[position].bookmark = !clothes[position].bookmark
         val clothesService = ClothesService()
         clothesService.setBookmarkView(this)
-        clothesService.bookmark("1", clothes[position].clothesIdx, clothes[position].bookmark)
+        clothesService.bookmark(userToken, clothes[position].clothesIdx, clothes[position].bookmark)
     }
 
     fun isBookmark(position: Int, binding: ItemClothesBinding) {
@@ -70,10 +70,10 @@ class SearchRVAdapter(private val clothes: ArrayList<Clothes>) : RecyclerView.Ad
     }
 
     override fun onBookmarkSuccess() {
-        Log.d("BOOKMARK/SUCCESS", "의류 등록을 성공했습니다.")
+        Log.d("BOOKMARK/SUCCESS", "의류 즐겨찾기를 성공했습니다.")
     }
 
     override fun onBookmarkFailure() {
-        Log.d("BOOKMARK/FAILURE", "의류 등록을 실패했습니다.")
+        Log.d("BOOKMARK/FAILURE", "의류 즐겨찾기를 실패했습니다.")
     }
 }

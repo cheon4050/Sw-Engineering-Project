@@ -33,10 +33,10 @@ class AuthService {
         authService.signUp(userSignUpRequest).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("SIGNUP/SUCCESS", response.toString())
-                val resp: UserResponse = response.body()!!
-                when (resp.status) {
-                    200 -> signUpView.onSignUpSuccess()
-                    else -> signUpView.onSignUpFailure()
+                if (response.code() == 400) {
+                    signUpView.onSignUpFailure()
+                } else {
+                    signUpView.onSignUpSuccess()
                 }
             }
 
@@ -51,16 +51,17 @@ class AuthService {
         authService.idCheck(userId).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("IDCHECK/SUCCESS", response.toString())
-                val resp: UserResponse = response.body()!!
                 if (view == "signUp") {
-                    when (resp.status) {
-                        200 -> signUpView.onIdCheckSuccess()
-                        else -> signUpView.onIdCheckFailure()
+                    if (response.code() == 200) {
+                        signUpView.onIdCheckFailure()
+                    } else {
+                        signUpView.onIdCheckSuccess()
                     }
                 } else {
-                    when (resp.status) {
-                        200 -> modifyUserView.onIdCheckSuccess()
-                        else -> modifyUserView.onIdCheckFailure()
+                    if (response.code() == 200) {
+                        modifyUserView.onIdCheckFailure()
+                    } else {
+                        modifyUserView.onIdCheckSuccess()
                     }
                 }
             }
@@ -76,10 +77,11 @@ class AuthService {
         authService.login(user).enqueue(object: Callback<UserLoginResponse> {
             override fun onResponse(call: Call<UserLoginResponse>, response: Response<UserLoginResponse>) {
                 Log.d("LOGIN/SUCCESS", response.toString())
-                val resp: UserLoginResponse = response.body()!!
-                when (resp.status) {
-                    200 -> loginView.onLoginSuccess(resp.userToken)
-                    else -> loginView.onLoginFailure()
+                if (response.code() == 400) {
+                    loginView.onLoginFailure()
+                } else {
+                    val resp: UserLoginResponse = response.body()!!
+                    loginView.onLoginSuccess(resp.userToken)
                 }
             }
 
@@ -94,10 +96,11 @@ class AuthService {
         authService.find(userFindPasswordRequest).enqueue(object: Callback<UserFindPasswordResponse>{
             override fun onResponse(call: Call<UserFindPasswordResponse>, response: Response<UserFindPasswordResponse>) {
                 Log.d("FIND/SUCCESS", response.toString())
-                val resp: UserFindPasswordResponse = response.body()!!
-                when (resp.status) {
-                    200 -> findPasswordView.onFindPasswordSuccess(resp.password)
-                    else -> findPasswordView.onFindPasswordFailure()
+                if (response.code() == 400) {
+                    findPasswordView.onFindPasswordFailure()
+                } else {
+                    val resp: UserFindPasswordResponse = response.body()!!
+                    findPasswordView.onFindPasswordSuccess(resp.password)
                 }
             }
 
@@ -112,10 +115,10 @@ class AuthService {
         authService.update(userToken, user).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("UPDATE/SUCCESS", response.toString())
-                val resp: UserResponse = response.body()!!
-                when (resp.status) {
-                    200 -> modifyUserView.onUpdateSuccess()
-                    else -> modifyUserView.onUpdateFailure()
+                if (response.code() == 400) {
+                    modifyUserView.onUpdateFailure()
+                } else {
+                    modifyUserView.onUpdateSuccess()
                 }
             }
 
@@ -130,10 +133,10 @@ class AuthService {
         authService.delete(userToken).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("DELETE/SUCCESS", response.toString())
-                val resp: UserResponse = response.body()!!
-                when (resp.status) {
-                    200 -> modifyUserView.onWithdrawalSuccess()
-                    else -> modifyUserView.onWithdrawalFailure()
+                if (response.code() == 400) {
+                    modifyUserView.onWithdrawalFailure()
+                } else {
+                    modifyUserView.onWithdrawalSuccess()
                 }
             }
 

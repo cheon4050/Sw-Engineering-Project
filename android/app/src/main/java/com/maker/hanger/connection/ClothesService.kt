@@ -1,10 +1,7 @@
 package com.maker.hanger.connection
 
 import android.util.Log
-import com.maker.hanger.data.ClothesRequest
-import com.maker.hanger.data.ClothesResponse
-import com.maker.hanger.data.ClothesSearchInfoResponse
-import com.maker.hanger.data.ClothesSearchResponse
+import com.maker.hanger.data.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,6 +12,7 @@ class ClothesService {
     private lateinit var bookmarkView: BookmarkView
     private lateinit var detailedInfoView: DetailedInfoView
     private lateinit var modifyClothesView: ModifyClothesView
+    private lateinit var recommendView: RecommendView
 
     fun setRegisterView(registerView: RegisterView) {
         this.registerView = registerView
@@ -36,15 +34,19 @@ class ClothesService {
         this.modifyClothesView = modifyClothesView
     }
 
+    fun setRecommendView(recommendView: RecommendView) {
+        this.recommendView = recommendView
+    }
+
     fun add(userToken: String?, clothes: ClothesRequest) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.add(userToken, clothes).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
-                Log.d("ADD/SUCCESS", response.body()!!.message)
-                val resp: ClothesResponse = response.body()!!
-                when (resp.status) {
-                    200 -> registerView.onRegisterSuccess()
-                    else -> registerView.onRegisterFailure()
+                Log.d("ADD/SUCCESS", response.toString())
+                if (response.code() == 400) {
+                    registerView.onRegisterFailure()
+                } else {
+                    registerView.onRegisterSuccess()
                 }
             }
 
@@ -59,10 +61,11 @@ class ClothesService {
         clothesService.search(userToken, season, kind, bookmark).enqueue(object: Callback<ClothesSearchResponse> {
             override fun onResponse(call: Call<ClothesSearchResponse>, response: Response<ClothesSearchResponse>) {
                 Log.d("SEARCH/SUCCESS", response.toString())
-                val resp: ClothesSearchResponse = response.body()!!
-                when (resp.status) {
-                    200 -> searchView.onSearchSuccess(resp.clothes)
-                    else -> searchView.onSearchFailure()
+                if (response.code() == 400) {
+                    searchView.onSearchFailure()
+                } else {
+                    val resp: ClothesSearchResponse = response.body()!!
+                    searchView.onSearchSuccess(resp.clothes)
                 }
             }
 
@@ -77,10 +80,10 @@ class ClothesService {
         clothesService.bookmark(userToken, clothesIdx, bookmark).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
                 Log.d("BOOKMARK/SUCCESS", response.toString())
-                val resp: ClothesResponse = response.body()!!
-                when (resp.status) {
-                    200 -> bookmarkView.onBookmarkSuccess()
-                    else -> bookmarkView.onBookmarkFailure()
+                if (response.code() == 400) {
+                    bookmarkView.onBookmarkFailure()
+                } else {
+                    bookmarkView.onBookmarkSuccess()
                 }
             }
 
@@ -95,10 +98,11 @@ class ClothesService {
         clothesService.searchInfo(userToken, clothesIdx).enqueue(object: Callback<ClothesSearchInfoResponse> {
             override fun onResponse(call: Call<ClothesSearchInfoResponse>, response: Response<ClothesSearchInfoResponse>) {
                 Log.d("SEARCHINFO/SUCCESS", response.toString())
-                val resp: ClothesSearchInfoResponse = response.body()!!
-                when (resp.status) {
-                    200 -> detailedInfoView.onSearchInfoSuccess(resp.clothes)
-                    else -> detailedInfoView.onSearchInfoFailure()
+                if (response.code() == 400) {
+                    detailedInfoView.onSearchInfoFailure()
+                } else {
+                    val resp: ClothesSearchInfoResponse = response.body()!!
+                    detailedInfoView.onSearchInfoSuccess(resp.clothes)
                 }
             }
 
@@ -113,10 +117,10 @@ class ClothesService {
         clothesService.delete(userToken, clothesIdx).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
                 Log.d("DELETE/SUCCESS", response.toString())
-                val resp: ClothesResponse = response.body()!!
-                when (resp.status) {
-                    200 -> detailedInfoView.onDeleteSuccess()
-                    else -> detailedInfoView.onDeleteFailure()
+                if (response.code() == 400) {
+                    detailedInfoView.onDeleteFailure()
+                } else {
+                    detailedInfoView.onDeleteSuccess()
                 }
             }
 
@@ -126,20 +130,40 @@ class ClothesService {
         })
     }
 
-    fun update(userToken: String?, clothesIdx: Int, clothes: ClothesRequest, ) {
+    fun update(userToken: String?, clothesIdx: Int, clothes: ClothesRequest) {
         val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
         clothesService.update(userToken, clothesIdx, clothes).enqueue(object: Callback<ClothesResponse> {
             override fun onResponse(call: Call<ClothesResponse>, response: Response<ClothesResponse>) {
-                Log.d("UPDATE/SUCCESS", response.body()!!.message)
-                val resp: ClothesResponse = response.body()!!
-                when (resp.status) {
-                    200 -> modifyClothesView.onUpdateSuccess()
-                    else -> modifyClothesView.onUpdateFailure()
+                Log.d("UPDATE/SUCCESS", response.toString())
+                if (response.code() == 400) {
+                    modifyClothesView.onUpdateFailure()
+                } else {
+                    modifyClothesView.onUpdateSuccess()
                 }
             }
 
             override fun onFailure(call: Call<ClothesResponse>, t: Throwable) {
                 Log.d("UPDATE/FAILURE", t.message.toString())
+            }
+        })
+    }
+
+    fun recommend(userToken: String?) {
+        val clothesService = getRetrofit().create(ClothesRetrofitInterface::class.java)
+        clothesService.recommend(userToken).enqueue(object: Callback<ClothesRecommendResponse> {
+            override fun onResponse(call: Call<ClothesRecommendResponse>, response: Response<ClothesRecommendResponse>) {
+                Log.d("RECOMMEND/SUCCESS", response.toString())
+                if (response.code() == 400) {
+                    recommendView.onRecommendFailure()
+                } else {
+                    val resp: ClothesRecommendResponse = response.body()!!
+                    Log.d("TTT", resp.toString())
+                    recommendView.onRecommendSuccess(resp.clothesImageUrl)
+                }
+            }
+
+            override fun onFailure(call: Call<ClothesRecommendResponse>, t: Throwable) {
+                Log.d("RECOMMEND/FAILURE", t.message.toString())
             }
         })
     }
