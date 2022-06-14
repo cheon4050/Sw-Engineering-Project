@@ -14,6 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Hanger"
+        android:fontFamily="@font/font"
         android:textSize="30sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -59,7 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="회원 가입"
-        android:textSize="14sp"
+        android:fontFamily="@font/font"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/login_password_til"
         app:layout_constraintEnd_toEndOf="@id/login_password_til"/>
 
@@ -69,7 +71,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="비밀번호 찾기"
-        android:textSize="14sp"
+        android:fontFamily="@font/font"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/login_password_til"
         app:layout_constraintStart_toStartOf="@id/login_password_til"/>
 
@@ -79,8 +82,9 @@
         android:layout_height="50dp"
         android:background="@color/orange"
         android:text="로그인"
+        android:fontFamily="@font/font"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

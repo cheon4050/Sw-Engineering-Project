@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="회원 정보 수정"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:fontFamily="@font/font"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,8 +38,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:text="중복 확인"
+        android:fontFamily="@font/font"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/modify_id_et"
         app:layout_constraintBottom_toBottomOf="@id/modify_id_et"/>
@@ -119,8 +120,9 @@
             android:layout_weight="1"
             android:background="@color/orange"
             android:text="탈퇴하기"
+            android:fontFamily="@font/font"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="20sp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/modify_modify_btn"
@@ -129,8 +131,9 @@
             android:layout_weight="1"
             android:background="@color/orange"
             android:text="수정완료"
+            android:fontFamily="@font/font"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="20sp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

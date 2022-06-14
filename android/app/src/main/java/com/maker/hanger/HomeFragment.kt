@@ -12,12 +12,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.maker.hanger.adapter.RecommendVPAdapter
+import com.maker.hanger.connection.ClothesService
+import com.maker.hanger.connection.RecommendView
 import com.maker.hanger.connection.WeatherService
 import com.maker.hanger.connection.WeatherView
 import com.maker.hanger.data.Weather
 import com.maker.hanger.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(), WeatherView {
+class HomeFragment : Fragment(), WeatherView, RecommendView {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var handler: Handler
     private lateinit var recommendVPAdapter: RecommendVPAdapter
@@ -30,32 +32,33 @@ class HomeFragment : Fragment(), WeatherView {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        initViewPager()
+        searchWeather()
+        recommendClothes()
+
         updateUser()
         logout()
-
-        handler = Handler(Looper.getMainLooper())
-        val autoViewPager = AutoViewPager(recommendVPAdapter)
-        autoViewPager.start()
-
-        searchWeather()
 
         return binding.root
     }
 
-    private fun initViewPager() {
+    private fun initViewPager(clothesImageUrl: ArrayList<String>) {
         recommendVPAdapter = RecommendVPAdapter(this)
-        recommendVPAdapter.addFragment(RecommendFragment())
-        recommendVPAdapter.addFragment(RecommendFragment())
-        recommendVPAdapter.addFragment(RecommendFragment())
-        recommendVPAdapter.addFragment(RecommendFragment())
-        recommendVPAdapter.addFragment(RecommendFragment())
-        recommendVPAdapter.addFragment(RecommendFragment())
+        for (clothesImage in clothesImageUrl) {
+            recommendVPAdapter.addFragment(RecommendFragment(clothesImage))
+        }
         binding.homeRecommendVp.adapter = recommendVPAdapter
         binding.homeIndicator.setViewPager2(binding.homeRecommendVp)
+
+        setAutoViewPager()
     }
 
-    private fun recommendClothes(recommendAdapter: RecommendVPAdapter) {
+    private fun setAutoViewPager() {
+        handler = Handler(Looper.getMainLooper())
+        val autoViewPager = AutoViewPager(recommendVPAdapter)
+        autoViewPager.start()
+    }
+
+    private fun autoRecommendClothes(recommendAdapter: RecommendVPAdapter) {
         position = (position + 1) % recommendAdapter.itemCount
         binding.homeRecommendVp.setCurrentItem(position, true)
     }
@@ -64,6 +67,12 @@ class HomeFragment : Fragment(), WeatherView {
         val weatherService = WeatherService()
         weatherService.setWeatherView(this)
         weatherService.getWeather()
+    }
+
+    private fun recommendClothes() {
+        val clothesService = ClothesService()
+        clothesService.setRecommendView(this)
+        clothesService.recommend(getJwt())
     }
 
     private fun updateUser() {
@@ -81,6 +90,11 @@ class HomeFragment : Fragment(), WeatherView {
         }
     }
 
+    private fun getJwt(): String? {
+        val sharedPreferences = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        return sharedPreferences!!.getString("jwt", null)
+    }
+
     private fun removeJwt() {
         val sharedPreferences = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
         val editor = sharedPreferences!!.edit()
@@ -95,7 +109,7 @@ class HomeFragment : Fragment(), WeatherView {
                 while (true) {
                     sleep(2500)
                     handler.post {
-                        recommendClothes(recommendAdapter)
+                        autoRecommendClothes(recommendAdapter)
                     }
                 }
             } catch (e: InterruptedException) {
@@ -126,5 +140,16 @@ class HomeFragment : Fragment(), WeatherView {
 
     override fun onGetWeatherFailure() {
         Log.d("WEATHER/FAILURE", "날씨 조회를 실패했습니다.")
+    }
+
+    override fun onRecommendSuccess(clothesImageUrl: ArrayList<String>) {
+        Log.d("RECOMMEND/SUCCESS", "의류 추천을 성공했습니다.")
+        if (clothesImageUrl.size > 0) {
+            initViewPager(clothesImageUrl)
+        }
+    }
+
+    override fun onRecommendFailure() {
+        Log.d("RECOMMEND/FAILURE", "의류 추천을 실패했습니다.")
     }
 }
