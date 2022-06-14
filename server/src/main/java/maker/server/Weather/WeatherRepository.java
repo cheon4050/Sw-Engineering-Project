@@ -25,7 +25,11 @@ public class WeatherRepository {
 
         String nx = "60";
         String ny = "127";
-        String baseDate = now.format(formatter);
+        String baseDate;
+        if (time.getHour() <= 1)
+            baseDate = Integer.toString(Integer.parseInt(now.format(formatter)) - 1);
+        else
+            baseDate = hourToString(time.getHour());
         String baseTime = hourToString(time.getHour());
         String type = "json";
         String apiUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
@@ -67,6 +71,7 @@ public class WeatherRepository {
         String result = sb.toString();
 
         // 데이터를 파싱
+        System.out.println("result = " + result);
         JSONObject jsonObj_1 = new JSONObject(result);
         JSONObject jsonObj_2 = jsonObj_1.getJSONObject("response");
         JSONObject jsonObj_3 = jsonObj_2.getJSONObject("body");
@@ -112,7 +117,9 @@ public class WeatherRepository {
     }
     private String hourToString(int hour){
         String result;
-        if(hour <= 4)
+        if(hour <= 1)
+            result = "2300";
+        else if(hour <= 4)
             result = "0200";
         else if(hour <= 7)
             result = "0500";
