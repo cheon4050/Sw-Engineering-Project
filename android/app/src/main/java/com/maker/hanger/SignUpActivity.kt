@@ -26,10 +26,10 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
     private fun userIdCheck() {
         binding.signupIdCheckTv.setOnClickListener {
             if (binding.signupIdEt.text.toString().isEmpty()) {
-                Toast.makeText(this, "아이디가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "아이디를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             } else if (binding.signupIdEt.text.toString().length < 8 || binding.signupIdEt.text.toString().length > 20) {
-                Toast.makeText(this, "사용 가능한 아이디의 길이는 8 ~ 20글자입니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "사용 가능한 아이디의 길이는 8 ~ 20자입니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             } else {
                 val authService = AuthService()
@@ -46,15 +46,15 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
                 return@setOnClickListener
             }
             if (binding.signupNicknameEt.text.toString().isEmpty()) {
-                Toast.makeText(this, "별명이 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "별명을 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (binding.signupPasswordEt.text.toString().length < 8 || binding.signupPasswordEt.text.toString().length > 20) {
-                Toast.makeText(this, "사용 가능한 비밀번호의 길이는 8 ~ 20글자입니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "사용 가능한 비밀번호의 길이는 8 ~ 20자입니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (binding.signupPasswordEt.text.toString().isEmpty() || binding.signupPasswordCheckEt.text.toString().isEmpty()) {
-                Toast.makeText(this, "비밀번호가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (binding.signupPasswordEt.text.toString() != binding.signupPasswordCheckEt.text.toString()) {
@@ -77,11 +77,13 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
 
     override fun onSignUpSuccess() {
         Log.d("SIGNUP/SUCCESS", "회원가입을 성공했습니다.")
+        Toast.makeText(this, "Hanger 회원이 되신 것을 축하드립니다!", Toast.LENGTH_SHORT).show()
         finish()
     }
 
     override fun onSignUpFailure() {
         Log.d("SIGNUP/FAILURE", "회원가입을 실패했습니다.")
+        Toast.makeText(this, "회원가입을 실패했습니다.", Toast.LENGTH_SHORT).show()
         finish()
     }
 
@@ -90,10 +92,13 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
         Log.d("IDCHECK/SUCCESS", "아이디 중복 확인을 성공했습니다.")
         isValid = true
         binding.signupIdCheckTv.text = "사용 가능"
-        binding.signupIdCheckTv.setTextColor(R.color.blue)
+        binding.signupIdCheckTv.setTextColor(R.color.green)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onIdCheckFailure() {
         Log.d("IDCHECK/FAILURE", "아이디 중복 확인을 실패했습니다.")
+        binding.signupIdCheckTv.text = "사용 불가능"
+        binding.signupIdCheckTv.setTextColor(R.color.red)
     }
 }
