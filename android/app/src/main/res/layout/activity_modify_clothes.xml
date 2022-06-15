@@ -246,7 +246,7 @@
             android:layout_marginLeft="10dp"
             android:text="치수 : "
             android:fontFamily="@font/font"
-            android:textStyle="bold"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/modify_kind_nsv"
             app:layout_constraintStart_toStartOf="parent"/>
 

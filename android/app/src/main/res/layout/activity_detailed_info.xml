@@ -74,7 +74,7 @@
             android:layout_marginLeft="10dp"
             android:text="등록일 : "
             android:fontFamily="@font/font"
-            android:textStyle="bold"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/detail_info_clothes_iv"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -84,6 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:fontFamily="@font/font"
+            android:textSize="18sp"
             app:layout_constraintTop_toTopOf="@id/detail_info_clothes_date_tv"
             app:layout_constraintStart_toEndOf="@id/detail_info_clothes_date_tv"
             app:layout_constraintBottom_toBottomOf="@id/detail_info_clothes_date_tv"/>
@@ -288,7 +289,7 @@
             android:layout_marginLeft="10dp"
             android:text="치수 : "
             android:fontFamily="@font/font"
-            android:textStyle="bold"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/detail_info_kind_nsv"
             app:layout_constraintStart_toStartOf="parent"/>
 
