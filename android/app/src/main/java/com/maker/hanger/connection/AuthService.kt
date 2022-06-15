@@ -33,10 +33,10 @@ class AuthService {
         authService.signUp(userSignUpRequest).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("SIGNUP/SUCCESS", response.toString())
-                if (response.code() == 400) {
-                    signUpView.onSignUpFailure()
-                } else {
+                if (response.isSuccessful) {
                     signUpView.onSignUpSuccess()
+                } else {
+                    signUpView.onSignUpFailure()
                 }
             }
 
@@ -52,13 +52,13 @@ class AuthService {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("IDCHECK/SUCCESS", response.toString())
                 if (view == "signUp") {
-                    if (response.code() == 200) {
+                    if (response.isSuccessful) {
                         signUpView.onIdCheckFailure()
                     } else {
                         signUpView.onIdCheckSuccess()
                     }
                 } else {
-                    if (response.code() == 200) {
+                    if (response.isSuccessful) {
                         modifyUserView.onIdCheckFailure()
                     } else {
                         modifyUserView.onIdCheckSuccess()
@@ -77,11 +77,11 @@ class AuthService {
         authService.login(user).enqueue(object: Callback<UserLoginResponse> {
             override fun onResponse(call: Call<UserLoginResponse>, response: Response<UserLoginResponse>) {
                 Log.d("LOGIN/SUCCESS", response.toString())
-                if (response.code() == 400) {
-                    loginView.onLoginFailure()
-                } else {
+                if (response.isSuccessful) {
                     val resp: UserLoginResponse = response.body()!!
                     loginView.onLoginSuccess(resp.userToken)
+                } else {
+                    loginView.onLoginFailure()
                 }
             }
 
@@ -96,11 +96,11 @@ class AuthService {
         authService.find(userFindPasswordRequest).enqueue(object: Callback<UserFindPasswordResponse>{
             override fun onResponse(call: Call<UserFindPasswordResponse>, response: Response<UserFindPasswordResponse>) {
                 Log.d("FIND/SUCCESS", response.toString())
-                if (response.code() == 400) {
-                    findPasswordView.onFindPasswordFailure()
-                } else {
+                if (response.isSuccessful) {
                     val resp: UserFindPasswordResponse = response.body()!!
                     findPasswordView.onFindPasswordSuccess(resp.password)
+                } else {
+                    findPasswordView.onFindPasswordFailure()
                 }
             }
 
@@ -115,10 +115,10 @@ class AuthService {
         authService.update(userToken, user).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("UPDATE/SUCCESS", response.toString())
-                if (response.code() == 400) {
-                    modifyUserView.onUpdateFailure()
-                } else {
+                if (response.isSuccessful) {
                     modifyUserView.onUpdateSuccess()
+                } else {
+                    modifyUserView.onUpdateFailure()
                 }
             }
 
@@ -133,10 +133,10 @@ class AuthService {
         authService.delete(userToken).enqueue(object: Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("DELETE/SUCCESS", response.toString())
-                if (response.code() == 400) {
-                    modifyUserView.onWithdrawalFailure()
-                } else {
+                if (response.isSuccessful) {
                     modifyUserView.onWithdrawalSuccess()
+                } else {
+                    modifyUserView.onWithdrawalFailure()
                 }
             }
 
