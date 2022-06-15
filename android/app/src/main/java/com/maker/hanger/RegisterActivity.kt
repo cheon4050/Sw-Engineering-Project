@@ -297,7 +297,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     }
 
     private fun getJwt(): String? {
-        val sharedPreferences = getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
         return sharedPreferences.getString("jwt", null)
     }
 

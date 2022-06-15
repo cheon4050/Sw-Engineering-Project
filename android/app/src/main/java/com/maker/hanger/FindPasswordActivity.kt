@@ -23,11 +23,11 @@ class FindPasswordActivity : AppCompatActivity(), FindPasswordView {
     private fun findPassword() {
         binding.findFindBtn.setOnClickListener {
             if (binding.findIdEt.text.toString().isEmpty()) {
-                Toast.makeText(this, "아이디가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "아이디를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (binding.findNicknameEt.text.toString().isEmpty()) {
-                Toast.makeText(this, "별명이 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "별명을 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -50,5 +50,7 @@ class FindPasswordActivity : AppCompatActivity(), FindPasswordView {
 
     override fun onFindPasswordFailure() {
         Log.d("FIND/FAILURE", "비밀번호 찾기를 실패했습니다.")
+        Toast.makeText(this, "비밀번호 찾기를 실패했습니다.", Toast.LENGTH_SHORT).show()
+        finish()
     }
 }

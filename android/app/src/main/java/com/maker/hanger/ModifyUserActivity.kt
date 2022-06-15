@@ -1,7 +1,7 @@
 package com.maker.hanger
 
-import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -28,10 +28,10 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
     private fun userIdCheck() {
         binding.modifyIdCheckTv.setOnClickListener {
             if (binding.modifyIdEt.text.toString().isEmpty()) {
-                Toast.makeText(this, "아이디가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "아이디를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             } else if (binding.modifyIdEt.text.toString().length < 8 || binding.modifyIdEt.text.toString().length > 20) {
-                Toast.makeText(this, "사용 가능한 아이디의 길이는 8 ~ 20글자입니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "사용 가능한 아이디의 길이는 8 ~ 20자입니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             } else {
                 val authService = AuthService()
@@ -47,8 +47,12 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
                 Toast.makeText(this, "아이디가 유효하지 않습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (binding.modifyPasswordEt.text.toString().length < 8 || binding.modifyPasswordEt.text.toString().length > 20) {
+                Toast.makeText(this, "사용 가능한 비밀번호의 길이는 8 ~ 20자입니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             if (binding.modifyPasswordEt.text.toString().isEmpty() || binding.modifyPasswordCheckEt.text.toString().isEmpty()) {
-                Toast.makeText(this, "비밀번호가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (binding.modifyPasswordEt.text.toString() != binding.modifyPasswordCheckEt.text.toString()) {
@@ -90,16 +94,19 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
 
     override fun onUpdateSuccess() {
         Log.d("UPDATE/SUCCESS", "회원 정보 수정을 성공했습니다.")
+        Toast.makeText(this, "회원 정보가 수정되었습니다.", Toast.LENGTH_SHORT).show()
         finish()
     }
 
     override fun onUpdateFailure() {
         Log.d("UPDATE/FAILURE", "회원 정보 수정을 실패했습니다.")
+        Toast.makeText(this, "회원 정보 수정을 실패했습니다.", Toast.LENGTH_SHORT).show()
         finish()
     }
 
     override fun onWithdrawalSuccess() {
         Log.d("DELETE/SUCCESS", "회원 탈퇴를 성공했습니다.")
+        Toast.makeText(this, "그동안 Hanger를 이용해 주셔서 감사합니다.", Toast.LENGTH_SHORT).show()
         removeJwt()
         startActivity(Intent(this, LoginActivity::class.java))
         finishAffinity()
@@ -107,17 +114,20 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
 
     override fun onWithdrawalFailure() {
         Log.d("DELETE/FAILURE", "회원 탈퇴를 실패했습니다.")
+        Toast.makeText(this, "회원 탈퇴를 실패했습니다.", Toast.LENGTH_SHORT).show()
+        finish()
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun onIdCheckSuccess() {
         Log.d("IDCHECK/SUCCESS", "아이디 중복 확인을 성공했습니다.")
         isValid = true
         binding.modifyIdCheckTv.text = "사용 가능"
-        binding.modifyIdCheckTv.setTextColor(R.color.blue)
+        binding.modifyIdCheckTv.setTextColor(Color.BLUE)
     }
 
     override fun onIdCheckFailure() {
         Log.d("IDCHECK/FAILURE", "아이디 중복 확인을 실패했습니다.")
+        binding.modifyIdCheckTv.text = "사용 불가능"
+        binding.modifyIdCheckTv.setTextColor(Color.RED)
     }
 }
