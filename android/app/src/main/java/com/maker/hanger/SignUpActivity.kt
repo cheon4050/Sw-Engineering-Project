@@ -49,6 +49,10 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
                 Toast.makeText(this, "별명이 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (binding.signupPasswordEt.text.toString().length < 8 || binding.signupPasswordEt.text.toString().length > 20) {
+                Toast.makeText(this, "사용 가능한 비밀번호의 길이는 8 ~ 20글자입니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             if (binding.signupPasswordEt.text.toString().isEmpty() || binding.signupPasswordCheckEt.text.toString().isEmpty()) {
                 Toast.makeText(this, "비밀번호가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

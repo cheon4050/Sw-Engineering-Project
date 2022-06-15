@@ -47,6 +47,10 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
                 Toast.makeText(this, "아이디가 유효하지 않습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (binding.modifyPasswordEt.text.toString().length < 8 || binding.modifyPasswordEt.text.toString().length > 20) {
+                Toast.makeText(this, "사용 가능한 비밀번호의 길이는 8 ~ 20글자입니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             if (binding.modifyPasswordEt.text.toString().isEmpty() || binding.modifyPasswordCheckEt.text.toString().isEmpty()) {
                 Toast.makeText(this, "비밀번호가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
