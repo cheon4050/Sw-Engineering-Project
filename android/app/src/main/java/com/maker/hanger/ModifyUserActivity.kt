@@ -1,7 +1,7 @@
 package com.maker.hanger
 
-import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -118,18 +118,16 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
         finish()
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun onIdCheckSuccess() {
         Log.d("IDCHECK/SUCCESS", "아이디 중복 확인을 성공했습니다.")
         isValid = true
         binding.modifyIdCheckTv.text = "사용 가능"
-        binding.modifyIdCheckTv.setTextColor(R.color.green)
+        binding.modifyIdCheckTv.setTextColor(Color.BLUE)
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun onIdCheckFailure() {
         Log.d("IDCHECK/FAILURE", "아이디 중복 확인을 실패했습니다.")
         binding.modifyIdCheckTv.text = "사용 불가능"
-        binding.modifyIdCheckTv.setTextColor(R.color.red)
+        binding.modifyIdCheckTv.setTextColor(Color.RED)
     }
 }

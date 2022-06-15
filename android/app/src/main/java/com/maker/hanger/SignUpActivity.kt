@@ -1,6 +1,6 @@
 package com.maker.hanger
 
-import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -87,18 +87,16 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
         finish()
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun onIdCheckSuccess() {
         Log.d("IDCHECK/SUCCESS", "아이디 중복 확인을 성공했습니다.")
         isValid = true
         binding.signupIdCheckTv.text = "사용 가능"
-        binding.signupIdCheckTv.setTextColor(R.color.green)
+        binding.signupIdCheckTv.setTextColor(Color.BLUE)
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun onIdCheckFailure() {
         Log.d("IDCHECK/FAILURE", "아이디 중복 확인을 실패했습니다.")
         binding.signupIdCheckTv.text = "사용 불가능"
-        binding.signupIdCheckTv.setTextColor(R.color.red)
+        binding.signupIdCheckTv.setTextColor(Color.RED)
     }
 }

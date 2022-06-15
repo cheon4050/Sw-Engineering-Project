@@ -367,7 +367,7 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
     }
 
     private fun getJwt(): String? {
-        val sharedPreferences = getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
         return sharedPreferences.getString("jwt", null)
     }
 
@@ -380,6 +380,5 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
     override fun onUpdateFailure() {
         Log.d("UPDATE/FAILURE", "의류 수정을 실패했습니다.")
         Toast.makeText(this,"의류 수정을 실패했습니다.", Toast.LENGTH_SHORT).show()
-        finish()
     }
 }
