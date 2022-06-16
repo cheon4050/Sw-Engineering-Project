@@ -42,15 +42,19 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         val intent = Intent(this, WashingMethodActivity::class.java)
         with (binding) {
             detailInfoClothesWashing40Iv.setOnClickListener {
+                intent.putExtra("washing", 40)
                 startActivity(intent)
             }
             detailInfoClothesWashing60Iv.setOnClickListener {
+                intent.putExtra("washing", 60)
                 startActivity(intent)
             }
             detailInfoClothesWashing95Iv.setOnClickListener {
+                intent.putExtra("washing", 95)
                 startActivity(intent)
             }
             detailInfoClothesWashingNoIv.setOnClickListener {
+                intent.putExtra("washing", 0)
                 startActivity(intent)
             }
         }
