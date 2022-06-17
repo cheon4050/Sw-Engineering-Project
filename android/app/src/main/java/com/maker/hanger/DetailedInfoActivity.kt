@@ -236,6 +236,13 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         return sharedPreferences.getString("jwt", null)
     }
 
+    private fun removeJwt() {
+        val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("jwt")
+        editor.apply()
+    }
+
     override fun onSearchInfoSuccess(clothes: Clothes) {
         Log.d("SEARCHINFO/SUCCESS", "의류 상세정보 조회를 성공했습니다.")
         this.clothes = clothes
@@ -246,9 +253,20 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         updateClothes()
     }
 
-    override fun onSearchInfoFailure() {
+    override fun onSearchInfoFailure(status: Int) {
         Log.d("SEARCHINFO/FAILURE", "의류 상세정보 조회를 실패했습니다.")
-        finish()
+        when (status) {
+            400 -> {
+                Toast.makeText(this,"의류 상세정보 조회를 실패했습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            else -> {
+                Toast.makeText(this, "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finishAffinity()
+            }
+        }
     }
 
     override fun onDeleteSuccess() {
@@ -257,8 +275,18 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         finish()
     }
 
-    override fun onDeleteFailure() {
+    override fun onDeleteFailure(status: Int) {
         Log.d("DELETE/FAILURE", "의류 삭제를 실패했습니다.")
-        Toast.makeText(this, "의류 삭제를 실패했습니다.", Toast.LENGTH_SHORT).show()
+        when (status) {
+            400 -> {
+                Toast.makeText(this, "의류 삭제를 실패했습니다.", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Toast.makeText(this, "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finishAffinity()
+            }
+        }
     }
 }

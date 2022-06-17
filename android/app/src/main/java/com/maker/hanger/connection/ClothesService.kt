@@ -46,7 +46,7 @@ class ClothesService {
                 if (response.isSuccessful) {
                     registerView.onRegisterSuccess()
                 } else {
-                    registerView.onRegisterFailure()
+                    registerView.onRegisterFailure(response.code())
                 }
             }
 
@@ -65,7 +65,7 @@ class ClothesService {
                     val resp: ClothesSearchResponse = response.body()!!
                     searchView.onSearchSuccess(resp.clothes)
                 } else {
-                    searchView.onSearchFailure()
+                    searchView.onSearchFailure(response.code())
                 }
             }
 
@@ -83,7 +83,7 @@ class ClothesService {
                 if (response.isSuccessful) {
                     bookmarkView.onBookmarkSuccess()
                 } else {
-                    bookmarkView.onBookmarkFailure()
+                    bookmarkView.onBookmarkFailure(response.code())
                 }
             }
 
@@ -102,7 +102,7 @@ class ClothesService {
                     val resp: ClothesSearchInfoResponse = response.body()!!
                     detailedInfoView.onSearchInfoSuccess(resp.clothes)
                 } else {
-                    detailedInfoView.onSearchInfoFailure()
+                    detailedInfoView.onSearchInfoFailure(response.code())
                 }
             }
 
@@ -120,7 +120,7 @@ class ClothesService {
                 if (response.isSuccessful) {
                     detailedInfoView.onDeleteSuccess()
                 } else {
-                    detailedInfoView.onDeleteFailure()
+                    detailedInfoView.onDeleteFailure(response.code())
                 }
             }
 
@@ -138,7 +138,7 @@ class ClothesService {
                 if (response.isSuccessful) {
                     modifyClothesView.onUpdateSuccess()
                 } else {
-                    modifyClothesView.onUpdateFailure()
+                    modifyClothesView.onUpdateFailure(response.code())
                 }
             }
 
@@ -157,7 +157,7 @@ class ClothesService {
                     val resp: ClothesRecommendResponse = response.body()!!
                     recommendView.onRecommendSuccess(resp.clothesImageUrl)
                 } else {
-                    recommendView.onRecommendFailure()
+                    recommendView.onRecommendFailure(response.code())
                 }
             }
 

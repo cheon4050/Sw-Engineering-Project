@@ -371,14 +371,31 @@ class ModifyClothesActivity : AppCompatActivity(), ModifyClothesView {
         return sharedPreferences.getString("jwt", null)
     }
 
+    private fun removeJwt() {
+        val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("jwt")
+        editor.apply()
+    }
+
     override fun onUpdateSuccess() {
         Log.d("UPDATE/SUCCESS", "의류 수정을 성공했습니다.")
         Toast.makeText(this,"의류를 수정했습니다.", Toast.LENGTH_SHORT).show()
         finish()
     }
 
-    override fun onUpdateFailure() {
+    override fun onUpdateFailure(status: Int) {
         Log.d("UPDATE/FAILURE", "의류 수정을 실패했습니다.")
-        Toast.makeText(this,"의류 수정을 실패했습니다.", Toast.LENGTH_SHORT).show()
+        when (status) {
+            400 -> {
+                Toast.makeText(this,"의류 수정을 실패했습니다.", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Toast.makeText(this, "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finishAffinity()
+            }
+        }
     }
 }

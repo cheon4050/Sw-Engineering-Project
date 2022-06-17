@@ -2,5 +2,5 @@ package com.maker.hanger.connection
 
 interface RegisterView {
     fun onRegisterSuccess()
-    fun onRegisterFailure()
+    fun onRegisterFailure(status: Int)
 }
