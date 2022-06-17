@@ -11,5 +11,5 @@ public class User {
     private String userToken;
     private String userId;
     private String password;
-    private int birth;
+    private String answer;
 }

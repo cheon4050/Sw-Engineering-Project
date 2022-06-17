@@ -71,7 +71,6 @@ public class WeatherRepository {
         String result = sb.toString();
 
         // 데이터를 파싱
-        System.out.println("result = " + result);
         JSONObject jsonObj_1 = new JSONObject(result);
         JSONObject jsonObj_2 = jsonObj_1.getJSONObject("response");
         JSONObject jsonObj_3 = jsonObj_2.getJSONObject("body");

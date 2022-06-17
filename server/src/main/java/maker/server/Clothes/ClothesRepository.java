@@ -73,18 +73,6 @@ public class ClothesRepository {
                 "' where clothesIdx = "+clothesIdx);
     }
 
-    public String findClothesImageUrlByClothesIdx(int clothesIdx){
-        return jdbcTemplate.queryForObject(
-                "select clothesImageUrl from clothes where clothesIdx = " + clothesIdx,
-                new RowMapper<String>() {
-                    @Override
-                    public String mapRow(ResultSet rs, int count) throws SQLException{
-                        return rs.getString(1);
-                    }
-                }
-        );
-
-    }
     public Clothes findByClothesIdx(int clothesIdx) {
         return jdbcTemplate.queryForObject(
                 "select * from clothes where clothesIdx = "+clothesIdx,

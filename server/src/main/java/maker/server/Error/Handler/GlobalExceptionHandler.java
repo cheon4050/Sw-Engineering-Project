@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {UserException.class})
-    public ResponseEntity userHandle(UserException e){
+    public ResponseEntity userHandler(UserException e){
         log.info(e.getMessage(), e);
         return new ResponseEntity(new Response(401, "UnAuthorization"), HttpStatus.UNAUTHORIZED);
     }
