@@ -118,7 +118,7 @@ class AuthService {
                 if (response.isSuccessful) {
                     modifyUserView.onUpdateSuccess()
                 } else {
-                    modifyUserView.onUpdateFailure()
+                    modifyUserView.onUpdateFailure(response.code())
                 }
             }
 
@@ -136,7 +136,7 @@ class AuthService {
                 if (response.isSuccessful) {
                     modifyUserView.onWithdrawalSuccess()
                 } else {
-                    modifyUserView.onWithdrawalFailure()
+                    modifyUserView.onWithdrawalFailure(response.code())
                 }
             }
 

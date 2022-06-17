@@ -4,5 +4,5 @@ import com.maker.hanger.data.Clothes
 
 interface SearchView {
     fun onSearchSuccess(clothes: ArrayList<Clothes>)
-    fun onSearchFailure()
+    fun onSearchFailure(status: Int)
 }

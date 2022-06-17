@@ -2,9 +2,9 @@ package com.maker.hanger.connection
 
 interface ModifyUserView {
     fun onUpdateSuccess()
-    fun onUpdateFailure()
+    fun onUpdateFailure(status: Int)
     fun onWithdrawalSuccess()
-    fun onWithdrawalFailure()
+    fun onWithdrawalFailure(status: Int)
     fun onIdCheckSuccess()
     fun onIdCheckFailure()
 }

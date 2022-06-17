@@ -98,10 +98,20 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
         finish()
     }
 
-    override fun onUpdateFailure() {
+    override fun onUpdateFailure(status: Int) {
         Log.d("UPDATE/FAILURE", "회원 정보 수정을 실패했습니다.")
-        Toast.makeText(this, "회원 정보 수정을 실패했습니다.", Toast.LENGTH_SHORT).show()
-        finish()
+        when (status) {
+            400 -> {
+                Toast.makeText(this, "회원 정보 수정을 실패했습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            else -> {
+                Toast.makeText(this, "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finishAffinity()
+            }
+        }
     }
 
     override fun onWithdrawalSuccess() {
@@ -112,10 +122,20 @@ class ModifyUserActivity : AppCompatActivity(), ModifyUserView {
         finishAffinity()
     }
 
-    override fun onWithdrawalFailure() {
+    override fun onWithdrawalFailure(status: Int) {
         Log.d("DELETE/FAILURE", "회원 탈퇴를 실패했습니다.")
-        Toast.makeText(this, "회원 탈퇴를 실패했습니다.", Toast.LENGTH_SHORT).show()
-        finish()
+        when (status) {
+            400 -> {
+                Toast.makeText(this, "회원 탈퇴를 실패했습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            else -> {
+                Toast.makeText(this, "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finishAffinity()
+            }
+        }
     }
 
     override fun onIdCheckSuccess() {

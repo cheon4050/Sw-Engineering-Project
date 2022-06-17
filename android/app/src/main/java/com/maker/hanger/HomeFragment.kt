@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -138,8 +139,16 @@ class HomeFragment : Fragment(), WeatherView, RecommendView {
         }
     }
 
-    override fun onGetWeatherFailure() {
+    override fun onGetWeatherFailure(status: Int) {
         Log.d("WEATHER/FAILURE", "날씨 조회를 실패했습니다.")
+        when (status) {
+            401 -> {
+                Toast.makeText(requireContext(), "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                activity?.finishAffinity()
+            }
+        }
     }
 
     override fun onRecommendSuccess(clothesImageUrl: ArrayList<String>) {
@@ -149,7 +158,15 @@ class HomeFragment : Fragment(), WeatherView, RecommendView {
         }
     }
 
-    override fun onRecommendFailure() {
+    override fun onRecommendFailure(status: Int) {
         Log.d("RECOMMEND/FAILURE", "의류 추천을 실패했습니다.")
+        when (status) {
+            401 -> {
+                Toast.makeText(requireContext(), "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                activity?.finishAffinity()
+            }
+        }
     }
 }
