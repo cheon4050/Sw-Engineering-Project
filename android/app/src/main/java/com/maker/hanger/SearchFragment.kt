@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -47,7 +48,7 @@ class SearchFragment : Fragment(), SearchView {
     }
 
     private fun initRecyclerView(clothes: ArrayList<Clothes>) {
-        searchRVAdapter = SearchRVAdapter(getJwt(), clothes)
+        searchRVAdapter = SearchRVAdapter(getJwt(), clothes, requireContext())
         binding.searchClothesRv.adapter = searchRVAdapter
         binding.searchClothesRv.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 
@@ -206,12 +207,27 @@ class SearchFragment : Fragment(), SearchView {
         return sharedPreferences!!.getString("jwt", null)
     }
 
+    private fun removeJwt() {
+        val sharedPreferences = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        val editor = sharedPreferences!!.edit()
+        editor.remove("jwt")
+        editor.apply()
+    }
+
     override fun onSearchSuccess(clothes: ArrayList<Clothes>) {
         Log.d("SEARCH/SUCCESS", "의류 조회를 성공했습니다.")
         initRecyclerView(clothes)
     }
 
-    override fun onSearchFailure() {
+    override fun onSearchFailure(status: Int) {
         Log.d("SEARCH/FAILURE", "의류 조회를 실패했습니다.")
+        when (status) {
+            401 -> {
+                Toast.makeText(requireContext(), "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                activity?.finishAffinity()
+            }
+        }
     }
 }

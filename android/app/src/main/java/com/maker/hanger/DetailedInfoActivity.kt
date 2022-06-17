@@ -42,15 +42,19 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         val intent = Intent(this, WashingMethodActivity::class.java)
         with (binding) {
             detailInfoClothesWashing40Iv.setOnClickListener {
+                intent.putExtra("washing", 40)
                 startActivity(intent)
             }
             detailInfoClothesWashing60Iv.setOnClickListener {
+                intent.putExtra("washing", 60)
                 startActivity(intent)
             }
             detailInfoClothesWashing95Iv.setOnClickListener {
+                intent.putExtra("washing", 95)
                 startActivity(intent)
             }
             detailInfoClothesWashingNoIv.setOnClickListener {
+                intent.putExtra("washing", 0)
                 startActivity(intent)
             }
         }
@@ -228,8 +232,15 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
     }
 
     private fun getJwt(): String? {
-        val sharedPreferences = getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
         return sharedPreferences.getString("jwt", null)
+    }
+
+    private fun removeJwt() {
+        val sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("jwt")
+        editor.apply()
     }
 
     override fun onSearchInfoSuccess(clothes: Clothes) {
@@ -242,18 +253,40 @@ class DetailedInfoActivity : AppCompatActivity(), DetailedInfoView {
         updateClothes()
     }
 
-    override fun onSearchInfoFailure() {
+    override fun onSearchInfoFailure(status: Int) {
         Log.d("SEARCHINFO/FAILURE", "의류 상세정보 조회를 실패했습니다.")
-        finish()
+        when (status) {
+            400 -> {
+                Toast.makeText(this,"의류 상세정보 조회를 실패했습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            else -> {
+                Toast.makeText(this, "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finishAffinity()
+            }
+        }
     }
 
     override fun onDeleteSuccess() {
         Log.d("DELETE/SUCCESS", "의류 삭제를 성공했습니다.")
-        Toast.makeText(this, "의류가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "의류를 삭제했습니다.", Toast.LENGTH_SHORT).show()
         finish()
     }
 
-    override fun onDeleteFailure() {
+    override fun onDeleteFailure(status: Int) {
         Log.d("DELETE/FAILURE", "의류 삭제를 실패했습니다.")
+        when (status) {
+            400 -> {
+                Toast.makeText(this, "의류 삭제를 실패했습니다.", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Toast.makeText(this, "토큰이 유효하지 않습니다. 다시 로그인해 주세요.", Toast.LENGTH_SHORT).show()
+                removeJwt()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finishAffinity()
+            }
+        }
     }
 }

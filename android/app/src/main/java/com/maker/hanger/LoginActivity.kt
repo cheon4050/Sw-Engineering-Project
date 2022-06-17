@@ -26,11 +26,11 @@ class LoginActivity : AppCompatActivity(), LoginView {
     private fun login() {
         binding.loginSignUpBtn.setOnClickListener {
             if (binding.loginIdEt.text.toString().isEmpty()) {
-                Toast.makeText(this, "아이디가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "아이디를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (binding.loginPasswordEt.text.toString().isEmpty()) {
-                Toast.makeText(this, "비밀번호가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "비밀번호를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -74,5 +74,6 @@ class LoginActivity : AppCompatActivity(), LoginView {
 
     override fun onLoginFailure() {
         Log.d("LOGIN/FAILURE", "로그인을 실패했습니다.")
+        Toast.makeText(this, "등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.", Toast.LENGTH_SHORT).show()
     }
 }

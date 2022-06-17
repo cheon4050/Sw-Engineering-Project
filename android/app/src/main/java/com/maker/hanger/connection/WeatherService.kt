@@ -18,11 +18,11 @@ class WeatherService {
         weatherService.getWeather().enqueue(object: Callback<WeatherResponse> {
             override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                 Log.d("WEATHER/SUCCESS", response.toString())
-                if (response.code() == 400) {
-                    weatherView.onGetWeatherFailure()
-                } else {
+                if (response.isSuccessful) {
                     val resp: WeatherResponse = response.body()!!
                     weatherView.onGetWeatherSuccess(resp.weather)
+                } else {
+                    weatherView.onGetWeatherFailure(response.code())
                 }
             }
 

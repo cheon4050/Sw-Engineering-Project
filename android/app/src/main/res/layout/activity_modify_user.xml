@@ -40,7 +40,6 @@
         android:text="중복 확인"
         android:fontFamily="@font/font"
         android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/modify_id_et"
         app:layout_constraintBottom_toBottomOf="@id/modify_id_et"/>

@@ -50,7 +50,7 @@
             android:id="@+id/modify_season_nsv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:layout_marginHorizontal="10dp"
             android:fillViewport="true"
             android:scrollbars="none"
@@ -246,7 +246,7 @@
             android:layout_marginLeft="10dp"
             android:text="치수 : "
             android:fontFamily="@font/font"
-            android:textStyle="bold"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/modify_kind_nsv"
             app:layout_constraintStart_toStartOf="parent"/>
 

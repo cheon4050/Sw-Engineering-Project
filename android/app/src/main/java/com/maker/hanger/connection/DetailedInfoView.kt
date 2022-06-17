@@ -4,7 +4,7 @@ import com.maker.hanger.data.Clothes
 
 interface DetailedInfoView {
     fun onSearchInfoSuccess(clothes: Clothes)
-    fun onSearchInfoFailure()
+    fun onSearchInfoFailure(status: Int)
     fun onDeleteSuccess()
-    fun onDeleteFailure()
+    fun onDeleteFailure(status: Int)
 }
