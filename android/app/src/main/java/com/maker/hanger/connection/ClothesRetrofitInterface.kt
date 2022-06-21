@@ -42,7 +42,7 @@ interface ClothesRetrofitInterface {
     fun bookmark(
         @Header("userToken") userToken: String?,
         @Query("clothesIdx") clothesIdx: Int,
-        @Query("bookmark") bookmark: Boolean,
+        @Query("bookmark") bookmark: Boolean
     ): Call<ClothesResponse>
 
     @GET("/clothes/recommend")

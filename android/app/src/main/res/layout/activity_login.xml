@@ -14,8 +14,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Hanger"
+        android:textColor="@color/logo"
         android:fontFamily="@font/font"
-        android:textSize="30sp"/>
+        android:textSize="35sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_id_til"
