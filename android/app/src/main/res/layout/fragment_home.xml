@@ -159,7 +159,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             app:dampingRatio="0.5"
-            app:dotsColor="@color/bottom"
+            app:dotsColor="@color/logo"
             app:dotsSize="10dp"
             app:dotsSpacing="6dp"
             app:dotsStrokeColor="@color/indicator"
