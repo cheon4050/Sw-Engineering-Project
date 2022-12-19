@@ -1,8 +1,8 @@
-package maker.server.Clothes;
+package maker.server.clothes;
 
 import lombok.RequiredArgsConstructor;
-import maker.server.Dto.Clothes.ClothesPostDto;
-import maker.server.Dto.Clothes.ClothesPutDto;
+import maker.server.dto.clothes.ClothesPostDto;
+import maker.server.dto.clothes.ClothesPutDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

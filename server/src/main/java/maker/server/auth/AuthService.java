@@ -1,11 +1,11 @@
-package maker.server.Auth;
+package maker.server.auth;
 
 import lombok.RequiredArgsConstructor;
-import maker.server.Dto.User.*;
-import maker.server.Response.GetUserPasswordResponse;
-import maker.server.Response.Response;
-import maker.server.Response.GetUserLoginResponse;
-import maker.server.Util.JwtUtil;
+import maker.server.dto.user.*;
+import maker.server.response.GetUserPasswordResponse;
+import maker.server.response.Response;
+import maker.server.response.GetUserLoginResponse;
+import maker.server.util.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

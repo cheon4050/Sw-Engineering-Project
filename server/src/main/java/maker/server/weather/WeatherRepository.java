@@ -1,6 +1,6 @@
-package maker.server.Weather;
+package maker.server.weather;
 
-import maker.server.Entity.Weather;
+import maker.server.entity.Weather;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Repository;

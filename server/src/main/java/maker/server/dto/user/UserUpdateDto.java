@@ -1,4 +1,4 @@
-package maker.server.Dto.User;
+package maker.server.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

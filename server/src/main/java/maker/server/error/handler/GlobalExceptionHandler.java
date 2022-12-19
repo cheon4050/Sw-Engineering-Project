@@ -1,8 +1,8 @@
-package maker.server.Error.Handler;
+package maker.server.error.handler;
 
 import lombok.extern.slf4j.Slf4j;
-import maker.server.Response.Response;
-import maker.server.Error.Exception.UserException;
+import maker.server.response.Response;
+import maker.server.error.entity.UserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,8 +1,8 @@
-package maker.server.Weather;
+package maker.server.weather;
 
 import lombok.RequiredArgsConstructor;
-import maker.server.Response.GetWeatherResponse;
-import maker.server.Entity.Weather;
+import maker.server.response.GetWeatherResponse;
+import maker.server.entity.Weather;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

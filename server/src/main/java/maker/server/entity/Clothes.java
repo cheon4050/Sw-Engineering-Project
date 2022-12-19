@@ -1,9 +1,8 @@
-package maker.server.Entity;
+package maker.server.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Arrays;

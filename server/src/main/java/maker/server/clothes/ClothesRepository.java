@@ -1,14 +1,13 @@
-package maker.server.Clothes;
+package maker.server.clothes;
 
-import maker.server.Dto.Clothes.ClothesPostDto;
-import maker.server.Dto.Clothes.ClothesPutDto;
-import maker.server.Entity.Clothes;
+import maker.server.dto.clothes.ClothesPostDto;
+import maker.server.dto.clothes.ClothesPutDto;
+import maker.server.entity.Clothes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 
 

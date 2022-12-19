@@ -1,9 +1,9 @@
-package maker.server.Response;
+package maker.server.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import maker.server.Entity.Weather;
+import maker.server.entity.Weather;
 
 @Data
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package maker.server.Error.Exception;
+package maker.server.error.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

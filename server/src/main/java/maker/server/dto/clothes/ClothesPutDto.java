@@ -1,4 +1,4 @@
-package maker.server.Dto.Clothes;
+package maker.server.dto.clothes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

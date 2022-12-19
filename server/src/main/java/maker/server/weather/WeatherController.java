@@ -1,4 +1,4 @@
-package maker.server.Weather;
+package maker.server.weather;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

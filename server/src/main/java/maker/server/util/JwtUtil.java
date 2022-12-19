@@ -1,11 +1,11 @@
-package maker.server.Util;
+package maker.server.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import maker.server.Error.Exception.UserException;
+import maker.server.error.entity.UserException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

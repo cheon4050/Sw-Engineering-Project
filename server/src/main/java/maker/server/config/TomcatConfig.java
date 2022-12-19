@@ -1,4 +1,4 @@
-package maker.server.Config;
+package maker.server.config;
 
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;

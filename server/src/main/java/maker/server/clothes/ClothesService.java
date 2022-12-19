@@ -1,15 +1,15 @@
-package maker.server.Clothes;
+package maker.server.clothes;
 
 import lombok.RequiredArgsConstructor;
-import maker.server.Response.GetClothesInfoResponse;
-import maker.server.Response.GetClothesResponse;
-import maker.server.Response.GetRecommendResponse;
-import maker.server.Response.Response;
-import maker.server.Util.JwtUtil;
-import maker.server.Dto.Clothes.ClothesPostDto;
-import maker.server.Dto.Clothes.ClothesPutDto;
-import maker.server.Entity.*;
-import maker.server.Weather.WeatherRepository;
+import maker.server.response.GetClothesInfoResponse;
+import maker.server.response.GetClothesResponse;
+import maker.server.response.GetRecommendResponse;
+import maker.server.response.Response;
+import maker.server.util.JwtUtil;
+import maker.server.dto.clothes.ClothesPostDto;
+import maker.server.dto.clothes.ClothesPutDto;
+import maker.server.entity.*;
+import maker.server.weather.WeatherRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

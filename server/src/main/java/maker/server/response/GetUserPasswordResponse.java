@@ -1,4 +1,4 @@
-package maker.server.Response;
+package maker.server.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
