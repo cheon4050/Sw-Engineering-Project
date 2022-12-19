@@ -1,2 +1,15 @@
-# Sw-Engineering-Project
-🍎 Maker팀 server repository입니다.
+# 소개
+
+행거는 앱을 통해 의류를 관리하고, 날씨에 맞는 옷을 추천 받는 서비스 입니다.
+
+## 주요 기능
+
+- 회원 관리 기능
+- 의류 사진 및 관련 데이터 CRUD 기능
+- 날씨에 맞는 의류 추천 기능
+
+## 기술 스택
+
+`Spring`, `Spring Boot`, `MySQL`
+
+

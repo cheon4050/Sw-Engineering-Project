@@ -30,7 +30,10 @@ public class WeatherRepository {
             baseDate = Integer.toString(Integer.parseInt(now.format(formatter)) - 1);
         else
             baseDate = hourToString(time.getHour());
+        System.out.println("baseDate = " + baseDate);
         String baseTime = hourToString(time.getHour());
+        System.out.println("baseTime = " + baseTime);
+//        baseTime = "0500";
         String type = "json";
         String apiUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
         String serviceKey = "0VS1T%2B%2FVge%2BZHKroSjc8BoCHmXkgDKsOiVQBISwGkaFkVf%2BW3JyRRbtIcbFe1WFXdp%2Bmllvf%2BkKXSFyPRreQrA%3D%3D";
@@ -59,17 +62,16 @@ public class WeatherRepository {
         } else {
             rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
         }
-
         StringBuilder sb = new StringBuilder();
         String line;
         while ((line = rd.readLine()) != null) {
             sb.append(line);
         }
-
         rd.close();
         conn.disconnect();
         String result = sb.toString();
 
+        System.out.println("result = " + result);
         // 데이터를 파싱
         JSONObject jsonObj_1 = new JSONObject(result);
         JSONObject jsonObj_2 = jsonObj_1.getJSONObject("response");
