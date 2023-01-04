@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserFindDto {
-    private String userId;
+    private String email;
     private String answer;
 }

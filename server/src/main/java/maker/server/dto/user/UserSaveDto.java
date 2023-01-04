@@ -9,7 +9,7 @@ import maker.server.entity.Users;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class UserSaveDto {
     private String email;
     private String password;
     private String answer;
