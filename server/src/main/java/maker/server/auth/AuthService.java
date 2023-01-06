@@ -11,6 +11,7 @@ import maker.server.util.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import static maker.server.error.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AuthService {
     private final AuthJpaRepository authJpaRepository;
     private final JwtUtil jwtUtil;
