@@ -1,6 +1,6 @@
 package maker.server.clothes;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import maker.server.dto.clothes.ClothesPostDto;
 import maker.server.dto.clothes.ClothesPutDto;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/clothes")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ClothesController {
     private final ClothesService clothesService;
 
@@ -21,14 +21,14 @@ public class ClothesController {
         return clothesService.postClothes(userToken, clothes);
     }
 
-    @GetMapping
-    public ResponseEntity getClothes(
-            @RequestHeader String userToken,
-            @RequestParam(value = "season", required = false)ArrayList<String> season,
-            @RequestParam(value = "kind", required = false)ArrayList<String> kind,
-            @RequestParam(value = "bookmark", required = false) boolean bookmark){
-        return clothesService.getClothes(userToken, season, kind, bookmark);
-    }
+//    @GetMapping
+//    public ResponseEntity getClothes(
+//            @RequestHeader String userToken,
+//            @RequestParam(value = "season", required = false)ArrayList<String> season,
+//            @RequestParam(value = "kind", required = false)ArrayList<String> kind,
+//            @RequestParam(value = "bookmark", required = false) boolean bookmark){
+//        return clothesService.getClothes(userToken, season, kind, bookmark);
+//    }
 
     @DeleteMapping
     public ResponseEntity deleteClothes(
@@ -41,7 +41,7 @@ public class ClothesController {
     public ResponseEntity updateClothes(@RequestHeader String userToken,
                                         @RequestBody ClothesPutDto clothes,
                             @RequestParam int clothesIdx
-    )throws java.io.IOException{
+    ){
         return clothesService.updateClothes(userToken, clothes, clothesIdx);
 
     }

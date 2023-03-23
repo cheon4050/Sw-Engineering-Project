@@ -11,37 +11,37 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 
 
-@Repository
+//@Repository
 public class ClothesRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private final RowMapper<Clothes> clothesRowMapper =  (rs,count) ->{
             Clothes clothes = new Clothes();
-            clothes.setClothesIdx(rs.getInt("clothesIdx"));
-            clothes.setClothesImageUrl(rs.getString("clothesImageUrl"));
-            clothes.setDate(rs.getString("date"));
-            clothes.setSeason(rs.getString("season"));
-            clothes.setKind(rs.getString("kind"));
-            clothes.setWashingMethod(rs.getString("washingMethod"));
-            clothes.setSize(rs.getString("size"));
-            clothes.setBookmark(rs.getBoolean("bookmark"));
+//            clothes.setClothesIdx(rs.getInt("clothesIdx"));
+//            clothes.setClothesImageUrl(rs.getString("clothesImageUrl"));
+//            clothes.setDate(rs.getString("date"));
+//            clothes.setSeason(rs.getString("season"));
+//            clothes.setKind(rs.getString("kind"));
+//            clothes.setWashingMethod(rs.getString("washingMethod"));
+//            clothes.setSize(rs.getString("size"));
+//            clothes.setBookmark(rs.getBoolean("bookmark"));
             return clothes;
 
     };
     private final RowMapper<String> stringMapper =  (rs, count) -> {
         return rs.getString(1);
     };
-    public void save(Integer userIdx, ClothesPostDto clothes) {
-        jdbcTemplate.execute("INSERT INTO clothes(userIdx,date,bookmark,size,clothesImageUrl,kind,season,washingMethod) VALUES ("+
-                userIdx + ",'"+
-                clothes.getDate()+ "',"+
-                clothes.isBookmark()+ ",'"+
-                clothes.getSize()+ "','" +
-                clothes.getClothesImageUrl() + "','"+
-                clothes.getKind() + "','"+
-                clothes.getSeason() + "','"+
-                clothes.getWashingMethod() + "')");
-    }
+//    public void save(Integer userIdx, ClothesPostDto clothes) {
+//        jdbcTemplate.execute("INSERT INTO clothes(userIdx,date,bookmark,size,clothesImageUrl,kind,season,washingMethod) VALUES ("+
+//                userIdx + ",'"+
+//                clothes.getDate()+ "',"+
+//                clothes.isBookmark()+ ",'"+
+//                clothes.getSize()+ "','" +
+//                clothes.getClothesImageUrl() + "','"+
+//                clothes.getKind() + "','"+
+//                clothes.getSeason() + "','"+
+//                clothes.getWashingMethod() + "')");
+//    }
 
     public ArrayList<Clothes> findByCategory(Integer userIdx, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
         final String[] query = {"Select * From Clothes where userIdx = " + userIdx};
