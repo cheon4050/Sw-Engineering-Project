@@ -3,6 +3,8 @@ package maker.server.dto.clothes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import maker.server.entity.Clothes;
+import maker.server.entity.Users;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,18 @@ public class ClothesPostDto {
     private ArrayList<String> season;
     private ArrayList<String> kind;
     private ArrayList<Integer> washingMethod;
-    private String size;
-    private boolean bookmark;
+    private char size;
+
+    public Clothes toEntity(Users users){
+        return Clothes.builder()
+                .users(users)
+                .clothesImageUrl(clothesImageUrl)
+                .season(season)
+                .kind(kind)
+                .washingMethod(washingMethod)
+                .size(size)
+                .bookmark(false)
+                .build();
+
+    }
 }
