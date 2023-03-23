@@ -1,49 +1,78 @@
 package maker.server.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import maker.server.entity.converter.BooleanToYNConverter;
+import maker.server.entity.converter.IntegerArrayConverter;
+import maker.server.entity.converter.StringArrayConverter;
+import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.List;
 
-@Data
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
+@Entity
+@DynamicUpdate
 public class Clothes {
-    private int clothesIdx;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name="USERS_ID")
+    private Users users;
+
     private String clothesImageUrl;
-    private String date;
-    private ArrayList<String> season;
-    private ArrayList<String> kind;
-    private ArrayList<Integer> washingMethod;
+
+    private LocalDateTime createDate;
+
+    @Convert(converter = StringArrayConverter.class)
+    private List<String> season = new ArrayList<>();
+
+    @Convert(converter = StringArrayConverter.class)
+    private List<String> kind = new ArrayList<>();
+
+    @Convert(converter = IntegerArrayConverter.class)
+    private List<Integer> washingMethod = new ArrayList<>();
+
     private char size;
+
+//    @Convert(converter = BooleanToYNConverter.class)
     private boolean bookmark;
 
-    public void setSeason(String strSeason){
-        if(strSeason.equals("[]"))
-            this.season = new ArrayList<String>();
-        else
-            this.season = new ArrayList<String>(Arrays.asList(strSeason.substring(1,strSeason.length()-1).split(", ")));
+
+    @Builder
+    public Clothes(Users users, String clothesImageUrl, List<String> season, List<String> kind, List<Integer> washingMethod, char size, boolean bookmark) {
+        this.users = users;
+        this.clothesImageUrl = clothesImageUrl;
+        this.season = season;
+        this.kind = kind;
+        this.washingMethod = washingMethod;
+        this.size = size;
+        this.bookmark = bookmark;
     }
 
-    public void setKind(String strKind){
-        if(strKind.equals("[]"))
-            this.kind = new ArrayList<String>();
-        else
-            this.kind = new ArrayList<String>(Arrays.asList(strKind.substring(1,strKind.length()-1).split(", ")));
+    public void updateBookmark(boolean bookmark) {
+        this.bookmark = bookmark;
     }
 
-    public void setWashingMethod(String str){
-        if (str.equals("[]"))
-                this.washingMethod = new ArrayList<Integer>();
-        else {
-            int[] arr = Arrays.stream(str.substring(1, str.length() - 1).split(", ")).map(String::trim).mapToInt(Integer::parseInt).toArray();
-            this.washingMethod = (ArrayList<Integer>) Arrays.stream(arr).boxed().collect(Collectors.toList());
-        }
+    public void updateClothes(String clothesImageUrl, List<String> season, List<String> kind, List<Integer> washingMethod, char size, boolean bookmark) {
+        this.clothesImageUrl = clothesImageUrl;
+        this.season = season;
+        this.kind = kind;
+        this.washingMethod = washingMethod;
+        this.size = size;
+        this.bookmark = bookmark;
     }
-    public void setSize(String str){
-        this.size = str.charAt(0);
+    @PrePersist
+    public void createAt() {
+        this.createDate = LocalDateTime.now();
     }
+
+
+
 }
