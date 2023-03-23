@@ -50,9 +50,12 @@ public class AuthService {
         return new ResponseEntity(new GetUserPasswordResponse(password, 200, "비밀번호 찾기 성공"),HttpStatus.OK);
     }
 
+    @Transactional
     public ResponseEntity updateUser(String userToken, UserUpdateDto userUpdateDto) {
         Integer userIdx = jwtUtil.parseJwt(userToken);
-        authJpaRepository.updateEmailAndPassword(userIdx, userUpdateDto.getEmail(), userUpdateDto.getPassword());
+//        authJpaRepository.updateEmailAndPassword(userIdx, userUpdateDto.getEmail(), userUpdateDto.getPassword());
+        Users user = authJpaRepository.findById(userIdx).get();
+        user.updateEmailAndPassword(userUpdateDto.getEmail(), userUpdateDto.getPassword());
         return new ResponseEntity(new Response(200, "회원 정보 수정 성공"), HttpStatus.OK);
     }
 
