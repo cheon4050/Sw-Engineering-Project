@@ -11,6 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+
+/*
+ * V2 AuthRepository
+ * Jpa 사용 AuthRepository
+ * */
 @Repository
 public interface AuthJpaRepository extends JpaRepository<Users, Integer> {
 
