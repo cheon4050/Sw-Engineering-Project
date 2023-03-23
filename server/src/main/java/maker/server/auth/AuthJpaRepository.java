@@ -24,8 +24,4 @@ public interface AuthJpaRepository extends JpaRepository<Users, Integer> {
     Optional<Users> findByEmailAndPassword(String email, String password);
 
     Optional<Users> findByEmailAndAnswer(String email, String answer);
-
-    @Query("update Users set email = :email, password = :password where id = :id")
-    @Modifying(clearAutomatically = true)
-    void updateEmailAndPassword(@Param("id") int id, @Param("email") String email, @Param("password") String password);
 }
