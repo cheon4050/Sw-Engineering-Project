@@ -7,10 +7,14 @@ import maker.server.dto.user.UserUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public class AuthRepository {
+/*
+* V1 AuthRepository
+* JDBC 사용 AuthRepository
+* */
+
+//@Repository
+public class AuthJdbcRepository{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
