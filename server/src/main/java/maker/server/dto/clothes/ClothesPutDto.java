@@ -16,6 +16,6 @@ public class ClothesPutDto {
     private ArrayList<String> season;
     private ArrayList<String> kind;
     private ArrayList<Integer> washingMethod;
-    private String size;
+    private char size;
     private boolean bookmark;
 }
