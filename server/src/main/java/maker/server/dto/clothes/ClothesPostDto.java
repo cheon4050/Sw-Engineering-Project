@@ -7,6 +7,7 @@ import maker.server.entity.Clothes;
 import maker.server.entity.Users;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -24,12 +25,16 @@ public class ClothesPostDto {
         return Clothes.builder()
                 .users(users)
                 .clothesImageUrl(clothesImageUrl)
-                .season(season)
-                .kind(kind)
+                .season(convertArrayToString(season))
+                .kind(convertArrayToString(kind))
                 .washingMethod(washingMethod)
                 .size(size)
                 .bookmark(false)
                 .build();
 
+    }
+
+    private String convertArrayToString(ArrayList<String> attribute){
+        return attribute.stream().map(String::valueOf).collect(Collectors.joining(","));
     }
 }

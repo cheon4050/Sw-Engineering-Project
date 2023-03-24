@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -18,4 +19,12 @@ public class ClothesPutDto {
     private ArrayList<Integer> washingMethod;
     private char size;
     private boolean bookmark;
+
+    public String getSeason(){
+        return season.stream().map(String::valueOf).collect(Collectors.joining(","));
+    }
+
+    public String getKind(){
+        return kind.stream().map(String::valueOf).collect(Collectors.joining(","));
+    }
 }
