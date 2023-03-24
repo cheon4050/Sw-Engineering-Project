@@ -1,4 +1,4 @@
-package maker.server.clothes;
+package maker.server.clothes.Repository.v1;
 
 import maker.server.dto.clothes.ClothesPostDto;
 import maker.server.dto.clothes.ClothesPutDto;
@@ -11,10 +11,15 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 
 
+/*
+ * V1 ClothesRepository
+ * Jdbc 사용 ClothesRepository
+ * */
 //@Repository
 public class ClothesRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     private final RowMapper<Clothes> clothesRowMapper =  (rs,count) ->{
             Clothes clothes = new Clothes();
 //            clothes.setClothesIdx(rs.getInt("clothesIdx"));
@@ -44,7 +49,7 @@ public class ClothesRepository {
 //    }
 
     public ArrayList<Clothes> findByCategory(Integer userIdx, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
-        final String[] query = {"Select * From Clothes where userIdx = " + userIdx};
+        final String[] query = {"Select * From Clothes where users_id = " + userIdx};
         if (bookmark)
             query[0] = query[0] + " and bookmark = true";
         if (season != null)
