@@ -21,14 +21,14 @@ public class ClothesController {
         return clothesService.postClothes(userToken, clothes);
     }
 
-//    @GetMapping
-//    public ResponseEntity getClothes(
-//            @RequestHeader String userToken,
-//            @RequestParam(value = "season", required = false)ArrayList<String> season,
-//            @RequestParam(value = "kind", required = false)ArrayList<String> kind,
-//            @RequestParam(value = "bookmark", required = false) boolean bookmark){
-//        return clothesService.getClothes(userToken, season, kind, bookmark);
-//    }
+    @GetMapping
+    public ResponseEntity getClothes(
+            @RequestHeader String userToken,
+            @RequestParam(value = "season", required = false)ArrayList<String> season,
+            @RequestParam(value = "kind", required = false)ArrayList<String> kind,
+            @RequestParam(value = "bookmark", required = false) boolean bookmark){
+        return clothesService.getClothes(userToken, season, kind, bookmark);
+    }
 
     @DeleteMapping
     public ResponseEntity deleteClothes(
