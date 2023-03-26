@@ -7,7 +7,7 @@ import maker.server.error.entity.AuthException;
 import maker.server.response.GetUserPasswordResponse;
 import maker.server.response.Response;
 import maker.server.response.GetUserLoginResponse;
-import maker.server.util.JwtUtil;
+import maker.server.util.jwt.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -51,8 +51,7 @@ public class AuthService {
     }
 
     @Transactional
-    public ResponseEntity updateUser(String userToken, UserUpdateDto userUpdateDto) {
-        Integer userIdx = jwtUtil.parseJwt(userToken);
+    public ResponseEntity updateUser(Integer userIdx, UserUpdateDto userUpdateDto) {
 //        authJpaRepository.updateEmailAndPassword(userIdx, userUpdateDto.getEmail(), userUpdateDto.getPassword());
         Users user = authJpaRepository.findById(userIdx).get();
         user.updateEmailAndPassword(userUpdateDto.getEmail(), userUpdateDto.getPassword());

@@ -1,6 +1,8 @@
 package maker.server.auth;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import maker.server.config.argumentresolver.JwtValidation;
 import maker.server.dto.user.UserSaveDto;
 import maker.server.dto.user.UserFindDto;
 import maker.server.dto.user.UserLoginDto;
@@ -8,6 +10,7 @@ import maker.server.dto.user.UserUpdateDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -21,7 +24,9 @@ public class AuthController {
     }
 
     @GetMapping("/check")
-    public ResponseEntity check(@RequestParam String email){return authService.userIdCheck(email);}
+    public ResponseEntity check(@RequestParam String email){
+        return authService.userIdCheck(email);
+    }
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody UserLoginDto user){
@@ -34,8 +39,9 @@ public class AuthController {
     }
 
     @PatchMapping("/user")
-    public ResponseEntity updateUser(@RequestHeader String userToken, @RequestBody UserUpdateDto user){
-        return authService.updateUser(userToken, user);
+    public ResponseEntity updateUser(@JwtValidation Integer userIdx, @RequestBody UserUpdateDto user){
+
+        return authService.updateUser(userIdx, user);
     }
 
     @DeleteMapping("/user")

@@ -1,6 +1,7 @@
 package maker.server.clothes;
 
 import lombok.AllArgsConstructor;
+import maker.server.config.argumentresolver.JwtValidation;
 import maker.server.dto.clothes.ClothesPostDto;
 import maker.server.dto.clothes.ClothesPutDto;
 import org.springframework.http.ResponseEntity;
@@ -15,54 +16,54 @@ public class ClothesController {
     private final ClothesService clothesService;
 
     @PostMapping
-    public ResponseEntity postClothes(@RequestHeader String userToken,
+    public ResponseEntity postClothes(@JwtValidation Integer userIdx,
                                       @RequestBody ClothesPostDto clothes
                                       ){
-        return clothesService.postClothes(userToken, clothes);
+        return clothesService.postClothes(userIdx, clothes);
     }
 
     @GetMapping
     public ResponseEntity getClothes(
-            @RequestHeader String userToken,
+            @JwtValidation Integer userIdx,
             @RequestParam(value = "season", required = false)ArrayList<String> season,
             @RequestParam(value = "kind", required = false)ArrayList<String> kind,
             @RequestParam(value = "bookmark", required = false) boolean bookmark){
-        return clothesService.getClothes(userToken, season, kind, bookmark);
+        return clothesService.getClothes(userIdx, season, kind, bookmark);
     }
 
     @DeleteMapping
     public ResponseEntity deleteClothes(
-            @RequestHeader String userToken,
+            @JwtValidation Integer userIdx,
             @RequestParam int clothesIdx){
-        return clothesService.deleteClothes(userToken, clothesIdx);
+        return clothesService.deleteClothes(userIdx, clothesIdx);
     }
 
     @PutMapping
-    public ResponseEntity updateClothes(@RequestHeader String userToken,
+    public ResponseEntity updateClothes(@JwtValidation Integer userIdx,
                                         @RequestBody ClothesPutDto clothes,
                             @RequestParam int clothesIdx
     ){
-        return clothesService.updateClothes(userToken, clothes, clothesIdx);
+        return clothesService.updateClothes(userIdx, clothes, clothesIdx);
 
     }
 
     @GetMapping("/info")
     public ResponseEntity getClothesInfo(
-            @RequestHeader String userToken,
+            @JwtValidation Integer userIdx,
             @RequestParam int clothesIdx){
-        return clothesService.getClothesInfo(userToken, clothesIdx);
+        return clothesService.getClothesInfo(userIdx, clothesIdx);
     }
 
     @PostMapping("/bookmark")
     public  ResponseEntity bookmark(
-            @RequestHeader String userToken,
+            @JwtValidation Integer userIdx,
             @RequestParam int clothesIdx,
             @RequestParam boolean bookmark){
-        return clothesService.bookmark(userToken, clothesIdx, bookmark);
+        return clothesService.bookmark(userIdx, clothesIdx, bookmark);
     }
 
     @GetMapping("/recommend")
-    public ResponseEntity recommend(@RequestHeader String userToken) throws Exception {
-        return clothesService.recommend(userToken);
+    public ResponseEntity recommend(@JwtValidation Integer userIdx) throws Exception {
+        return clothesService.recommend(userIdx);
     }
 }

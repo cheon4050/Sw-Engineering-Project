@@ -8,7 +8,7 @@ import maker.server.response.GetClothesInfoResponse;
 import maker.server.response.GetClothesResponse;
 import maker.server.response.GetRecommendResponse;
 import maker.server.response.Response;
-import maker.server.util.JwtUtil;
+import maker.server.util.jwt.JwtUtil;
 import maker.server.dto.clothes.ClothesPostDto;
 import maker.server.dto.clothes.ClothesPutDto;
 import maker.server.entity.*;
@@ -33,9 +33,7 @@ public class ClothesService {
     private final WeatherRepository weatherRepository;
     private final JwtUtil jwtUtil;
 
-    public ResponseEntity postClothes(String userToken, ClothesPostDto clothes)
-    {
-        Integer userIdx = jwtUtil.parseJwt(userToken);
+    public ResponseEntity postClothes(Integer userIdx, ClothesPostDto clothes) {
         Optional<Users> optionalUsers = authJpaRepository.findById(userIdx);
         Users user = optionalUsers.get();
         //clothesRepository.save(userIdx, clothes);
@@ -45,8 +43,7 @@ public class ClothesService {
         return new ResponseEntity(Response,HttpStatus.OK);
     }
 
-    public ResponseEntity getClothes(String userToken, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
-        Integer userIdx = jwtUtil.parseJwt(userToken);
+    public ResponseEntity getClothes(Integer userIdx, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
         Users users = authJpaRepository.findById(userIdx).get();
 //        ArrayList<Clothes> clothesArrayList = clothesRepository.findByCategory(userIdx, season, kind, bookmark);
         List<Clothes> clothesArrayList = clothesJpaRepository.findAllByUsersIdAndOptions(users, season, kind, bookmark);
@@ -54,8 +51,7 @@ public class ClothesService {
         return new ResponseEntity(GetClothesResponse, HttpStatus.OK);
     }
 
-    public ResponseEntity deleteClothes(String userToken, int clothesIdx) {
-        Integer userIdx = jwtUtil.parseJwt(userToken);
+    public ResponseEntity deleteClothes(Integer userIdx, int clothesIdx) {
 //        clothesRepository.delete(clothesIdx);
         Clothes clothes = clothesJpaRepository.findById(clothesIdx).get();
         clothesJpaRepository.delete(clothes);
@@ -65,8 +61,7 @@ public class ClothesService {
     }
 
     @Transactional
-    public ResponseEntity updateClothes(String userToken, ClothesPutDto clothesInfo, int clothesIdx){
-        Integer userIdx = jwtUtil.parseJwt(userToken);
+    public ResponseEntity updateClothes(Integer userIdx, ClothesPutDto clothesInfo, int clothesIdx){
 //        clothesRepository.update(clothesIdx, clothes);
         Users users = authJpaRepository.findById(userIdx).get();
         Clothes clothes = clothesJpaRepository.findById(clothesIdx).get();
@@ -82,8 +77,7 @@ public class ClothesService {
         return new ResponseEntity(Response, HttpStatus.OK);
     }
 
-    public ResponseEntity getClothesInfo(String userToken, int clothesIdx) {
-        Integer userIdx = jwtUtil.parseJwt(userToken);
+    public ResponseEntity getClothesInfo(Integer userIdx, int clothesIdx) {
         //        Clothes clothes = clothesRepository.findByClothesIdx(clothesIdx);
         Clothes clothes = clothesJpaRepository.findById(clothesIdx).get();
         GetClothesInfoResponse GetClothesInfoResponse = new GetClothesInfoResponse(clothes, 200, "상세 조회 성공");
@@ -91,8 +85,7 @@ public class ClothesService {
     }
 
     @Transactional
-    public ResponseEntity bookmark(String userToken, int clothesIdx, boolean bookmark) {
-        Integer userIdx = jwtUtil.parseJwt(userToken);
+    public ResponseEntity bookmark(Integer userIdx, int clothesIdx, boolean bookmark) {
 //        clothesRepository.bookmarkByClothesIdx(clothesIdx, bookmark);
         Clothes clothes = clothesJpaRepository.findById(clothesIdx).get();
         clothes.updateBookmark(bookmark);
@@ -100,8 +93,7 @@ public class ClothesService {
         return new ResponseEntity(Response, HttpStatus.OK);
     }
 
-    public ResponseEntity recommend(String userToken) throws Exception {
-        Integer userIdx = jwtUtil.parseJwt(userToken);
+    public ResponseEntity recommend(Integer userIdx) throws Exception {
         Weather weather = weatherRepository.getWeather();
         String season = getSeason(weather.getPresent());
 //        List<String> urlList =  clothesRepository.recommend(userIdx, season);
