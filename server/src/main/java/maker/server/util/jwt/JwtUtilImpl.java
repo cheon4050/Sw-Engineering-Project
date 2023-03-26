@@ -5,7 +5,7 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import maker.server.error.entity.UserException;
+import maker.server.error.entity.AuthException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +14,10 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 
+import static maker.server.error.ErrorCode.*;
+
 @Component
-public class JwtUtil {
+public class JwtUtilImpl implements JwtUtil{
     @Value("${jwt.secret-key}")
     private String apikey;
 
@@ -53,13 +55,14 @@ public class JwtUtil {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
+
         Jws<Claims> claims = Jwts.parserBuilder()
                 .setSigningKey(getSignKey())
                 .build()
                 .parseClaimsJws(jwt);
 
-        if (claims.getBody().get("exp",Long.class) < now.getTime()) {
-            throw new UserException("Unauthorized");
+        if (claims.getBody().get("exp",Long. class) < now.getTime()) {
+            throw new AuthException(UNAUTHORIZED_TOKEN);
         }
 
         return claims.getBody().get("userIdx",Integer.class);
