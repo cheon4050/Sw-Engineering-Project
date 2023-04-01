@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import maker.server.config.argumentresolver.JwtValidation;
 import maker.server.dto.user.UserSaveDto;
-import maker.server.dto.user.UserFindDto;
 import maker.server.dto.user.UserLoginDto;
 import maker.server.dto.user.UserUpdateDto;
 import maker.server.response.GetUserLoginResponse;
@@ -54,8 +53,8 @@ public class AuthController {
     }
 
     @DeleteMapping("/user")
-    public ResponseEntity DeleteUser(@RequestHeader String userToken){
-        authService.deleteUser(userToken);
+    public ResponseEntity DeleteUser(@JwtValidation Integer userIdx){
+        authService.deleteUser(userIdx);
         return new ResponseEntity(new Response(200, "회원 탈퇴 성공"), HttpStatus.OK);
     }
 

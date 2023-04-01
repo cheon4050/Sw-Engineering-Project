@@ -50,8 +50,7 @@ public class AuthService {
         user.updateEmailAndPassword(userUpdateDto.getEmail(), userUpdateDto.getPassword());
     }
 
-    public void deleteUser(String userToken) {
-        Integer userIdx = jwtUtil.parseJwt(userToken);
+    public void deleteUser(Integer userIdx) {
         authJpaRepository.deleteById(userIdx);
     }
 
