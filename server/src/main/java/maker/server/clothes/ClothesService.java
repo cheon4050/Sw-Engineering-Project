@@ -7,7 +7,7 @@ import maker.server.clothes.Repository.v2.ClothesJpaRepository;
 import maker.server.dto.clothes.ClothesPostDto;
 import maker.server.dto.clothes.ClothesPutDto;
 import maker.server.entity.*;
-import maker.server.weather.WeatherRepository;
+import maker.server.weather.WeatherService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,7 @@ public class ClothesService {
 
     private final AuthJpaRepository authJpaRepository;
     private final ClothesJpaRepository clothesJpaRepository;
-    private final WeatherRepository weatherRepository;
+    private final WeatherService weatherService;
 
     public void postClothes(Integer userIdx, ClothesPostDto clothes) {
         Optional<Users> optionalUsers = authJpaRepository.findById(userIdx);
@@ -67,7 +67,7 @@ public class ClothesService {
     }
 
     public List<String> recommend(Integer userIdx) throws Exception {
-        Weather weather = weatherRepository.getWeather();
+        Weather weather = weatherService.getWeather();
         String season = getSeason(weather.getPresent());
         List<String> urlList = clothesJpaRepository.findBySeason(season);
         return urlList;
