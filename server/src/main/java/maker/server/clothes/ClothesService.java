@@ -4,17 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import maker.server.auth.AuthJpaRepository;
 import maker.server.clothes.Repository.v2.ClothesJpaRepository;
-import maker.server.response.GetClothesInfoResponse;
-import maker.server.response.GetClothesResponse;
-import maker.server.response.GetRecommendResponse;
-import maker.server.response.Response;
-import maker.server.util.jwt.JwtUtil;
 import maker.server.dto.clothes.ClothesPostDto;
 import maker.server.dto.clothes.ClothesPutDto;
 import maker.server.entity.*;
 import maker.server.weather.WeatherRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,42 +20,30 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ClothesService {
 
-//    private final ClothesRepository clothesRepository;
     private final AuthJpaRepository authJpaRepository;
     private final ClothesJpaRepository clothesJpaRepository;
     private final WeatherRepository weatherRepository;
-    private final JwtUtil jwtUtil;
 
-    public ResponseEntity postClothes(Integer userIdx, ClothesPostDto clothes) {
+    public void postClothes(Integer userIdx, ClothesPostDto clothes) {
         Optional<Users> optionalUsers = authJpaRepository.findById(userIdx);
         Users user = optionalUsers.get();
-        //clothesRepository.save(userIdx, clothes);
         Clothes saveClothes = clothes.toEntity(user);
         clothesJpaRepository.save(saveClothes);
-        Response Response =  new Response(200, "등록 성공");
-        return new ResponseEntity(Response,HttpStatus.OK);
     }
 
-    public ResponseEntity getClothes(Integer userIdx, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
+    public List<Clothes> getClothes(Integer userIdx, ArrayList<String> season, ArrayList<String> kind, boolean bookmark) {
         Users users = authJpaRepository.findById(userIdx).get();
-//        ArrayList<Clothes> clothesArrayList = clothesRepository.findByCategory(userIdx, season, kind, bookmark);
         List<Clothes> clothesArrayList = clothesJpaRepository.findAllByUsersIdAndOptions(users, season, kind, bookmark);
-        GetClothesResponse GetClothesResponse = new GetClothesResponse(clothesArrayList, 200, "조회 성공");
-        return new ResponseEntity(GetClothesResponse, HttpStatus.OK);
+        return clothesArrayList;
     }
 
-    public ResponseEntity deleteClothes(Integer userIdx, int clothesIdx) {
-//        clothesRepository.delete(clothesIdx);
+    public void deleteClothes(Integer userIdx, int clothesIdx) {
         Clothes clothes = clothesJpaRepository.findById(clothesIdx).get();
         clothesJpaRepository.delete(clothes);
-        Response Response = new Response(200, "삭제 성공");
-        return new ResponseEntity(Response, HttpStatus.OK);
-
     }
 
     @Transactional
-    public ResponseEntity updateClothes(Integer userIdx, ClothesPutDto clothesInfo, int clothesIdx){
-//        clothesRepository.update(clothesIdx, clothes);
+    public void updateClothes(Integer userIdx, ClothesPutDto clothesInfo, int clothesIdx){
         Users users = authJpaRepository.findById(userIdx).get();
         Clothes clothes = clothesJpaRepository.findById(clothesIdx).get();
         clothes.updateClothes(
@@ -72,34 +53,24 @@ public class ClothesService {
                 clothesInfo.getWashingMethod(),
                 clothesInfo.getSize(),
                 clothesInfo.isBookmark());
-
-        Response Response = new Response(200, "수정 성공");
-        return new ResponseEntity(Response, HttpStatus.OK);
     }
 
-    public ResponseEntity getClothesInfo(Integer userIdx, int clothesIdx) {
-        //        Clothes clothes = clothesRepository.findByClothesIdx(clothesIdx);
+    public Clothes getClothesInfo(Integer userIdx, int clothesIdx) {
         Clothes clothes = clothesJpaRepository.findById(clothesIdx).get();
-        GetClothesInfoResponse GetClothesInfoResponse = new GetClothesInfoResponse(clothes, 200, "상세 조회 성공");
-        return new ResponseEntity(GetClothesInfoResponse, HttpStatus.OK);
+        return clothes;
     }
 
     @Transactional
-    public ResponseEntity bookmark(Integer userIdx, int clothesIdx, boolean bookmark) {
-//        clothesRepository.bookmarkByClothesIdx(clothesIdx, bookmark);
+    public void bookmark(Integer userIdx, int clothesIdx, boolean bookmark) {
         Clothes clothes = clothesJpaRepository.findById(clothesIdx).get();
         clothes.updateBookmark(bookmark);
-        Response Response = new Response(200, "즐겨찾기 성공");
-        return new ResponseEntity(Response, HttpStatus.OK);
     }
 
-    public ResponseEntity recommend(Integer userIdx) throws Exception {
+    public List<String> recommend(Integer userIdx) throws Exception {
         Weather weather = weatherRepository.getWeather();
         String season = getSeason(weather.getPresent());
-//        List<String> urlList =  clothesRepository.recommend(userIdx, season);
         List<String> urlList = clothesJpaRepository.findBySeason(season);
-        GetRecommendResponse getRecommendResponse = new GetRecommendResponse(urlList, 200, "의류 추천 성공");
-        return new ResponseEntity(getRecommendResponse,HttpStatus.OK);
+        return urlList;
     }
 
     private String getSeason(double present){
